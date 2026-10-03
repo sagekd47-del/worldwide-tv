@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <title>SavageTech TV — Live Entertainment</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="home.html" aria-label="SavageTech TV"><img class="brand-logo" src="assets/logo.png" alt="SavageTech TV"></a>
+  <nav class="desktop-nav">
+    <a class="active" href="#home">Home</a><a href="#live">All Channels</a><a href="support.html">Support</a><a href="#category-Movies">Movies</a><a href="#category-Entertainment">Entertainment</a><a href="#category-News">News</a><a href="#category-Music">Music</a>
+  </nav>
+  <div class="top-actions">
+    <button class="icon-btn" id="themeBtn" title="Theme">☼</button>
+    <a class="icon-btn" id="downloadTopBtn" href="download.html" title="Download SavageTech TV">⇩</a>
+    <a class="icon-btn" id="settingsTopBtn" href="settings.html" title="Settings">⚙</a>
+    <a class="login-btn" id="loginBtn" href="login.html">Sign in</a>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero featured-hero" id="featuredHero">
+    <div class="featured-slides" id="featuredSlides"></div>
+    <div class="hero-overlay"></div>
+    <div class="featured-content" id="featuredContent"></div>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <section class="content-wrap">
+    <div class="search-row">
+      <label class="search"><span>⌕</span><input id="searchInput" placeholder="Search channels, sports, movies..."><kbd>⌘ K</kbd></label>
+      <button class="filter-btn" id="filterBtn" type="button" aria-expanded="false">☷ Filters</button>
+    </div>
+
+    <section id="live" class="section category-browser">
+      <div class="section-head"><div><span class="section-kicker">CHANNEL DIRECTORY</span><h2>Browse Channels</h2></div></div>
+      <div class="category-tabs" id="categoryTabs"></div>
+      <div class="channel-grid" id="channelGrid"></div>
+    </section>
+    <div id="categorySections"></div>
+  </section>
+</main>
+
+<!-- SAVAGETECH TV DOWNLOAD CENTER -->
+<section class="content-wrap">
+  <section class="download-center compact-download" id="download">
+    <div class="download-head"><div><span class="section-kicker">GET THE APP</span><h2>Download SavageTech TV</h2><p>Choose Android, iPhone, Tablet, TV or Laptop from the dedicated download center.</p></div>
+    <a class="primary-btn" href="download.html">⇩ Download Center</a></div>
+  </section>
+</section>
+
+<!-- FIRST-LAUNCH SAVAGETECH TV GUIDE -->
+<div class="guide-modal" id="guideModal" aria-hidden="true">
+  <div class="guide-card">
+    <div class="guide-top"><span id="guideStep">1 / 6</span><button type="button" class="modal-close" id="guideSkip" aria-label="Close">×</button></div>
+    <div class="guide-icon" id="guideIcon">📺</div>
+    <h2 id="guideTitle">Welcome to SavageTech TV</h2>
+    <p id="guideText">This quick guide shows how to use the main features of SavageTech TV.</p>
+    <div class="guide-progress" id="guideProgress"></div>
+    <div class="guide-actions">
+      <button class="ghost-btn" type="button" id="guideBack">Back</button>
+      <button class="primary-btn" type="button" id="guideNext">Next</button>
+    </div>
+    <label class="guide-check"><input type="checkbox" id="guideDontShow"> Don't show this again</label>
+    <button class="primary-btn guide-ok" type="button" id="guideOk" hidden>OK</button>
+  </div>
+</div>
+
+<div class="filter-panel" id="filterPanel" hidden>
+  <div class="filter-panel-header"><strong>Filter Channels</strong><button type="button" id="filterClose" aria-label="Close filters">×</button></div>
+  <div class="filter-options" id="filterOptions"></div>
+  <button type="button" class="filter-clear" id="filterClear">Show All</button>
+</div>
+
+<div class="floating-contact-stack" aria-label="SavageTech shortcuts">
+  <a class="savage-ai-shortcut" href="savagetech-ai.html" aria-label="Open SavageTech AI" title="SavageTech AI">
+    <img src="assets/savagetec-ai-icon.png" alt="SavageTech AI">
+  </a>
+
+  <a class="whatsapp whatsapp-trigger" href="https://wa.me/255614051456?text=Hello%20SavageTech%20Tv%20Creator" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+    <img class="whatsapp-icon" src="assets/whatsapp.png" data-whatsapp="assets/whatsapp.png" alt="Tap to show shortcuts" width="60" height="60">
+  </a>
+</div>
+
+
+
+<nav class="mobile-nav">
+  <a class="active" href="home.html">🏠<small>Home</small></a>
+  <a href="#live">⏺️<small>Live</small></a>
+  <a href="support.html">✉️<small>Support</small></a>
+  <a href="settings.html">⚙️<small>Settings</small></a>
+</nav>
+
+<footer>
+    <div class="brand">
+        <img class="brand-logo" src="assets/logo.png" alt="SavageTech TV">
+    </div>
+
+    <p>© 2026 SavageTech TV. Built for a better viewing experience.</p>
+
+    <div class="footer-links">
+        <button onclick="openModal('termsModal')" class="footer-link">
+            Terms
+        </button>
+
+        <span>|</span>
+
+        <button onclick="openModal('privacyModal')" class="footer-link">
+            Privacy
+        </button>
+    </div>
+</footer>
+
+
+<!-- TERMS POPUP -->
+<div id="termsModal" class="policy-modal">
+
+    <div class="policy-modal-content">
+
+        <button class="modal-close"
+            onclick="closeModal('termsModal')">
+            ×
+        </button>
+
+        <h2>Terms of Service</h2>
+
+        <div class="policy-content">
+
+            <h3>1. Acceptance of Terms</h3>
+
+            <p>
+                By using SavageTech TV, you agree to these Terms of Service.
+                If you do not agree with these terms, please stop using the service.
+            </p>
+
+
+            <h3>2. Use of the Service</h3>
+
+            <p>
+                SavageTech TV provides access to television and entertainment
+                content. Users must use the platform responsibly and legally.
+            </p>
+
+
+            <h3>3. Streaming Content</h3>
+
+            <p>
+                Channel availability and streaming quality may change depending
+                on internet connection, stream providers, maintenance, or
+                technical issues.
+            </p>
+
+
+            <h3>4. Changes to the Service</h3>
+
+            <p>
+                SavageTech TV may update, modify, or remove features and
+                channels when necessary.
+            </p>
+
+
+            <h3>5. Changes to Terms</h3>
+
+            <p>
+                These Terms may be updated from time to time. Continued use of
+                SavageTech TV means that you accept the updated Terms.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PRIVACY POPUP -->
+<div id="privacyModal" class="policy-modal">
+
+    <div class="policy-modal-content">
+
+        <button class="modal-close"
+            onclick="closeModal('privacyModal')">
+            ×
+        </button>
+
+        <h2>Privacy Policy</h2>
+
+        <div class="policy-content">
+
+            <h3>1. Information We Collect</h3>
+
+            <p>
+                SavageTech TV may store basic preferences required for the
+                platform to function properly.
+            </p>
+
+
+            <h3>2. Local Storage</h3>
+
+            <p>
+                The website may use browser local storage to remember your
+                preferences, theme settings, and channel configuration.
+            </p>
+
+
+            <h3>3. Third-Party Streams</h3>
+
+            <p>
+                Some channels may use third-party streaming providers.
+                SavageTech TV is not responsible for the privacy practices
+                or availability of external streaming services.
+            </p>
+
+
+            <h3>4. Data Protection</h3>
+
+            <p>
+                We aim to protect user information and do not intentionally
+                sell personal information to third parties.
+            </p>
+
+
+            <h3>5. Updates</h3>
+
+            <p>
+                This Privacy Policy may be updated when necessary.
+                Continued use of the service indicates acceptance of changes.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+(function(){
+  const modal=document.getElementById('guideModal');
+  if(!modal || localStorage.getItem('st_onboarding_done')==='true') return;
+  const steps=[
+    ['📺','Browse channels','Use “All Channels” or the category tabs to find Live TV, Sports, Movies, News, Music and Entertainment. Tap any channel card to open the player.'],
+    ['▶️','Start a stream','Inside the player, tap ▶ to start or pause. Use 🔊 for sound, CC for available subtitles, ⚙ for speed/quality, and ⛶ for fullscreen.'],
+    ['🔎','Search & filter','Use the search box to quickly find a channel. The Filters button lets you narrow the channel directory.'],
+    ['⚙️','Settings & Profile','Open a channel and choose Add to Favorites. Open Settings to manage your profile, preferences, AI history and account.'],
+    ['🤖','SavageTech AI & WhatsApp','Tap the animated arrow at the bottom-right to reveal the SavageTech AI and WhatsApp shortcuts. SavageTech AI answers SavageTech TV questions only.'],
+    ['🛡️','Ready to watch','If your connection becomes unstable, the player will show a network notice and retry. Terms and Privacy are available at the bottom of the page.']
+  ];
+  let i=0;
+  const step=document.getElementById('guideStep'),icon=document.getElementById('guideIcon'),title=document.getElementById('guideTitle'),
+        text=document.getElementById('guideText'),next=document.getElementById('guideNext'),back=document.getElementById('guideBack'),
+        check=document.getElementById('guideDontShow'),ok=document.getElementById('guideOk'),progress=document.getElementById('guideProgress');
+  function paint(){
+    const x=steps[i]; step.textContent=(i+1)+' / '+steps.length; icon.textContent=x[0]; title.textContent=x[1]; text.textContent=x[2];
+    back.style.visibility=i===0?'hidden':'visible'; next.hidden=i===steps.length-1; ok.hidden=i!==steps.length-1;
+    progress.innerHTML=steps.map((_,n)=>'<i class="'+(n===i?'active':'')+'"></i>').join('');
+  }
+  function close(){
+    if(check.checked) localStorage.setItem('st_onboarding_done','true');
+    modal.style.display='none'; modal.setAttribute('aria-hidden','true'); document.body.classList.remove('guide-open');
+  }
+  next.addEventListener('click',()=>{if(i<steps.length-1){i++;paint();}});
+  back.addEventListener('click',()=>{if(i>0){i--;paint();}});
+  ok.addEventListener('click',close);
+  document.getElementById('guideSkip').addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal)close()});
+  modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); document.body.classList.add('guide-open'); paint();
+})();
+</script>
+
+<script src="js/app.js"></script>
+<script src="js/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "SavageTech TV",
+  "short_name": "SavageTech TV",
+  "start_url": "home.html",
+  "display": "fullscreen",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "any",
+  "icons": []
+}

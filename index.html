@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <title>Loading — SavageTech TV</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-inner">
+      <img class="splash-logo" src="assets/logo.png" alt="SavageTech TV">
+      <div class="loading-track"><div class="loading-bar" id="loadingBar"></div></div>
+      <div class="loading-copy"><span>Preparing your experience</span><span id="loadingPercent">1%</span></div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      const bar=document.getElementById('loadingBar');
+      const pct=document.getElementById('loadingPercent');
+      const duration=7000;
+      const start=performance.now();
+      function tick(now){
+        const progress=Math.min(100, Math.max(1, Math.floor(((now-start)/duration)*100)+1));
+        bar.style.width=progress+'%';
+        pct.textContent=progress+'%';
+        if(progress<100){ requestAnimationFrame(tick); }
+        else { setTimeout(()=>location.replace('home.html'), 120); }
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
+<script src="js/analytics.js"></script>
+</body>
+</html>

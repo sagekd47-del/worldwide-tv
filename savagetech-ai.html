@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050912">
+<title>SavageTech AI</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+:root{--ai-cyan:#28c7ff;--ai-blue:#4f7cff;--ai-purple:#8b5cf6;--ai-bg:#050912;--ai-card:rgba(13,20,34,.78);--ai-line:rgba(255,255,255,.09)}
+*{box-sizing:border-box}.ai-body{min-height:100vh;background:radial-gradient(circle at 15% 0%,rgba(40,199,255,.14),transparent 28%),radial-gradient(circle at 90% 20%,rgba(139,92,246,.13),transparent 30%),var(--ai-bg)}
+.ai-topbar{height:72px;padding:0 4%;display:flex;align-items:center;gap:18px;border-bottom:1px solid var(--ai-line);background:rgba(5,9,18,.78);backdrop-filter:blur(18px);position:sticky;top:0;z-index:50}.ai-back{width:40px;height:40px;border:1px solid var(--ai-line);border-radius:12px;display:grid;place-items:center;color:#cbd5e1}.ai-brand{display:flex;align-items:center;gap:10px;font-weight:800}.ai-brand img{width:40px;height:40px;border-radius:12px}.ai-brand span{font-size:17px}.ai-brand b{color:var(--ai-cyan)}.ai-status{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:11px;color:#9aa9bd}.ai-dot{width:7px;height:7px;border-radius:50%;background:#20e47a;box-shadow:0 0 14px #20e47a}
+.ai-layout{width:min(1180px,94%);margin:auto;display:grid;grid-template-columns:250px 1fr;gap:18px;padding:22px 0 35px}.ai-side,.ai-main{border:1px solid var(--ai-line);background:var(--ai-card);box-shadow:0 25px 80px rgba(0,0,0,.25);backdrop-filter:blur(20px);border-radius:22px}.ai-side{padding:16px;height:calc(100vh - 130px);position:sticky;top:94px}.ai-profile{padding:12px;border:1px solid var(--ai-line);border-radius:17px;background:rgba(255,255,255,.025);text-align:center}.ai-profile img{width:64px;height:64px;border-radius:18px;box-shadow:0 0 30px rgba(40,199,255,.2)}.ai-profile h3{margin:9px 0 3px;font-size:15px}.ai-profile p{margin:0;color:#8493a8;font-size:10px}.ai-side-title{font-size:10px;letter-spacing:1.5px;color:#718097;font-weight:800;margin:22px 8px 9px}.ai-prompt{width:100%;text-align:left;border:1px solid transparent;background:transparent;color:#aebbd0;padding:10px;border-radius:11px;cursor:pointer;font-size:11px;margin-bottom:4px}.ai-prompt:hover{background:rgba(40,199,255,.07);border-color:rgba(40,199,255,.13);color:#fff}.ai-clear{width:100%;margin-top:10px;padding:10px;border:1px solid var(--ai-line);background:transparent;color:#9aa9bd;border-radius:11px;cursor:pointer;font-size:11px}
+.ai-main{min-height:calc(100vh - 130px);display:flex;flex-direction:column;overflow:hidden}.ai-header{padding:23px 25px 18px;border-bottom:1px solid var(--ai-line);display:flex;align-items:center;gap:14px}.ai-header-icon{width:48px;height:48px;border-radius:15px;padding:2px;background:linear-gradient(135deg,var(--ai-cyan),var(--ai-purple));box-shadow:0 0 28px rgba(40,199,255,.18)}.ai-header-icon img{width:100%;height:100%;border-radius:13px}.ai-header h1{font-size:20px;margin:0 0 4px}.ai-header p{margin:0;color:#8291a6;font-size:11px}.ai-model{margin-left:auto;border:1px solid var(--ai-line);background:#0a1120;color:#cbd5e1;border-radius:10px;padding:9px 10px;font-size:10px}
+.ai-chat{flex:1;overflow:auto;padding:25px;min-height:420px}.ai-welcome{text-align:center;max-width:600px;margin:35px auto 25px}.ai-welcome-logo{width:88px;height:88px;border-radius:26px;margin-bottom:16px;box-shadow:0 0 55px rgba(40,199,255,.16)}.ai-welcome h2{font-size:31px;margin:0 0 9px}.ai-welcome h2 span{background:linear-gradient(90deg,var(--ai-cyan),#8aa2ff,var(--ai-purple));-webkit-background-clip:text;background-clip:text;color:transparent}.ai-welcome p{color:#8493a8;line-height:1.7;font-size:12px;margin:0}.ai-suggestions{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:22px}.ai-suggestion{padding:13px;text-align:left;background:rgba(255,255,255,.025);border:1px solid var(--ai-line);color:#bdc9d9;border-radius:14px;cursor:pointer;font-size:11px}.ai-suggestion:hover{border-color:rgba(40,199,255,.35);transform:translateY(-1px)}
+.ai-msg{display:flex;gap:11px;margin:0 auto 18px;max-width:800px}.ai-msg.user{justify-content:flex-end}.ai-avatar{width:32px;height:32px;flex:0 0 32px;border-radius:10px;object-fit:cover}.ai-bubble{max-width:min(78%,680px);padding:12px 14px;border-radius:15px;background:#0d1727;border:1px solid var(--ai-line);color:#d9e3ef;font-size:12px;line-height:1.65;white-space:pre-wrap}.ai-msg.user .ai-bubble{background:linear-gradient(135deg,#176fa8,#3152a6);border-color:transparent;color:#fff;border-bottom-right-radius:5px}.ai-msg.assistant .ai-bubble{border-bottom-left-radius:5px}.typing{display:flex;gap:4px;align-items:center}.typing i{width:5px;height:5px;border-radius:50%;background:#7f91aa;animation:blink 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}@keyframes blink{50%{opacity:.25;transform:translateY(-2px)}}
+
+.ai-actions{display:flex;align-items:center;gap:5px;margin-top:6px;padding-left:2px}.ai-action{height:30px;min-width:30px;padding:0 8px;border:1px solid rgba(255,255,255,.08);border-radius:9px;background:rgba(255,255,255,.025);color:#8291a6;font-size:11px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px;transition:.18s ease}.ai-action:hover{color:#fff;border-color:rgba(40,199,255,.28);background:rgba(40,199,255,.07)}.ai-action:active{transform:scale(.95)}.ai-action.active{color:#fff;border-color:rgba(40,199,255,.4);background:rgba(40,199,255,.1)}.ai-action.copied{color:#20e47a;border-color:rgba(32,228,122,.3);background:rgba(32,228,122,.07)}
+.ai-response-wrap{display:flex;flex-direction:column;align-items:flex-start;max-width:min(78%,680px)}.ai-response-wrap .ai-bubble{max-width:100%;width:100%}.ai-speech-modal{display:none;position:fixed;left:50%;bottom:22px;transform:translate(-50%,120%);z-index:1001;width:min(620px,calc(100% - 28px));padding:17px 18px;border:1px solid rgba(40,199,255,.25);border-radius:18px;background:rgba(8,17,30,.96);box-shadow:0 25px 70px rgba(0,0,0,.5);backdrop-filter:blur(16px);transition:transform .25s ease}.ai-speech-modal.show{display:block;transform:translate(-50%,0)}.ai-speech-top{display:flex;align-items:center;gap:10px}.ai-speech-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(40,199,255,.1);color:var(--ai-cyan);flex:0 0 38px}.ai-speech-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.ai-speech-copy{flex:1;min-width:0}.ai-speech-copy strong{display:block;font-size:12px}.ai-speech-copy small{color:#7f90a6;font-size:10px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ai-speech-message{margin-top:11px;padding:10px 11px;border:1px solid rgba(255,255,255,.07);border-radius:11px;background:rgba(255,255,255,.025);color:#b9c7d9;font-size:10px;line-height:1.55;max-height:64px;overflow:hidden;white-space:pre-wrap}.ai-speech-close{width:36px;height:36px;border:1px solid var(--ai-line);border-radius:10px;background:#101a2a;color:#d9e3ef;font-size:21px;cursor:pointer;flex:0 0 36px}.ai-speech-close:hover{background:#172438;color:#fff}.ai-speech-close:active{transform:scale(.96)}.ai-speech-progress{height:4px;margin-top:13px;background:#1d2a3d;border-radius:99px;overflow:hidden}.ai-speech-progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--ai-cyan),var(--ai-purple));transition:width .12s linear}@media(max-width:600px){.ai-speech-modal{bottom:12px;width:calc(100% - 20px);padding:14px}.ai-speech-message{max-height:58px}}
+.ai-recent-mobile{display:none;margin-left:auto;border:1px solid var(--ai-line);background:#0a1120;color:#cbd5e1;border-radius:10px;padding:8px 10px;font-size:10px}.ai-recent-mobile:hover{color:#fff;border-color:rgba(40,199,255,.35)}.ai-side.mobile-open{display:block;position:fixed;top:78px;left:10px;right:10px;bottom:78px;z-index:90;height:auto;overflow:auto}
+
+.ai-composer-wrap{padding:15px 20px 20px;border-top:1px solid var(--ai-line);background:rgba(5,9,18,.45)}.ai-composer{max-width:800px;margin:auto;border:1px solid #25354d;background:#09111e;border-radius:17px;padding:9px;display:flex;align-items:flex-end;gap:8px}.ai-composer textarea{flex:1;resize:none;min-height:42px;max-height:130px;background:transparent;border:0;outline:0;color:#fff;padding:10px;font-size:12px;line-height:1.5}.ai-composer textarea::placeholder{color:#627087}.ai-send{width:43px;height:43px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--ai-cyan),var(--ai-blue));color:#fff;font-size:17px;cursor:pointer;box-shadow:0 8px 24px rgba(40,199,255,.18)}.ai-send:disabled{opacity:.45;cursor:not-allowed}.ai-note{text-align:center;color:#59677c;font-size:9px;margin-top:9px}
+@media(max-width:850px){.ai-recent-mobile{display:block}.ai-layout{grid-template-columns:1fr}.ai-side{display:none}.ai-main{min-height:calc(100vh - 105px)}.ai-model{display:none}.ai-chat{padding:18px 13px}.ai-composer-wrap{padding:11px}.ai-welcome{margin-top:22px}.ai-welcome h2{font-size:26px}.ai-suggestions{grid-template-columns:1fr}.ai-bubble{max-width:100%}.ai-response-wrap{max-width:86%}.ai-actions{gap:2px}.ai-action{width:32px;height:32px}.ai-speech-modal{bottom:78px}}
+
+</style>
+</head>
+<body class="ai-body" data-ai-tts-fix="v5">
+<header class="ai-topbar">
+  <a class="ai-back" href="home.html" aria-label="Back">←</a>
+  <div class="ai-brand"><img src="assets/savagetec-ai-icon.png" alt="SavageTech AI"><span>SavageTech <b>AI</b></span></div>
+  <div class="ai-status"><span class="ai-dot"></span> AI Online</div>
+</header>
+
+<main class="ai-layout">
+  <aside class="ai-side">
+    <div class="ai-profile"><img src="assets/savagetec-ai-icon.png" alt="SavageTech AI"><h3>SavageTech AI</h3><p>Your smart TV companion</p></div>
+    <div class="ai-side-title">QUICK PROMPTS</div>
+    <button class="ai-prompt" data-prompt="What is currently available on SavageTech TV?">📺 Explore SavageTech TV</button>
+    <button class="ai-prompt" data-prompt="Give me a short explanation of what you can help me with.">✨ What can you do?</button>
+    <button class="ai-prompt" data-prompt="Help me choose something interesting to watch tonight.">🎬 Help me choose</button>
+    <button class="ai-prompt" data-prompt="Give me some football and sports ideas to watch.">⚽ Sports ideas</button>
+    <button class="ai-prompt" data-prompt="Give me a few movie or animation recommendations.">🍿 Movies & animation</button>
+    <button class="ai-clear" id="clearChat">Clear conversation</button>
+  </aside>
+
+  <section class="ai-main">
+    <div class="ai-header">
+      <div class="ai-header-icon"><img src="assets/savagetec-ai-icon.png" alt="AI"></div>
+      <div><h1>Chat with SavageTech AI</h1><p>Ask about SavageTech TV, its channels, features, creator and how to use the platform.</p></div>
+      <div class="ai-model" aria-label="AI mode">Standard AI</div>
+    </div>
+
+    <div class="ai-chat" id="chat">
+      <div class="ai-user-gate" id="aiUserGate" hidden><h3>Sign in to chat with SavageTech AI</h3><p>To recognize you by username and keep your recent AI conversations, please create an account or sign in.</p><div class="voice-actions"><a class="primary-btn" href="signup.html">Create account</a><a class="ghost-btn" href="login.html">Sign in</a></div></div>
+      <div class="ai-welcome" id="welcome">
+        <img class="ai-welcome-logo" src="assets/savagetec-ai-icon.png" alt="SavageTech AI">
+        <h2>Hello, <span id="welcomeName">there</span> 👋</h2>
+        <p>Welcome to SavageTech AI. I can listen to you, answer your questions, and speak my replies using your device voice.</p>
+        <div class="ai-suggestions">
+          <button class="ai-suggestion" data-prompt="What channels and categories can I watch on SavageTech TV?">📺 What can I watch?</button>
+          <button class="ai-suggestion" data-prompt="Which movie channels are available on SavageTech TV?">🎬 Movie channels</button>
+          <button class="ai-suggestion" data-prompt="Which Sports channels can I watch on SavageTech TV?">⚽ Sports channels</button>
+          <button class="ai-suggestion" data-prompt="Tell me something interesting about SavageTech TV.">💡 About SavageTech TV</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-speech-modal" id="aiSpeechModal" hidden role="status" aria-live="polite">
+      <div class="ai-speech-top">
+        <div class="ai-speech-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9.5a4 4 0 0 1 0 5"/><path d="M18.5 7a7.5 7.5 0 0 1 0 10"/></svg>
+        </div>
+        <div class="ai-speech-copy"><strong>Reading SavageTech AI response…</strong><small id="aiSpeechStatus">Tap × when you are done listening.</small></div>
+        <button class="ai-speech-close" id="aiSpeechClose" type="button" aria-label="Stop reading">×</button>
+      </div>
+      <div class="ai-speech-message" id="aiSpeechMessage" aria-label="AI message being read"></div>
+      <div class="ai-speech-progress"><i id="aiSpeechProgress"></i></div>
+    </div>
+
+    <div class="ai-voice-modal" id="voiceModal" role="dialog" aria-modal="true" aria-labelledby="voiceTitle">
+  <div class="ai-voice-card">
+    <button class="ai-feedback-close" id="voiceClose" type="button" aria-label="Close">×</button>
+    <h2 id="voiceTitle">Talk to SavageTech AI</h2><p>SavageTech AI will listen to your voice, answer your question, and read the answer aloud using your device's built-in text-to-speech voice.</p>
+    <div class="voice-key-wrap"><label>Device voice conversation</label><small>No voice selection. Your browser listens through the microphone, SavageTech AI processes your message, and your device reads the reply aloud.</small></div>
+    <div class="voice-wave" id="voiceWave"><i></i><i></i><i></i><i></i><i></i></div>
+    <p id="voiceStatus">Ready. Press Start conversation and allow microphone access.</p>
+    <div class="voice-actions"><button class="ghost-btn" id="voiceStop" type="button">Stop</button><button class="primary-btn" id="voiceStart" type="button">Start conversation</button></div>
+  </div>
+</div>
+
+<div class="ai-composer-wrap">
+      <form class="ai-composer" id="chatForm">
+        <textarea id="message" rows="1" placeholder="Message SavageTech AI..." autocomplete="off"></textarea>
+        
+        <button class="ai-voice-btn" id="voiceBtn" type="button" aria-label="Start voice conversation" title="Talk to SavageTech AI" style="display:grid;place-items:center;cursor:pointer">🎙</button><button class="ai-send" id="sendBtn" type="submit" aria-label="Send">➤</button>
+      </form>
+      <div class="ai-note">SavageTech AI can make mistakes. Verify important information.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+/* SAVAGETECH LOCAL AI — no OpenAI/Gemini/API key required. */
+const chat=document.getElementById('chat'),form=document.getElementById('chatForm'),input=document.getElementById('message'),sendBtn=document.getElementById('sendBtn'),welcome=document.getElementById('welcome'),clearBtn=document.getElementById('clearChat'),newChatBtn=document.getElementById('newChat');
+const recentChats=document.getElementById('recentChats'),userLabel=document.getElementById('aiUserLabel'),gate=document.getElementById('aiUserGate'),recentMobileBtn=document.getElementById('recentMobileBtn'),aiSide=document.querySelector('.ai-side');
+const voiceModal=document.getElementById('voiceModal'),voiceBtn=document.getElementById('voiceBtn'),voiceClose=document.getElementById('voiceClose'),voiceStart=document.getElementById('voiceStart'),voiceStop=document.getElementById('voiceStop'),voiceWave=document.getElementById('voiceWave'),voiceStatus=document.getElementById('voiceStatus');
+let messages=[],currentChatId=null,knowledge=null,deviceVoiceRunning=false,voiceRecognition=null,voiceSession=0;
+const HISTORY_KEY='st_ai_recent_chats', MEMORY_KEY='st_ai_memory';
+function getUser(){try{return JSON.parse(localStorage.getItem('st_user')||'null')}catch(e){return null}}
+function userKey(){const u=getUser();return (u?.username||u?.email||'guest').toLowerCase()}
+function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function updateWelcomeName(){const u=getUser();const el=document.getElementById('welcomeName');if(el)el.textContent=u?.username||'there'}
+function loadHistory(){try{return (JSON.parse(localStorage.getItem(HISTORY_KEY)||'{}')[userKey()]||[])}catch(e){return[]}}
+function saveHistory(list){try{const all=JSON.parse(localStorage.getItem(HISTORY_KEY)||'{}');all[userKey()]=list.slice(0,30);localStorage.setItem(HISTORY_KEY,JSON.stringify(all))}catch(e){}}
+function loadMemory(){try{return JSON.parse(localStorage.getItem(MEMORY_KEY)||'{}')[userKey()]||{name:getUser()?.username||'',facts:[],lastQuestions:[]}}catch(e){return{name:getUser()?.username||'',facts:[],lastQuestions:[]}}}
+function saveMemory(m){try{const all=JSON.parse(localStorage.getItem(MEMORY_KEY)||'{}');all[userKey()]=m;localStorage.setItem(MEMORY_KEY,JSON.stringify(all))}catch(e){}}
+function remember(text){const m=loadMemory();m.name=getUser()?.username||m.name||'';m.lastQuestions=[...(m.lastQuestions||[]),String(text).slice(0,180)].slice(-12);const low=String(text).toLowerCase();const patterns=[/my name is ([a-z0-9 _-]{2,50})/i,/call me ([a-z0-9 _-]{2,50})/i];for(const rx of patterns){const hit=String(text).match(rx);if(hit){m.name=hit[1].trim();m.facts=[...(m.facts||[]),`User prefers to be called ${m.name}`].slice(-10)}}saveMemory(m)}
+function refreshHistory(){const list=loadHistory();if(!recentChats)return;recentChats.innerHTML=list.length?list.map(x=>`<button class="ai-history-item ${x.id===currentChatId?'active':''}" data-id="${x.id}">${escapeHtml(x.title||'New conversation')}</button>`).join(''):'<div class="ai-history-empty">No recent chats yet.</div>';recentChats.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>openChat(b.dataset.id))}
+recentMobileBtn?.addEventListener('click',()=>aiSide?.classList.toggle('mobile-open'));
+function persistCurrent(){if(!currentChatId||!messages.length)return;const list=loadHistory();const first=messages.find(x=>x.role==='user');const item={id:currentChatId,title:(first?.content||'New conversation').slice(0,54),messages,updatedAt:Date.now()};const i=list.findIndex(x=>x.id===currentChatId);if(i>=0)list[i]=item;else list.unshift(item);list.sort((a,b)=>b.updatedAt-a.updatedAt);saveHistory(list);refreshHistory()}
+function newChat(){if(messages.length)persistCurrent();currentChatId='chat-'+Date.now()+'-'+Math.random().toString(36).slice(2);messages=[];chat.innerHTML='';chat.appendChild(gate);chat.appendChild(welcome);gate.hidden=true;welcome.style.display='block';refreshHistory();input.value='';autoResize()}
+function openChat(id){aiSide?.classList.remove('mobile-open');const item=loadHistory().find(x=>x.id===id);if(!item)return;currentChatId=item.id;messages=item.messages.slice();chat.innerHTML='';chat.appendChild(gate);chat.appendChild(welcome);gate.hidden=true;welcome.style.display='none';messages.forEach(m=>addMessage(m.role,m.content));refreshHistory()}
+function svgIcon(kind){
+ const common='width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+ if(kind==='copy') return `<svg ${common}><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+ if(kind==='like') return `<svg ${common}><path d="M7 10v10H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h3Z"></path><path d="M7 20h9.2a2 2 0 0 0 1.9-1.4l2-6A2 2 0 0 0 18.2 10H14l.7-3.6A3.2 3.2 0 0 0 11.6 3L7 10v10Z"></path></svg>`;
+ return `<svg ${common}><path d="M7 14V4H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h3Z"></path><path d="M7 4h9.2a2 2 0 0 1 1.9 1.4l2 6A2 2 0 0 1 18.2 14H14l.7 3.6A3.2 3.2 0 0 1 11.6 21L7 14V4Z"></path></svg>`;
+}
+function showFeedbackToast(wrap,message){
+ let toast=wrap.querySelector('.ai-feedback-thanks');
+ if(!toast){toast=document.createElement('div');toast.className='ai-feedback-thanks';wrap.appendChild(toast)}
+ toast.textContent=message;toast.classList.add('show');clearTimeout(toast._timer);toast._timer=setTimeout(()=>toast.classList.remove('show'),2600);
+}
+function addMessage(role,text){
+ if(welcome)welcome.style.display='none';
+ const row=document.createElement('div');row.className='ai-msg '+role;
+ if(role==='assistant'){
+   const img=document.createElement('img');img.className='ai-avatar';img.src='assets/savagetec-ai-icon.png';img.alt='SavageTech AI';row.appendChild(img);
+   const wrap=document.createElement('div');wrap.className='ai-response-wrap';
+   const bubble=document.createElement('div');bubble.className='ai-bubble';bubble.textContent=text;wrap.appendChild(bubble);
+   const actions=document.createElement('div');actions.className='ai-actions';
+   const copy=document.createElement('button');copy.type='button';copy.className='ai-action ai-copy';copy.title='Copy response';copy.setAttribute('aria-label','Copy response');copy.innerHTML=svgIcon('copy')+'<span>Copy</span>';
+   copy.onclick=async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text)}else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}copy.classList.add('copied');copy.querySelector('span').textContent='Copied';setTimeout(()=>{copy.classList.remove('copied');copy.querySelector('span').textContent='Copy'},1400)}catch(e){copy.querySelector('span').textContent='Failed';setTimeout(()=>copy.querySelector('span').textContent='Copy',1400)}};
+   const like=document.createElement('button');like.type='button';like.className='ai-action ai-like';like.title='Like response';like.setAttribute('aria-label','Like response');like.innerHTML=svgIcon('like');
+   const dislike=document.createElement('button');dislike.type='button';dislike.className='ai-action ai-dislike';dislike.title='Dislike response';dislike.setAttribute('aria-label','Dislike response');dislike.innerHTML=svgIcon('dislike');
+   like.onclick=()=>{like.classList.add('active');dislike.classList.remove('active');showFeedbackToast(wrap,'Thanks for your feedback! We’re glad this answer helped.');if(window.SavageTechAnalytics)SavageTechAnalytics.track('ai_feedback_like')};
+   dislike.onclick=()=>{dislike.classList.add('active');like.classList.remove('active');showFeedbackToast(wrap,'Thanks for your feedback! We’ll use it to improve SavageTech AI.');if(window.SavageTechAnalytics)SavageTechAnalytics.track('ai_feedback_dislike')};
+   actions.append(copy,like,dislike);wrap.appendChild(actions);row.appendChild(wrap);
+ }else{
+   const bubble=document.createElement('div');bubble.className='ai-bubble';bubble.textContent=text;row.appendChild(bubble);const u=getUser();const img=document.createElement('img');img.className='ai-avatar ai-user-avatar';img.alt=u?.username?'@'+u.username:'Your profile';img.src=u?.photo||'assets/user.jpg';row.appendChild(img)
+ }
+ chat.appendChild(row);chat.scrollTop=chat.scrollHeight;return row
+}
+function addTyping(){const row=document.createElement('div');row.className='ai-msg assistant';row.id='typing';const img=document.createElement('img');img.className='ai-avatar';img.src='assets/savagetec-ai-icon.png';img.alt='SavageTech AI';row.appendChild(img);const bubble=document.createElement('div');bubble.className='ai-bubble typing';bubble.innerHTML='<i></i><i></i><i></i>';row.appendChild(bubble);chat.appendChild(row);chat.scrollTop=chat.scrollHeight}
+function autoResize(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,130)+'px'}
+function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
+function tokens(v){return [...new Set(norm(v).split(' ').filter(x=>x.length>2))]}
+async function loadKnowledge(){try{const r=await fetch('ai-knowledge.json',{cache:'no-store'});if(r.ok)knowledge=await r.json()}catch(e){knowledge={channels:[],categories:[]}}return knowledge}
+function channelMatches(q){const list=Array.isArray(knowledge?.channels)?knowledge.channels:[];const nq=norm(q);return list.filter(c=>{const n=norm(c.name),cat=norm(c.cat),d=norm(c.desc);return nq.includes(n)||tokens(q).some(t=>n.split(' ').includes(t))||nq.includes(cat)&&cat})}
+function answerFromFAQ(q){
+ const faqs=Array.isArray(knowledge?.featureFAQ)?knowledge.featureFAQ:[];
+ let best=null,bestScore=0;
+ for(const item of faqs){
+   let score=0;
+   for(const topic of (item.topics||[])){
+     const t=norm(topic); if(!t)continue;
+     if(q.includes(t)) score += t.length>=6?4:2;
+   }
+   if(score>bestScore){bestScore=score;best=item}
+ }
+ return bestScore>=2?best.answer:null;
+}
+function retrieveSiteInfo(q){
+ const docs=[];
+ for(const p of (knowledge?.sitePages||[])) docs.push({label:p.title,text:p.text});
+ for(const f of (knowledge?.featureFAQ||[])) docs.push({label:'SavageTech feature',text:(f.topics||[]).join(' ')+' '+f.answer});
+ const qs=tokens(q); if(!qs.length)return null;
+ let best=null,bestScore=0;
+ for(const d of docs){
+   const text=norm(d.text), label=norm(d.label); let score=0;
+   for(const t of qs){if(label.includes(t))score+=4;if(text.includes(t))score+=1}
+   if(score>bestScore){bestScore=score;best=d}
+ }
+ if(!best||bestScore<2)return null;
+ const raw=best.text.replace(/\s+/g,' ').trim();
+ const sentences=raw.split(/(?<=[.!?])\s+/).filter(Boolean);
+ const relevant=sentences.filter(x=>qs.some(t=>norm(x).includes(t))).slice(0,3);
+ if(!relevant.length)return `I found information in the ${best.label} page, but I need a more specific question. You can ask me about its channels, player, accounts, downloads, support or settings.`;
+ return `According to the SavageTech TV ${best.label} information: ${relevant.join(' ')}`;
+}
+function containsAnyText(q, arr){return arr.some(x=>q.includes(x))}
+function safetyReply(q){
+ const badWords=['fuck','fucking','motherfucker','shit','bullshit','bitch','asshole','bastard','dickhead','stupid bitch','matusi','tusi'];
+ const hacking=['hack','hacking','hacker','exploit','exploitation','malware','ransomware','phishing','ddos','denial of service','sql injection','xss','cross site scripting','password cracking','crack a password','credential theft','steal password','keylogger','backdoor','bypass login','bypass authentication','brute force','botnet','trojan','virus attack','cyber attack','unauthorized access','break into','break in','penetrate a system'];
+ if(containsAnyText(q,hacking)) return `I’m sorry, but I can’t help with hacking, unauthorized access, password theft, malware, phishing, DDoS attacks, bypassing security, exploiting systems, or other harmful cyber activity. I can help with defensive cybersecurity, account security, safe testing in an authorized lab, or how to secure SavageTech TV instead.`;
+ if(containsAnyText(q,badWords)) return `Let’s keep the conversation respectful 😊. I’m happy to help you with SavageTech TV, but I won’t respond to abusive or insulting language.`;
+ return null;
+}
+function suggestionReply(question){
+ const q=norm(question), cs=knowledge?.channels||[];
+ if(q.includes('what channels and categories')) return `SavageTech TV currently has ${cs.length} channel entries across these categories: ${(knowledge?.categories||[]).join(', ')}. You can browse the channel directory on Home and tap a channel to open its live player.`;
+ if(q.includes('which movie channels')) {const xs=cs.filter(c=>norm(c.cat)==='movies');return xs.length?`SavageTech TV has ${xs.length} Movies channel entries. Some available channels include: ${xs.slice(0,12).map(c=>c.name).join(', ')}. Tap a channel on Home to open its player.`:`I don't currently have Movies channels loaded in the local directory.`}
+ if(q.includes('which sports channels')) {const xs=cs.filter(c=>norm(c.cat)==='sports');return xs.length?`SavageTech TV has ${xs.length} Sports channel entries. Some available channels include: ${xs.slice(0,12).map(c=>c.name).join(', ')}. Tap a channel on Home to open its player.`:`I don't currently have Sports channels loaded in the local directory.`}
+ if(q.includes('something interesting about savagetech')) return `Here’s something useful: SavageTech TV combines a live channel directory with an HLS streaming player, category filtering, search, account/profile features, downloads, support and SavageTech AI. When a channel has a valid stream, selecting its card opens the player page for that channel.`;
+ return null;
+}
+function localReply(question){
+ const u=getUser(), name=u?.username||loadMemory().name||'there', q=norm(question);
+ const safe=safetyReply(q); if(safe)return safe;
+ const suggested=suggestionReply(q); if(suggested)return suggested;
+ const ch=channelMatches(question);
+ if(/^(hi|hello|hey|habari|mambo|good morning|good evening|good afternoon)\b/.test(q)) return `Hello ${name} 👋 Welcome to SavageTech TV! I’m SavageTech AI. How can I help you today?`;
+ if(/who are you|what are you|about you|your name/.test(q)) return `I’m SavageTech AI, the official assistant built into SavageTech TV. I can help with channels, live streaming, the player, accounts, settings, downloads, support, privacy, terms and other SavageTech TV features.`;
+ if(/who (made|created|is the creator)|creator|owner|developer/.test(q)) return `SavageTech TV and SavageTech AI identify Victor Isack as the creator.`;
+ if(/how many channels|number of channels|total channels|how much channels/.test(q)) return `The current SavageTech TV local channel directory contains ${((knowledge?.channels)||[]).length} channel entries. The catalogue can change when channels are added, removed or updated.`;
+ if(/list (all|every) channels|all channels|every channel/.test(q)) { const xs=(knowledge?.channels||[]); return xs.length?`The current directory contains ${xs.length} channels. Here are some entries: ${xs.slice(0,30).map(c=>c.name).filter(Boolean).join(', ')}. Ask me for a specific category or channel name for a focused answer.`:`I don't currently have channel entries loaded.`; }
+ if(/fullscreen|full screen|fullview|full view/.test(q)) return answerFromFAQ(q) || `To use fullscreen, open a channel in the SavageTech TV player and press the fullscreen ⛶ control. If it does not work, your browser/device may block fullscreen or the current player context may not support it.`;
+ if(/subtitle|subtitles|caption|captions|\bcc\b/.test(q)) return answerFromFAQ(q) || `The player can expose subtitle/CC options when subtitle tracks are available for the current stream. If no tracks are supplied by the stream, there may be nothing to select.`;
+ if(/quality|1080p|720p|480p|auto/.test(q)) return answerFromFAQ(q) || `Open the player settings ⚙ and check Video quality. Available quality choices depend on the HLS stream; the player can show Auto or available renditions when the stream provides them.`;
+ if(/landscape|portrait|orientation|rotate/.test(q)) return answerFromFAQ(q) || `Open the player settings and use the Landscape or Portrait screen-mode controls. Browser/device support can affect orientation changes.`;
+ if(/play|pause|start stream|stop stream|player control/.test(q)) return answerFromFAQ(q) || `Open a channel from Home. The player page provides Play/Pause, volume, subtitles, settings, quality, screen mode and fullscreen controls.`;
+ if(/hls|m3u8|stream link|streaming/.test(q)) return answerFromFAQ(q) || `SavageTech TV uses HLS live streaming for compatible channels. HLS streams commonly use .m3u8 playlists, and playback depends on the stream, browser and network.`;
+ if(/what is savage|about savage|what is savagetech|savagetech tv/.test(q)) return `SavageTech TV is a digital live-TV platform with a channel directory, category browsing, an HLS-based player, user accounts, downloads, support and the built-in SavageTech AI assistant.`;
+ if(/category|categories|what channels|which categories/.test(q)) return `SavageTech TV categories are: ${(knowledge?.categories||[]).join(', ')}.`;
+ if(/sport/.test(q)){const xs=(knowledge?.channels||[]).filter(c=>norm(c.cat)==='sports');return xs.length?`I found ${xs.length} Sports channels: ${xs.slice(0,20).map(c=>c.name).filter(Boolean).join(', ')}.`:`I don't currently have Sports channel entries loaded.`}
+ if(/movie|cinema|film/.test(q)){const xs=(knowledge?.channels||[]).filter(c=>norm(c.cat)==='movies');return xs.length?`I found ${xs.length} Movies channels: ${xs.slice(0,20).map(c=>c.name).filter(Boolean).join(', ')}.`:`I don't currently have Movies channel entries loaded.`}
+ if(/news|habari/.test(q)){const xs=(knowledge?.channels||[]).filter(c=>norm(c.cat)==='news');return xs.length?`I found ${xs.length} News channels: ${xs.slice(0,20).map(c=>c.name).filter(Boolean).join(', ')}.`:`I don't currently have News channel entries loaded.`}
+ if(/music|muziki/.test(q)){const xs=(knowledge?.channels||[]).filter(c=>norm(c.cat)==='music');return xs.length?`I found ${xs.length} Music channels: ${xs.slice(0,20).map(c=>c.name).filter(Boolean).join(', ')}.`:`I don't currently have Music channel entries loaded.`}
+ if(/kids|children|watoto/.test(q)){const xs=(knowledge?.channels||[]).filter(c=>norm(c.cat)==='kids');return xs.length?`I found ${xs.length} Kids channels: ${xs.slice(0,20).map(c=>c.name).filter(Boolean).join(', ')}.`:`I don't currently have Kids channel entries loaded.`}
+ if(/documentary|documentaries/.test(q)){const xs=(knowledge?.channels||[]).filter(c=>norm(c.cat)==='documentary');return xs.length?`I found ${xs.length} Documentary channels: ${xs.slice(0,20).map(c=>c.name).filter(Boolean).join(', ')}.`:`I don't currently have Documentary channel entries loaded.`}
+ if(/religious|religion|christian|islam/.test(q)){const xs=(knowledge?.channels||[]).filter(c=>norm(c.cat)==='religious');return xs.length?`I found ${xs.length} Religious channels: ${xs.slice(0,20).map(c=>c.name).filter(Boolean).join(', ')}.`:`I don't currently have Religious channel entries loaded.`}
+ if(/entertainment/.test(q)){const xs=(knowledge?.channels||[]).filter(c=>norm(c.cat)==='entertainment');return xs.length?`I found ${xs.length} Entertainment channels: ${xs.slice(0,20).map(c=>c.name).filter(Boolean).join(', ')}.`:`I don't currently have Entertainment channel entries loaded.`}
+ if(/search|find channel|where is|do you have/.test(q) && ch.length) return `I found ${ch.slice(0,10).map(c=>`${c.name}${c.cat?' ('+c.cat+')':''}`).join(', ')} in the current SavageTech TV directory.`;
+ if(ch.length===1){const c=ch[0];return `${c.name} is listed under ${c.cat||'SavageTech TV'}. ${c.desc||'It is available in the current SavageTech TV channel directory.'}`}
+ if(/account|login|sign in|signup|register|password/.test(q)) return answerFromFAQ(q) || `You can use the Sign in and Sign up pages for your SavageTech TV account. If you have forgotten a password, use the account recovery option available on the current site if configured.`;
+ if(/profile|avatar|username/.test(q)) return answerFromFAQ(q) || `Your profile area is where your account information and profile details can be managed.`;
+ if(/settings|dark mode|autoplay|preferences/.test(q)) return answerFromFAQ(q) || `Open Settings to manage the available SavageTech TV preferences and account settings.`;
+ if(/download|apk|android|iphone|ios|windows|mac/.test(q)) return answerFromFAQ(q) || `Open the Download Center to see the available SavageTech TV download options.`;
+ if(/contact|support|help|message|email/.test(q)) return answerFromFAQ(q) || `For support, open the Support page. You can send a message there, and SavageTech TV support can be contacted using the configured support details.`;
+ if(/privacy|private|data|local storage/.test(q)) return answerFromFAQ(q) || `The Privacy page explains how the website handles information and browser-local data.`;
+ if(/terms|legal|responsible|rules/.test(q)) return answerFromFAQ(q) || `The Terms page contains the site's legal and usage information.`;
+ if(/ai|artificial intelligence|voice|microphone|speech|memory|remember|recent chats/.test(q)) return answerFromFAQ(q) || `SavageTech AI provides local SavageTech TV assistance, device voice support and conversation memory in the browser.`;
+ if(/thank|thanks|asante/.test(q)) return `You’re very welcome, ${name}! 😊 I’m happy to help.`;
+ if(/bye|goodbye|see you|kwaheri/.test(q)) return `Goodbye ${name}! 👋 Enjoy SavageTech TV, and come back whenever you need help.`;
+ const retrieved=retrieveSiteInfo(q); if(retrieved)return retrieved;
+ if(ch.length>1)return `I found several possible matches: ${ch.slice(0,10).map(c=>c.name).filter(Boolean).join(', ')}. Tell me the exact channel name or what you want to know about it.`;
+ return `I’m SavageTech AI, ${name}. I can help with SavageTech TV channels, categories, live streaming, the player, fullscreen, quality, subtitles, orientation, accounts, profile, settings, downloads, support, privacy, terms, AI voice and memory. Please ask me your SavageTech TV question in a little more detail.`;
+}
+async function sendMessageToAI(text,u){
+ const clean=String(text||'').trim();if(!clean)throw Error('Please enter a message.');if(!u?.username)throw Error('Please sign in first.');
+ if(!knowledge)await loadKnowledge();if(!currentChatId)currentChatId='chat-'+Date.now();addMessage('user',clean);messages.push({role:'user',content:clean});remember(clean);if(window.SavageTechAnalytics)SavageTechAnalytics.track('chat');addTyping();
+ const reply=localReply(clean);
+ await new Promise(r=>setTimeout(r,3000));
+ document.getElementById('typing')?.remove();addMessage('assistant',reply);messages.push({role:'assistant',content:reply});persistCurrent();return reply;
+}
+function setVoiceStatus(t){if(voiceStatus)voiceStatus.textContent=t}
+function stopDeviceVoice(){deviceVoiceRunning=false;voiceSession++;if(voiceRecognition){try{voiceRecognition.onend=null;voiceRecognition.stop()}catch(e){}voiceRecognition=null}try{speechSynthesis?.cancel()}catch(e){}voiceWave?.classList.remove('show');if(voiceStart){voiceStart.disabled=false;voiceStart.textContent='Start conversation'}}
+function openVoice(){const u=getUser();if(!u?.username){gate.hidden=false;setVoiceStatus('Please sign in or create an account first.');return}voiceModal?.classList.add('show');if(voiceModal)voiceModal.hidden=false;setVoiceStatus('Ready. Press Start conversation and allow microphone access.')}
+function closeVoice(){stopDeviceVoice();voiceModal?.classList.remove('show');if(voiceModal)voiceModal.hidden=true}
+function startDeviceVoice(){
+ const u=getUser();if(!u?.username){gate.hidden=false;setVoiceStatus('Please sign in or create an account first.');return}
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){setVoiceStatus('Voice listening is not supported here. Try Chrome on Android.');return}if(!('speechSynthesis'in window)){setVoiceStatus('Device text-to-speech is not supported here.');return}
+ stopDeviceVoice();deviceVoiceRunning=true;const sid=++voiceSession;voiceStart.disabled=true;voiceStart.textContent='Listening…';voiceWave?.classList.add('show');
+ const greeting=`Hello ${u.username}. Welcome to SavageTech AI. I am ready to listen to your question.`;
+ const rec=new SR();voiceRecognition=rec;rec.lang=navigator.language||'en-US';rec.continuous=false;rec.interimResults=true;let final='';
+ const listen=()=>{if(!deviceVoiceRunning||sid!==voiceSession)return;setVoiceStatus('Listening… speak naturally, then pause.');try{rec.start()}catch(e){}};
+ rec.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0]?.transcript||'';if(e.results[i].isFinal)final+=t+' ';else interim+=t}if(interim)setVoiceStatus('Hearing: '+interim);if(final.trim())setVoiceStatus('I heard you. Thinking…')};
+ rec.onerror=e=>{if(!deviceVoiceRunning||sid!==voiceSession)return;if(e.error==='not-allowed'||e.error==='service-not-allowed'){setVoiceStatus('Microphone permission was denied.');stopDeviceVoice();return}if(e.error!=='no-speech')setVoiceStatus('Voice listening error: '+e.error)};
+ rec.onend=async()=>{if(!deviceVoiceRunning||sid!==voiceSession)return;const text=final.trim();if(!text){listen();return}try{const reply=await sendMessageToAI(text,u);if(!deviceVoiceRunning||sid!==voiceSession)return;await new Promise(resolve=>{const utter=new SpeechSynthesisUtterance(reply);utter.rate=1;utter.pitch=1;utter.volume=1;utter.onstart=()=>setVoiceStatus('Speaking…');utter.onend=resolve;utter.onerror=resolve;speechSynthesis.cancel();speechSynthesis.speak(utter)})}finally{if(deviceVoiceRunning&&sid===voiceSession){voiceWave?.classList.add('show');voiceStart.textContent='Listening…';listen()}}};
+ const utter=new SpeechSynthesisUtterance(greeting);utter.onstart=()=>setVoiceStatus('Welcome…');utter.onend=listen;utter.onerror=listen;speechSynthesis.cancel();speechSynthesis.speak(utter);
+}
+voiceBtn?.addEventListener('click',openVoice);voiceClose?.addEventListener('click',closeVoice);voiceStart?.addEventListener('click',startDeviceVoice);voiceStop?.addEventListener('click',()=>{stopDeviceVoice();setVoiceStatus('Voice conversation stopped.')});voiceModal?.addEventListener('click',e=>{if(e.target===voiceModal)closeVoice()});
+clearBtn?.addEventListener('click',()=>{messages=[];currentChatId='chat-'+Date.now();chat.innerHTML='';chat.appendChild(gate);chat.appendChild(welcome);gate.hidden=true;welcome.style.display='block';persistCurrent();refreshHistory()});newChatBtn?.addEventListener('click',newChat);
+input.addEventListener('input',autoResize);input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});document.querySelectorAll('[data-prompt]').forEach(btn=>btn.addEventListener('click',()=>{input.value=btn.dataset.prompt;autoResize();form.requestSubmit()}));
+form.addEventListener('submit',async e=>{e.preventDefault();const u=getUser();if(!u?.username){gate.hidden=false;return}const text=input.value.trim();if(!text||sendBtn.disabled)return;input.value='';autoResize();sendBtn.disabled=true;try{await sendMessageToAI(text,u)}catch(err){document.getElementById('typing')?.remove();addMessage('assistant','Sorry — I could not process that message. '+(err?.message||''))}finally{sendBtn.disabled=false;input.focus()}});
+const u=getUser();updateWelcomeName();if(u?.username){userLabel.textContent='@'+u.username;gate.hidden=true}else{userLabel.textContent='Guest Viewer';gate.hidden=false;input.disabled=true;sendBtn.disabled=true;voiceBtn.disabled=true}if(!currentChatId)currentChatId='chat-'+Date.now();refreshHistory();loadKnowledge();
+</script>
+</body>
+</html>

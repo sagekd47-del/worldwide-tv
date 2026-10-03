@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Profile — SavageTech TV</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="home.html"><img class="brand-logo" src="assets/logo.png" alt="SavageTech TV"></a>
+    <a class="back" href="home.html">⬅️Go Home</a>
+</header>
+
+<main class="profile-page">
+    <div class="profile-layout"><div>
+        <div class="profile-hero">
+            <div class="avatar-wrap">
+                <div class="avatar" id="avatar">S</div>
+                <label class="avatar-change" title="Change profile picture">✎
+                    <input id="avatarInput" type="file" accept="image/*">
+                </label>
+            </div>
+            <div>
+                <span class="section-kicker">MY ACCOUNT</span>
+                <h1 id="profileName">Guest Viewer</h1>
+                <p id="profileEmail">Sign in to personalize your experience.</p>
+            </div>
+        </div>
+        <section class="profile-card">
+            <span class="section-kicker">PROFILE SETTINGS</span>
+            <h2>Edit your profile</h2>
+            <form class="profile-form" id="profileForm">
+                <label>Username<input id="usernameInput" required maxlength="30" placeholder="Your username"></label>
+                <label>Email<input id="emailInput" type="email" readonly></label>
+                <div class="profile-actions">
+                    <button class="primary-btn" type="submit">Save changes</button>
+                    <button class="ghost-btn danger" type="button" id="logoutBtn">Log out</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <aside class="profile-card profile-side">
+        <span class="section-kicker">ACCOUNT</span>
+        <h3>Your SavageTech profile</h3>
+        <div class="account-status">Change your username, upload a profile picture, save your settings, and manage your favorites from one professional profile area.</div>
+    </aside>
+</div>
+<section class="section">
+    <div class="section-head">
+        <div>
+            <span class="section-kicker">YOUR LIST</span>
+            <h2>Favorites</h2>
+        </div>
+    </div>
+    <div class="channel-grid" id="favGrid"></div>
+</section>
+</main>
+<script src="js/app.js"></script>
+<script src="js/analytics.js"></script>
+<script>document.getElementById("logoutBtn")?.addEventListener("click",()=>window.savageTechLogout?.());</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Support — SavageTech TV</title><link rel="stylesheet" href="css/style.css"></head><body><header class="topbar"><a class="brand" href="home.html"><img class="brand-logo" src="assets/logo.png" alt="SavageTech TV"></a><a class="back" href="home.html">← Home</a></header><main class="download-page"><section class="support-card"><span class="section-kicker">SUPPORT</span><h1>How can we help?</h1><p>Need help with a channel, player, account, download or SavageTech AI? Send a message to the SavageTech TV support inbox.</p><div class="creator-badge">Creator: Victor Isack • SavageTech TV</div></section><section class="support-card"><h2>Contact SavageTech TV</h2><form class="support-form" id="supportForm"><label>Username<input id="supportUsername" required maxlength="120" placeholder="Your username"></label><label>Email<input id="supportEmail" type="email" required maxlength="200" placeholder="you@example.com"></label><label>Message<textarea id="supportMessage" required maxlength="5000" placeholder="Describe your issue or feature request…"></textarea></label><button class="primary-btn" type="submit">✉ Send message</button><div class="support-status" id="supportStatus"></div></form></section><section class="support-card"><h2>Policies</h2><p><a class="ghost-btn" href="terms.html">Terms of Service</a> &nbsp; <a class="ghost-btn" href="privacy.html">Privacy Policy</a></p></section></main><script>
+const supportUsername=document.getElementById('supportUsername'),supportEmail=document.getElementById('supportEmail'),supportMessage=document.getElementById('supportMessage'),supportStatus=document.getElementById('supportStatus');
+const u=(()=>{try{return JSON.parse(localStorage.getItem('st_user')||'null')}catch(e){return null}})();
+if(u){supportUsername.value=u.username||u.name||'';supportEmail.value=u.email||''}
+document.getElementById('supportForm').onsubmit=async e=>{
+ e.preventDefault(); const st=supportStatus,btn=e.target.querySelector('button');
+ st.textContent='Sending…'; btn.disabled=true;
+ try{
+  const r=await fetch('https://formsubmit.co/ajax/info.savagetech@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:supportUsername.value,email:supportEmail.value,message:supportMessage.value,_subject:'New SavageTech TV Contact Message',_captcha:'false',_template:'table'})});
+  const d=await r.json().catch(()=>({})); if(!r.ok||d.success===false) throw Error(d.message||'Could not send message.');
+  st.textContent='✓ Message sent directly to info.savagetech@gmail.com.'; e.target.reset(); if(u){supportUsername.value=u.username||u.name||'';supportEmail.value=u.email||''}
+ }catch(err){st.textContent='✕ '+(err.message||'Could not send message. Please try again.')}
+ finally{btn.disabled=false}
+};
+</script></body></html>
