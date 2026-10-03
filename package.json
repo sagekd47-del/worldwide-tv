@@ -1,14 +1,13 @@
 {
-  "name": "savagetech-tv-ai",
-  "version": "1.0.0",
+  "name": "savagetech-tv-vercel",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "start": "node server.js"
+  "engines": {
+    "node": "24.x"
   },
-  "dependencies": {
-    "dotenv": "^16.4.7",
-    "express": "^5.1.0",
-    "ffmpeg-static": "^5.2.0"
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "check": "node --check api/health.js && node --check api/stream-proxy.js && node --check api/analytics/event.js && node --check api/analytics/stats.js && node --check api/ratings/index.js && node --check api/ratings/summary.js && node --check api/chat.js && node --check api/ts-hls.js && node --check api/mkv-hls.js && node --check api/ts-status.js && node --check api/ts-segment.js && node --check api/mkv-segment.js"
   }
 }
