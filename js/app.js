@@ -646,7 +646,28 @@ function player(){
         video.src=url;
         video.addEventListener("loadedmetadata",()=>finishLoad(item.name),{once:true});
       }else if(window.Hls && window.Hls.isSupported()){
-        hls=new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:30,maxBufferLength:20,maxMaxBufferLength:40,liveSyncDurationCount:3});
+        hls=new Hls({
+          enableWorker:true,
+          // Prefer stability on slower connections over ultra-low latency.
+          lowLatencyMode:false,
+          backBufferLength:20,
+          maxBufferLength:30,
+          maxMaxBufferLength:60,
+          maxBufferSize:45*1000*1000,
+          liveSyncDurationCount:5,
+          liveMaxLatencyDurationCount:10,
+          startLevel:-1,
+          capLevelToPlayerSize:true,
+          abrEwmaDefaultEstimate:350000,
+          abrBandWidthFactor:0.8,
+          abrBandWidthUpFactor:0.6,
+          fragLoadingMaxRetry:6,
+          manifestLoadingMaxRetry:4,
+          levelLoadingMaxRetry:6,
+          fragLoadingRetryDelay:1000,
+          manifestLoadingRetryDelay:1000,
+          levelLoadingRetryDelay:1000
+        });
         hls.loadSource(url);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED,(_,data)=>{
@@ -661,6 +682,12 @@ function player(){
           console.warn("HLS error",data);
           if(data.fatal){
             if(data.type===Hls.ErrorTypes.MEDIA_ERROR){try{hls.recoverMediaError();return}catch(e){}}
+            if(data.type===Hls.ErrorTypes.NETWORK_ERROR && hls && !hls.__stRetrying){
+              hls.__stRetrying=true;
+              setStatus("Connection interrupted — reconnecting…");
+              setTimeout(()=>{if(hls){hls.__stRetrying=false;try{hls.startLoad()}catch(e){}}},1800);
+              return;
+            }
             fail("HLS playback failed. The stream may be offline, blocked, protected, or require authentication.");
           }
         });
@@ -1015,3 +1042,23 @@ document.addEventListener("keydown", function (event) {
     }
 
 });
+
+// Smart-TV spatial navigation: arrows move focus between visible cards/controls.
+(function enableRemoteSpatialNavigation(){
+ if(window.__stRemoteNavInstalled)return; window.__stRemoteNavInstalled=true;
+ const selector='a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
+ function candidates(){return [...document.querySelectorAll(selector)].filter(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'&&!el.closest('[hidden]')});}
+ document.addEventListener('keydown',e=>{
+  if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))return;
+  const active=document.activeElement; if(active&&(active.matches('input,textarea,select')||active.isContentEditable))return;
+  const list=candidates(); if(!list.length)return;
+  if(!active||active===document.body||!list.includes(active)){
+    e.preventDefault(); const first=list.find(x=>x.matches('.channel-card,.category-tab,.primary-btn'))||list[0]; first.focus({preventScroll:true}); first.scrollIntoView({block:'nearest',inline:'nearest'});return;
+  }
+  const a=active.getBoundingClientRect(), ax=a.left+a.width/2, ay=a.top+a.height/2;
+  const dirs={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]},[dx,dy]=dirs[e.key];
+  let best=null,bestScore=Infinity;
+  for(const el of list){if(el===active)continue;const r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,vx=x-ax,vy=y-ay,primary=vx*dx+vy*dy;if(primary<=3)continue;const secondary=Math.abs(vx*dy-vy*dx);const score=primary+secondary*2.4;if(score<bestScore){best=el;bestScore=score}}
+  if(best){e.preventDefault();best.focus({preventScroll:true});best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'auto'});}
+ },true);
+})();

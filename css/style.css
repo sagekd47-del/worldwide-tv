@@ -618,3 +618,9 @@ body.light footer{background:#fff}.light .account-status{background:#f3f6fa;colo
 
 /* Hide the browser cursor during active playback after 3 seconds of inactivity. */
 body.st-cursor-hidden, body.st-cursor-hidden * { cursor: none !important; }
+
+/* Visible focus and remote-friendly targets for Android TV / Smart TV */
+:where(a,button,[tabindex]):focus-visible{outline:3px solid #39a5ff!important;outline-offset:3px!important;box-shadow:0 0 0 5px rgba(57,165,255,.22)!important}
+.channel-card:focus,.category-tab:focus,.primary-btn:focus,.ghost-btn:focus{border-color:#39a5ff;transform:scale(1.025);z-index:2}
+.channel-card,.category-tab,.primary-btn,.ghost-btn,.control-btn{scroll-margin:18px}
+@media(min-width:901px){.channel-card{min-height:210px}.channel-card:focus{transform:scale(1.035)}}
