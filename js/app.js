@@ -612,7 +612,12 @@ function player(){
     // Cross-origin HTTPS streams still need the provider to allow CORS. If the
     // page is running through our Node server, proxy them as well to remove
     // browser CORS restrictions where possible.
-    const useProxy=isLocalServer && (!sameOrigin(url) || needsProxy);
+    // Only use the server-side proxy on deployed hosts that can actually run /api routes.
+    // VS Code Live Server / localhost is a static server; proxying there sends every
+    // cross-origin .m3u8 request to a missing /api/stream-proxy endpoint (404).
+    const host=location.hostname.toLowerCase();
+    const isLocalDevHost=host==="localhost" || host==="127.0.0.1" || host==="::1" || host.endsWith(".local");
+    const useProxy=isLocalServer && !isLocalDevHost && (!sameOrigin(url) || needsProxy);
     if(kind==="ts"){
       if(!isLocalServer){fail("Raw .ts streams need the SavageTech Node server (FFmpeg) because browsers do not natively play MPEG-TS.");return}
       url=tsUrl(url);
