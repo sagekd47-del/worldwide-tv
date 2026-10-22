@@ -114,92 +114,92 @@ const defaultChannels=[
  {id:97,name:"Rotana Music",cat:"Music",desc:"",logo:"",logoImage:"assets/rotana-music.png",stream:"https://rotana.hibridcdn.net/rotananet/music_net-7Y83PP5adWixDF93/playlist.m3u8"},
  {id:98,name:"Cartoonito",cat:"Kids",desc:"",logo:"",logoImage:"assets/cartoonito.png",stream:"http://tvstarlife.com:25461/live/cesar/cesar123/207.m3u8"},
  {id:99,name:"DELUXE MUSIC",cat:"Music",desc:"",logo:"",logoImage:"assets/deluxe-music.png",stream:"https://sdn-global-live-streaming-packager-cache.3qsdn.com/13456/13456_264_live.m3u8"},
- {id:100,name:"AzamOne",cat:"Entertainment",desc:"",logo:"",logoImage:"assets/aza1.png",stream:"https://www.revontechtv.com/play/live/6a8df7ce29a66e32add52109"},
- {id:101,name:"AzamTwo",cat:"Entertainment",desc:"",logo:"",logoImage:"assets/aza2.png",stream:"https://www.revontechtv.com/play/live/6a69b76334652aa1021022fe"},
- {id:102,name:"AzamSport 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport1.png",stream:"https://www.revontechtv.com/play/live/6a8e4e5629a66e32add52470"},
- {id:103,name:"AzamSport 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport2.png",stream:"https://www.revontechtv.com/play/live/6a8e4d6a29a66e32add5242c"},
- {id:104,name:"AzamSport 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport3.png",stream:"https://www.revontechtv.com/play/live/6a69b5e034652aa1021022ce"},
- {id:105,name:"AzamSport 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport4.png",stream:"https://www.revontechtv.com/play/live/6a8e4dcf29a66e32add5243f"},
- {id:106,name:"UTV",cat:"News",desc:"",logo:"",logoImage:"assets/aza-utv.png",stream:"https://www.revontechtv.com/play/live/6a8f47cb29a66e32add53290"},
- {id:107,name:"Sinema Zetu",cat:"Movies",desc:"",logo:"",logoImage:"assets/sinema-zetu.png",stream:"https://www.revontechtv.com/play/live/6a69b9d134652aa102102356"},
- {id:108,name:"Bein Sports Extra",cat:"Sports",desc:"",logo:"",logoImage:"assets/bein-xtra.png",stream:"https://bein-xtra-xumo.amagi.tv/hls/amagi_hls_data_beinAAAAA-bein-xtra-xumoA/CDN/master.m3u8"},
- {id:109,name:"MMA-TV",cat:"Sports",desc:"",logo:"",logoImage:"assets/mma-tv.png",stream:"https://streams2.sofast.tv/vglive-sk-462904/playlist.m3u8"},
- {id:110,name:"X-SPORT",cat:"Sports",desc:"",logo:"",logoImage:"assets/x-sports.png",stream:"http://iptv.prosto.tv:7000/ch109/video.m3u8"},
- {id:111,name:"X-SPORT HD",cat:"Sports",desc:"",logo:"",logoImage:"assets/x-sport-hd.png",stream:"http://iptv.prosto.tv:7000/ch110/video.m3u8"},
- {id:112,name:"Canal 11",cat:"Sports",desc:"",logo:"",logoImage:"assets/canal-11.png",stream:"https://ythls.armelin.one/channel/UCMfEEaNYYX5w6nbvccTCHhg.m3u8"},
- {id:113,name:"Canal Motor",cat:"Sports",desc:"",logo:"",logoImage:"assets/canal-motor.png",stream:"https://digicom.hls.iptvdc.com/canalmotor/index.m3u8"},
- {id:114,name:"M-Net Sport",cat:"Sports",desc:"",logo:"",logoImage:"assets/mnet.png",stream:"http://ares.mnet.mk/hls/mnet-sport.m3u8"},
- {id:115,name:"Real Madrid TV",cat:"Sports",desc:"",logo:"",logoImage:"assets/madrid-tv.png",stream:"https://rmtv.akamaized.net/hls/live/2043154/rmtv-en-web/master.m3u8"},
- {id:116,name:"Dazn Combat",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn-combat.png",stream:"https://dazn-combat-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-dazn-combat-rakuten/CDN/master.m3u8"},
- {id:117,name:"Fubo Sports Network",cat:"Sports",desc:"",logo:"",logoImage:"assets/fubo-sport.png",stream:"https://playout.fubo.tv/plex/3.m3u8"},
- {id:118,name:"Sportsgrid (US)",cat:"Sports",desc:"",logo:"",logoImage:"assets/sports-grid.png",stream:"https://cdn-uw2-prod.tsv2.amagi.tv/linear/sportsgri-sportsgrid-lgus/playlist.m3u8"},
- {id:119,name:"ACCDN",cat:"Sports",desc:"",logo:"",logoImage:"assets/accdn.png",stream:"https://raycom-accdn-firetv.amagi.tv/playlist.m3u8"},
- {id:120,name:"Movie Network (US)",cat:"Movies",desc:"",logo:"",logoImage:"assets/movie-network.png",stream:"https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00500-studiocitypictu-mytime-lgus/playlist.m3u8"},
- {id:121,name:"Trace Urban (UK)",cat:"Music",desc:"",logo:"",logoImage:"assets/trace-uk.png",stream:"https://cdn-uw2-prod.tsv2.amagi.tv/linear/tracetvAA-trace-urban-lg-uk/playlist.m3u8"},
- {id:122,name:"Fazal Tv",cat:"Religious",desc:"",logo:"",logoImage:"assets/fazal-tv.png",stream:"http://cdn9.live247stream.com/punjabitvcanada/tv/playlist.m3u8"},
- {id:123,name:"FB Tv",cat:"Sports",desc:"",logo:"",logoImage:"assets/fb-tv.png",stream:"http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8"},
- {id:124,name:"Fun Roads",cat:"Documentary",desc:"",logo:"",logoImage:"assets/fun-road.png",stream:"http://104.143.4.5:2080/funroads.m3u8"},
- {id:125,name:"FUEL Tv",cat:"Sports",desc:"",logo:"",logoImage:"assets/fuel-tv.png",stream:"https://amg01074-fueltv-fueltvemeaen-rakuten-b6j62.amagi.tv/hls/amagi_hls_data_rakutenAA-fueltvemeaen/CDN/master.m3u8"},
- {id:126,name:"Inter Tv",cat:"Sports",desc:"",logo:"",logoImage:"assets/inter-tv.png",stream:"https://ilglobotv-live.akamaized.net/channels/InterTV/Live.m3u8"},
- {id:127,name:"DD Sports",cat:"Sports",desc:"",logo:"",logoImage:"assets/dd-sports-in.png",stream:"http://103.78.149.54:8000/play/a02i/index.m3u8"},
- {id:128,name:"MNB Sport",cat:"Sports",desc:"",logo:"",logoImage:"assets/mnb-sport.png",stream:"https://cdn4.skygo.mn/live/disk1/MNBSport/DASH-FTA/MNBSport.mpd"},
- {id:129,name:"Premier Sports 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/ps-1.png",stream:"http://cdn4.skygo.mn/live/disk1/SPSPrime/HLS-FTA/SPSPrime.m3u8"},
- {id:130,name:"Premier Sports 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/ps-2.png",stream:"https://cdn4.skygo.mn/live/disk1/SPSPlay/HLS-FTA/SPSPlay.m3u8"},
- {id:131,name:"Premier Sports 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/ps-4.png",stream:"http://cdn4.skygo.mn/live/disk1/SPSFight/HLS-FTA/SPSFight.m3u8"},
- {id:132,name:"Premier Sports 5",cat:"Sports",logo:"",logoImage:"assets/ps-5.png",stream:"http://cdn4.skygo.mn/live/disk1/SPSPlus/HLS-FTA/SPSPlus.m3u8"},
- {id:133,name:"PRO International",cat:"Sports",desc:"",logo:"",logoImage:"assets/pro-tv.png",stream:"https://proshls.wns.live/hls/stream.m3u8"},
- {id:134,name:"Rai Sport HD",cat:"Sports",desc:"",logo:"",logoImage:"assets/rai-sport.png",stream:"https://viamotionhsi.netplus.ch/live/eds/raisport1/browser-dash/raisport1.mpd"},
- {id:135,name:"Realitatea Sportiva",cat:"Sports",desc:"",logo:"",logoImage:"assets/real-itatea.png",stream:"https://stream.realitatea.net/realitatea/sportiva_md/ts:playlist.m3u8"},
- {id:136,name:"World Sport",cat:"Sports",desc:"",logo:"",logoImage:"assets/world-sport.png",stream:"https://mainstreammedia-worldoffreesportsintl-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-mainstreammediafreesportsintl-rakuten/CDN/master.m3u8"},
- {id:137,name:"AfroBeats TV",cat:"Music",desc:"",logo:"",logoImage:"assets/afrobeat-tv.png",stream:"https://stream.ecable.tv/afrobeats/tracks-v1a1/mono.m3u8"},
- {id:138,name:"Trace Urban HD",cat:"Music",desc:"",logo:"",logoImage:"assets/trace-hd.png",stream:"https://lightning-traceurban-samsungau.amagi.tv/playlist1080p.m3u8"},
- {id:139,name:"CMC Tv",cat:"Music",desc:"",logo:"",logoImage:"assets/cmc-tv.png",stream:"https://stream.cmctv.hr:49998/cmc/live.m3u8"},
- {id:140,name:"Sol Música",cat:"Music",desc:"",logo:"",logoImage:"assets/sol-musica.png",stream:"https://d2glyu450vvghm.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-21u4g5cjglv02/sm.m3u8"},
- {id:141,name:"Trace Urban",cat:"Music",desc:"",logo:"",logoImage:"assets/trace-urban.png",stream:"https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-traceurban-samsungnz/playlist.m3u8"},
- {id:142,name:"Wanasah",cat:"Music",desc:"",logo:"",logoImage:"assets/wanasah-tv.png",stream:"https://shls-wanasah-prod-dub.shahid.net/out/v1/c84ef3128e564b74a6a796e8b6287de6/index.m3u8"},
- {id:143,name:"MN Music",cat:"Music",desc:"",logo:"",logoImage:"assets/mn-music.png",stream:"http://mntv.livebox.co.in/musichls/live.m3u8"},
- {id:144,name:"France 24",cat:"News",desc:"",logo:"",logoImage:"assets/france24.png",stream:"https://amg00106-france24-france24-samsunguk-qvpp8.amagi.tv/playlist/amg00106-france24-france24-samsunguk/playlist.m3u8"},
- {id:145,name:"Estrella News",cat:"News",desc:"",logo:"",logoImage:"assets/estrella-tv.png",stream:"https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00567-estrellamedia-estrellanews-lgus/playlist.m3u8"},
- {id:146,name:"DAZN 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/5589.ts"},
- {id:147,name:"DAZN 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/5590.ts"},
- {id:148,name:"DAZN 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/5591.ts"},
- {id:149,name:"DAZN 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn4.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/5592.ts"},
- {id:150,name:"DAZN LALIGA 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn-laliga1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25125.ts"},
- {id:151,name:"DAZN LALIGA 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn-laliga2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25127.ts"},
- {id:152,name:"SUPER SPORTS ACTION",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-action.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29740.ts"},
- {id:153,name:"SUPER SPORT PSL",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-psl.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29744.ts"},
- {id:154,name:"SUPER SPORT LALIGA",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-laliga.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29745.ts"},
- {id:155,name:"EUROSPORT 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/e-sport1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29929.ts"},
- {id:156,name:"EUROSPORT 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/e-sport2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29928.ts"},
- {id:157,name:"SPORT EXTRA 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-extra1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29685.ts"},
- {id:158,name:"SPORT EXTRA 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-extra2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29684.ts"},
- {id:159,name:"SPORT EXTRA 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-extra3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29683.ts"},
- {id:160,name:"SPORT EXTRA 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-extra4.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29682.ts"},
- {id:161,name:"BT SPORT 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/bt-spo1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29689.ts"},
- {id:162,name:"BT SPORT 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/bt-spo2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29688.ts"},
- {id:163,name:"BT SPORT 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/bt-spo3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29687.ts"},
- {id:164,name:"Nick Jr",cat:"Kids",desc:"",logo:"",logoImage:"assets/nick-jr.png",stream:"https://jmp2.uk/plu-5ca6748a37b88b269472dad9.m3u8"},
- {id:165,name:"Discovery Science",cat:"Documentary",desc:"",logo:"",logoImage:"assets/discovery-science.png",stream:"http://tv.minhalista.me/live/76MzsZCaAm/factoryiptv/93030.ts"},
- {id:166,name:"SUPER SPORT VARIETY 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-variety1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29738.ts"},
- {id:167,name:"SUPER SPORT VARIETY 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-variety2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29741.ts"},
- {id:168,name:"SUPER SPORT VARIETY 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-variety3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29737.ts"},
- {id:169,name:"SUPER SPORT VARIETY 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-variety4.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29734.ts"},
- {id:170,name:"BEIN ARAB 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/b-spo1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25113.ts"},
- {id:171,name:"BEIN ARAB 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/b-spo2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25114.ts"},
- {id:172,name:"BEIN ARAB 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/b-spo3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25115.ts"},
- {id:173,name:"Cartoon Network",cat:"Kids",desc:"",logo:"",logoImage:"assets/cn-kids.png",stream:"http://103.167.167.5:8111/play/a00x/index.m3u8"},
- {id:174,name:"PBS Kids",cat:"Kids",desc:"",logo:"",logoImage:"assets/pbs-kids.png",stream:"http://ys-users.com:8080/turneradt@gmail.com/S2PEcrwpdm/418040"},
- {id:175,name:"Discovery Kids",cat:"Kids",desc:"",logo:"",logoImage:"assets/dicovery-kids.png",stream:"http://190.60.37.69:8015/play/a00y/index.m3u8"},
- {id:176,name:"Tanzania Safari Channel",cat:"Documentary",desc:"",logo:"",logoImage:"assets/tz-safar.png",stream:"https://stream-134630.castr.net/5fe35eae8c53540cab83659a/live_31dabe40323511f08b8efff0016f3b67/index.m3u8"},
- {id:177,name:"Pluto Movies",cat:"Movies",desc:"",logo:"",logoImage:"assets/p-movies.png",stream:"https://jmp2.uk/plu-62ba60f059624e000781c436.m3u8"},
- {id:178,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
- {id:179,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
- {id:180,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
- {id:181,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
- {id:182,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
- {id:183,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
- {id:184,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
- {id:185,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
+ {id:100,name:"AzamOne",cat:"Entertainment",desc:"",logo:"",logoImage:"assets/aza1.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIyMTgiLCJ0cCI6InRwMSIsImV4cCI6MTgxNTg2Mjc0MCwiZG9tIjoiaXB0di5tb2thbmUudWsifQ.f3uKD-KEclx-FgwFED0OH6nJPgnEeFvh9xN4NNL3Wv0/azam-one.hls"},
+ {id:101,name:"AzamTwo",cat:"Entertainment",desc:"",logo:"",logoImage:"assets/aza2.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIyMTYiLCJ0cCI6InRwMSIsImV4cCI6MTgxNTg2Mjc0MCwiZG9tIjoiaXB0di5tb2thbmUudWsifQ.GWiJleH1WkeN4uJBmGnF-q2rsM0LzZzzckdj18LJ6h4/azam-two.hls"},
+ {id:102,name:"AzamSport 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport1.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxOTkiLCJ0cCI6InRwMSIsImV4cCI6MTgxNTg2Mjc0MCwiZG9tIjoiaXB0di5tb2thbmUudWsifQ.u9crLd3n5ouEZK0gWgwkbJpxwz7GrrD4EaLDnWCRzQg/sports-1.hls"},
+ {id:103,name:"AzamSport 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport2.png",stream:""},
+ {id:104,name:"AzamSport 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport3.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIyOCIsInRwIjoidHAxIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.kXolb1kTnOouLbxFWWlqRjv9mH_mHbB3oFS9Qi9U424/sports-3.hls"},
+ {id:105,name:"AzamSport 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport4.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIyMTMiLCJ0cCI6InRwMSIsImV4cCI6MTgxNTg2Mjc0MCwiZG9tIjoiaXB0di5tb2thbmUudWsifQ.I3l0DgmTBaQzlLkMPyt4sPTsNNaOyXxEfjWnfFVPKoE/sports-4.hls"},
+ {id:106,name:"AzamSport 5",cat:"Sports",desc:"",logo:"",logoImage:"assets/aza-sport5.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxOTc3MSIsInRwIjoidHAxIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.sq9ALUUoOMDkM-TXKth_a5gFoVf8ydrcs6KHLp0kiiE/azm-sports-5.hls"},
+ {id:107,name:"UTV",cat:"News",desc:"",logo:"",logoImage:"assets/aza-utv.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIyMTciLCJ0cCI6InRwMSIsImV4cCI6MTgxNTg2Mjc0MCwiZG9tIjoiaXB0di5tb2thbmUudWsifQ.ZJO_FpY-VhetnJ5lGs1OxFvUJPIVbMK49kIClLirMsQ/utv.hls"},
+ {id:108,name:"Sinema Zetu",cat:"Movies",desc:"",logo:"",logoImage:"assets/sinema-zetu.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIyMTQiLCJ0cCI6InRwMSIsImV4cCI6MTgxNTg2Mjc0MCwiZG9tIjoiaXB0di5tb2thbmUudWsifQ.i4XRC5m9YqI4QVkBzTU4DBCnu5oV5Ff-YeqlJavwYdI/sinema.hls"},
+ {id:109,name:"Bein Sports Extra",cat:"Sports",desc:"",logo:"",logoImage:"assets/bein-xtra.png",stream:"https://bein-xtra-xumo.amagi.tv/hls/amagi_hls_data_beinAAAAA-bein-xtra-xumoA/CDN/master.m3u8"},
+ {id:110,name:"MMA-TV",cat:"Sports",desc:"",logo:"",logoImage:"assets/mma-tv.png",stream:"https://streams2.sofast.tv/vglive-sk-462904/playlist.m3u8"},
+ {id:111,name:"X-SPORT",cat:"Sports",desc:"",logo:"",logoImage:"assets/x-sports.png",stream:"http://iptv.prosto.tv:7000/ch109/video.m3u8"},
+ {id:112,name:"X-SPORT HD",cat:"Sports",desc:"",logo:"",logoImage:"assets/x-sport-hd.png",stream:"http://iptv.prosto.tv:7000/ch110/video.m3u8"},
+ {id:113,name:"Canal 11",cat:"Sports",desc:"",logo:"",logoImage:"assets/canal-11.png",stream:"https://ythls.armelin.one/channel/UCMfEEaNYYX5w6nbvccTCHhg.m3u8"},
+ {id:114,name:"Canal Motor",cat:"Sports",desc:"",logo:"",logoImage:"assets/canal-motor.png",stream:"https://digicom.hls.iptvdc.com/canalmotor/index.m3u8"},
+ {id:115,name:"M-Net Sport",cat:"Sports",desc:"",logo:"",logoImage:"assets/mnet.png",stream:"http://ares.mnet.mk/hls/mnet-sport.m3u8"},
+ {id:116,name:"Real Madrid TV",cat:"Sports",desc:"",logo:"",logoImage:"assets/madrid-tv.png",stream:"https://rmtv.akamaized.net/hls/live/2043154/rmtv-en-web/master.m3u8"},
+ {id:117,name:"Dazn Combat",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn-combat.png",stream:"https://dazn-combat-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-dazn-combat-rakuten/CDN/master.m3u8"},
+ {id:118,name:"Fubo Sports Network",cat:"Sports",desc:"",logo:"",logoImage:"assets/fubo-sport.png",stream:"https://playout.fubo.tv/plex/3.m3u8"},
+ {id:119,name:"Sportsgrid (US)",cat:"Sports",desc:"",logo:"",logoImage:"assets/sports-grid.png",stream:"https://cdn-uw2-prod.tsv2.amagi.tv/linear/sportsgri-sportsgrid-lgus/playlist.m3u8"},
+ {id:120,name:"ACCDN",cat:"Sports",desc:"",logo:"",logoImage:"assets/accdn.png",stream:"https://raycom-accdn-firetv.amagi.tv/playlist.m3u8"},
+ {id:121,name:"Movie Network (US)",cat:"Movies",desc:"",logo:"",logoImage:"assets/movie-network.png",stream:"https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00500-studiocitypictu-mytime-lgus/playlist.m3u8"},
+ {id:122,name:"Trace Urban (UK)",cat:"Music",desc:"",logo:"",logoImage:"assets/trace-uk.png",stream:"https://cdn-uw2-prod.tsv2.amagi.tv/linear/tracetvAA-trace-urban-lg-uk/playlist.m3u8"},
+ {id:123,name:"Fazal Tv",cat:"Religious",desc:"",logo:"",logoImage:"assets/fazal-tv.png",stream:"http://cdn9.live247stream.com/punjabitvcanada/tv/playlist.m3u8"},
+ {id:124,name:"FB Tv",cat:"Sports",desc:"",logo:"",logoImage:"assets/fb-tv.png",stream:"http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8"},
+ {id:125,name:"Fun Roads",cat:"Documentary",desc:"",logo:"",logoImage:"assets/fun-road.png",stream:"http://104.143.4.5:2080/funroads.m3u8"},
+ {id:126,name:"FUEL Tv",cat:"Sports",desc:"",logo:"",logoImage:"assets/fuel-tv.png",stream:"https://amg01074-fueltv-fueltvemeaen-rakuten-b6j62.amagi.tv/hls/amagi_hls_data_rakutenAA-fueltvemeaen/CDN/master.m3u8"},
+ {id:127,name:"Inter Tv",cat:"Sports",desc:"",logo:"",logoImage:"assets/inter-tv.png",stream:"https://ilglobotv-live.akamaized.net/channels/InterTV/Live.m3u8"},
+ {id:128,name:"DD Sports",cat:"Sports",desc:"",logo:"",logoImage:"assets/dd-sports-in.png",stream:"http://103.78.149.54:8000/play/a02i/index.m3u8"},
+ {id:129,name:"MNB Sport",cat:"Sports",desc:"",logo:"",logoImage:"assets/mnb-sport.png",stream:"https://cdn4.skygo.mn/live/disk1/MNBSport/DASH-FTA/MNBSport.mpd"},
+ {id:130,name:"Premier Sports 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/ps-1.png",stream:"http://cdn4.skygo.mn/live/disk1/SPSPrime/HLS-FTA/SPSPrime.m3u8"},
+ {id:131,name:"Premier Sports 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/ps-2.png",stream:"https://cdn4.skygo.mn/live/disk1/SPSPlay/HLS-FTA/SPSPlay.m3u8"},
+ {id:132,name:"Premier Sports 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/ps-4.png",stream:"http://cdn4.skygo.mn/live/disk1/SPSFight/HLS-FTA/SPSFight.m3u8"},
+ {id:133,name:"Premier Sports 5",cat:"Sports",logo:"",logoImage:"assets/ps-5.png",stream:"http://cdn4.skygo.mn/live/disk1/SPSPlus/HLS-FTA/SPSPlus.m3u8"},
+ {id:134,name:"PRO International",cat:"Sports",desc:"",logo:"",logoImage:"assets/pro-tv.png",stream:"https://proshls.wns.live/hls/stream.m3u8"},
+ {id:135,name:"Rai Sport HD",cat:"Sports",desc:"",logo:"",logoImage:"assets/rai-sport.png",stream:"https://viamotionhsi.netplus.ch/live/eds/raisport1/browser-dash/raisport1.mpd"},
+ {id:136,name:"Realitatea Sportiva",cat:"Sports",desc:"",logo:"",logoImage:"assets/real-itatea.png",stream:"https://stream.realitatea.net/realitatea/sportiva_md/ts:playlist.m3u8"},
+ {id:137,name:"World Sport",cat:"Sports",desc:"",logo:"",logoImage:"assets/world-sport.png",stream:"https://mainstreammedia-worldoffreesportsintl-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-mainstreammediafreesportsintl-rakuten/CDN/master.m3u8"},
+ {id:138,name:"AfroBeats TV",cat:"Music",desc:"",logo:"",logoImage:"assets/afrobeat-tv.png",stream:"https://stream.ecable.tv/afrobeats/tracks-v1a1/mono.m3u8"},
+ {id:139,name:"Trace Urban HD",cat:"Music",desc:"",logo:"",logoImage:"assets/trace-hd.png",stream:"https://lightning-traceurban-samsungau.amagi.tv/playlist1080p.m3u8"},
+ {id:140,name:"CMC Tv",cat:"Music",desc:"",logo:"",logoImage:"assets/cmc-tv.png",stream:"https://stream.cmctv.hr:49998/cmc/live.m3u8"},
+ {id:141,name:"Sol Música",cat:"Music",desc:"",logo:"",logoImage:"assets/sol-musica.png",stream:"https://d2glyu450vvghm.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-21u4g5cjglv02/sm.m3u8"},
+ {id:142,name:"Trace Urban",cat:"Music",desc:"",logo:"",logoImage:"assets/trace-urban.png",stream:"https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-traceurban-samsungnz/playlist.m3u8"},
+ {id:143,name:"Wanasah",cat:"Music",desc:"",logo:"",logoImage:"assets/wanasah-tv.png",stream:"https://shls-wanasah-prod-dub.shahid.net/out/v1/c84ef3128e564b74a6a796e8b6287de6/index.m3u8"},
+ {id:144,name:"MN Music",cat:"Music",desc:"",logo:"",logoImage:"assets/mn-music.png",stream:"http://mntv.livebox.co.in/musichls/live.m3u8"},
+ {id:145,name:"France 24",cat:"News",desc:"",logo:"",logoImage:"assets/france24.png",stream:"https://amg00106-france24-france24-samsunguk-qvpp8.amagi.tv/playlist/amg00106-france24-france24-samsunguk/playlist.m3u8"},
+ {id:146,name:"Estrella News",cat:"News",desc:"",logo:"",logoImage:"assets/estrella-tv.png",stream:"https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00567-estrellamedia-estrellanews-lgus/playlist.m3u8"},
+ {id:147,name:"DAZN 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn1.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMDczNSIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.Gxi_cAdv985P1-KbxhK27xyjG3_Cb8E-SavR3fxrQms/dazn-1.hls"},
+ {id:148,name:"DAZN 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn2.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMDczNiIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.ZrD4vlpMHyTqgM-LtNCPMsy_hSoGEkZKv3_eyirlf10/dazn-2.hls"},
+ {id:149,name:"DAZN 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/5591.ts"},
+ {id:150,name:"DAZN 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn4.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMDc0MSIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.3KUHxOkmUfgtDRDi0kECLj7HswGqa8fQ51HtL4wM_Ys/dazn-4.hls"},
+ {id:151,name:"DAZN LALIGA 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn-laliga1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25125.ts"},
+ {id:152,name:"DAZN LALIGA 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/dazn-laliga2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25127.ts"},
+ {id:153,name:"SUPER SPORTS ACTION",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-action.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMTg5NiIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.nqY8vsb5BbDE93V5kOrZXaDGpH98DTWdYJxMV8J2vIM/ss-action.hls"},
+ {id:154,name:"SUPER SPORT PSL",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-psl.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMTg4NyIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.95PIKE2Fynl9QeIeShyohRy2W02JfWotpZYQHXM1Xfk/ss-premier-league.hls"},
+ {id:155,name:"SUPER SPORT LALIGA",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-laliga.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMTg4OCIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.s2NMLNVpTr4-h-Gp9Xahsp-4tTV4f2outclSXtf3cOs/ss-la-liga.hls"},
+ {id:156,name:"EUROSPORT 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/e-sport1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29929.ts"},
+ {id:157,name:"EUROSPORT 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/e-sport2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29928.ts"},
+ {id:158,name:"SPORT EXTRA 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-extra1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29685.ts"},
+ {id:159,name:"SPORT EXTRA 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-extra2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29684.ts"},
+ {id:160,name:"SPORT EXTRA 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-extra3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29683.ts"},
+ {id:161,name:"SPORT EXTRA 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-extra4.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29682.ts"},
+ {id:162,name:"BT SPORT 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/bt-spo1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29689.ts"},
+ {id:163,name:"BT SPORT 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/bt-spo2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29688.ts"},
+ {id:164,name:"BT SPORT 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/bt-spo3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29687.ts"},
+ {id:165,name:"Nick Jr",cat:"Kids",desc:"",logo:"",logoImage:"assets/nick-jr.png",stream:"https://jmp2.uk/plu-5ca6748a37b88b269472dad9.m3u8"},
+ {id:166,name:"Discovery Science",cat:"Documentary",desc:"",logo:"",logoImage:"assets/discovery-science.png",stream:"http://tv.minhalista.me/live/76MzsZCaAm/factoryiptv/93030.ts"},
+ {id:167,name:"SUPER SPORT VARIETY 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-variety1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29738.ts"},
+ {id:168,name:"SUPER SPORT VARIETY 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-variety2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29741.ts"},
+ {id:169,name:"SUPER SPORT VARIETY 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-variety3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29737.ts"},
+ {id:170,name:"SUPER SPORT VARIETY 4",cat:"Sports",desc:"",logo:"",logoImage:"assets/s-variety4.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/29734.ts"},
+ {id:171,name:"BEIN ARAB 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/b-spo1.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25113.ts"},
+ {id:172,name:"BEIN ARAB 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/b-spo2.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25114.ts"},
+ {id:173,name:"BEIN ARAB 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/b-spo3.png",stream:"http://flysilo.top:8080/live/321668264176020045/6571668264176020/25115.ts"},
+ {id:174,name:"Cartoon Network",cat:"Kids",desc:"",logo:"",logoImage:"assets/cn-kids.png",stream:"http://103.167.167.5:8111/play/a00x/index.m3u8"},
+ {id:175,name:"PBS Kids",cat:"Kids",desc:"",logo:"",logoImage:"assets/pbs-kids.png",stream:"http://ys-users.com:8080/turneradt@gmail.com/S2PEcrwpdm/418040"},
+ {id:176,name:"Discovery Kids",cat:"Kids",desc:"",logo:"",logoImage:"assets/dicovery-kids.png",stream:"http://190.60.37.69:8015/play/a00y/index.m3u8"},
+ {id:177,name:"Tanzania Safari Channel",cat:"Documentary",desc:"",logo:"",logoImage:"assets/tz-safar.png",stream:"https://stream-134630.castr.net/5fe35eae8c53540cab83659a/live_31dabe40323511f08b8efff0016f3b67/index.m3u8"},
+ {id:178,name:"Pluto Movies",cat:"Movies",desc:"",logo:"",logoImage:"assets/p-movies.png",stream:"https://jmp2.uk/plu-62ba60f059624e000781c436.m3u8"},
+ {id:179,name:"KIX",cat:"Movies",desc:"",logo:"",logoImage:"assets/kix.png",stream:"https://iptv.mokane.uk/s/tp1/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIyMjIiLCJ0cCI6InRwMSIsImV4cCI6MTgxNTg2Mjc0MCwiZG9tIjoiaXB0di5tb2thbmUudWsifQ.1xfxdRmV0iGEcKYl__3Lj9EU93a6YqrgKCOeZoVjDIU/kix.hls"},
+ {id:180,name:"Studio Universal",cat:"Movies",desc:"",logo:"",logoImage:"assets/studio-uni.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMTg3OSIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.8LZ8eDbA3h6-6JMkx-cDg1SZ_IlUxCHBccZKkW1cxpU/studio-universal.hls"},
+ {id:181,name:"TNT Sports 1",cat:"Sports",desc:"",logo:"",logoImage:"assets/tnt-spo1.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMTYyMyIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.2LbodL_nnyT2kMVOGXH7A3_UtiKw3JFz1f-08mdQ--Y/tnt-sports-1.hls"},
+ {id:182,name:"TNT Sports 2",cat:"Sports",desc:"",logo:"",logoImage:"assets/tnt-spo2.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIyNDQzNSIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.Hm--S3gxVvwy1SUOcGBJoLELjPOkejSgumIorkLZEno/tnt-sports-2.hls"},
+ {id:183,name:"TNT Sports 3",cat:"Sports",desc:"",logo:"",logoImage:"assets/tnt-spo3.png",stream:"https://iptv.mokane.uk/s/tp2/eyJwaWQiOiIyMzY0OWE5OGVmMmMyNmQ4ZjY3NzM0NmYiLCJzaWQiOiIxMTYyNSIsInRwIjoidHAyIiwiZXhwIjoxODE1ODYyNzQwLCJkb20iOiJpcHR2Lm1va2FuZS51ayJ9.sHuhw0GX95DCPydQEFC9Qkb-eB1zPD-MNeFneg6NnLs/tnt-sports-3.hls"},
+ {id:184,name:"Trace Mziki",cat:"Music",desc:"",logo:"",logoImage:"assets/trace-mziki.png",stream:"https://channels.trace.plus/Traceprod/MZIKI_hd/index.m3u8"},
+ {id:185,name:"Trace Gospel",cat:"Music",desc:"",logo:"",logoImage:"assets/trace-gosp.png",stream:"https://channels.trace.plus/Traceprod/GOSPEL_ROA_hd/index.m3u8"},
  {id:186,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
  {id:187,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
  {id:188,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
@@ -209,7 +209,8 @@ const defaultChannels=[
  {id:192,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
  {id:193,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
  {id:194,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
- {id:195,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""}
+ {id:195,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""},
+ {id:196,name:"",cat:"",desc:"",logo:"",logoImage:"assets/",stream:""}
 ];
 function getChannels(){try{const saved=JSON.parse(localStorage.getItem("st_channels")||"null");return Array.isArray(saved)&&saved.length?saved:defaultChannels}catch(e){return defaultChannels}}
 function saveChannels(x){localStorage.setItem("st_channels",JSON.stringify(x))}
@@ -374,6 +375,7 @@ function player(){
   const playBtn=document.getElementById("playBtn");
   const muteBtn=document.getElementById("muteBtn");
   const fullscreenBtn=document.getElementById("fullscreenBtn");
+  const pipBtn=document.getElementById("pipBtn");
   const subtitleBtn=document.getElementById("subtitleBtn");
   const subtitleMenu=document.getElementById("subtitleMenu");
   const subtitleOptions=document.getElementById("subtitleOptions");
@@ -387,20 +389,27 @@ function player(){
 
   let hls=null, dash=null, currentObjectUrl=null, retryTimer=null, tracks=[];
   const isLocalServer=location.protocol==="http:" || location.protocol==="https:";
+
+  // VOD resume: remember a finite-duration video position for 30 minutes.
+  // Live streams are ignored because their duration is normally Infinity.
+  const VOD_RESUME_TTL = 30 * 60 * 1000;
+  const resumeKey = `st_vod_resume:${item.id ?? id ?? slideId ?? "unknown"}:${stream}`;
+  let resumeRestored = false;
+  let lastResumeWrite = 0;
   const serverBase=isLocalServer ? location.origin : "";
   const esc=window.escapeHtml || (v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])));
 
   function extOf(url){
     try{
       const p=new URL(url,location.href).pathname.toLowerCase();
-      if(p.endsWith(".m3u8")) return "hls";
+      if(p.endsWith(".m3u8") || p.endsWith(".hls")) return "hls";
       if(p.endsWith(".mpd")) return "dash";
       if(p.endsWith(".ts")) return "ts";
       if(p.endsWith(".mkv")) return "mkv";
       if(p.endsWith(".mp4")||p.endsWith(".webm")||p.endsWith(".ogg")||p.endsWith(".m4v")) return "native";
     }catch(e){}
     const clean=url.split("?")[0].split("#")[0].toLowerCase();
-    if(clean.endsWith(".m3u8")) return "hls";
+    if(clean.endsWith(".m3u8") || clean.endsWith(".hls")) return "hls";
     if(clean.endsWith(".mpd")) return "dash";
     if(clean.endsWith(".ts")) return "ts";
     if(clean.endsWith(".mkv")) return "mkv";
@@ -438,6 +447,79 @@ function player(){
   }
   function setError(msg){
     if(errorBox){errorBox.hidden=!msg;errorBox.textContent=msg||""}
+  }
+  function isVOD(){
+    return Number.isFinite(video.duration) && video.duration > 0 && video.duration !== Infinity;
+  }
+  function formatTime(sec){
+    sec=Math.max(0,Math.floor(Number(sec)||0));
+    const h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=sec%60;
+    return h ? `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}` : `${m}:${String(s).padStart(2,"0")}`;
+  }
+  function readResume(){
+    try{
+      const raw=localStorage.getItem(resumeKey);
+      if(!raw)return null;
+      const data=JSON.parse(raw);
+      if(!data || Date.now()-Number(data.updatedAt||0) > VOD_RESUME_TTL) {
+        localStorage.removeItem(resumeKey);
+        return null;
+      }
+      const pos=Number(data.position);
+      if(!Number.isFinite(pos) || pos < 5)return null;
+      return data;
+    }catch(e){return null}
+  }
+  function saveResume(force=false){
+    if(!isVOD() || !Number.isFinite(video.currentTime) || video.currentTime < 5)return;
+    const now=Date.now();
+    if(!force && now-lastResumeWrite < 2000)return;
+    lastResumeWrite=now;
+    // Clear completed videos instead of offering an almost-finished resume.
+    if(video.duration > 0 && video.currentTime >= video.duration-3){
+      try{localStorage.removeItem(resumeKey)}catch(e){}
+      return;
+    }
+    try{
+      localStorage.setItem(resumeKey,JSON.stringify({position:video.currentTime,duration:video.duration,updatedAt:now,name:item.name||"Video"}));
+    }catch(e){}
+  }
+  function showResumeNotice(data){
+    if(!data || !isVOD() || data.position >= video.duration-5)return;
+    let el=document.getElementById("vodResumeNotice");
+    if(!el){
+      el=document.createElement("div");
+      el.id="vodResumeNotice";
+      el.className="vod-resume-notice";
+      el.innerHTML='<span class="vod-resume-text"></span><button type="button" class="resume-btn">Resume</button><button type="button" class="restart-btn">Start over</button>';
+      document.body.appendChild(el);
+      el.querySelector(".resume-btn").onclick=()=>{
+        const pos=Number(el.dataset.position||0);
+        if(Number.isFinite(pos)){ video.currentTime=pos; resumeRestored=true; }
+        el.classList.remove("show");
+        startPlayback();
+      };
+      el.querySelector(".restart-btn").onclick=()=>{
+        try{localStorage.removeItem(resumeKey)}catch(e){}
+        video.currentTime=0;
+        el.classList.remove("show");
+        startPlayback();
+      };
+    }
+    el.dataset.position=String(data.position);
+    el.querySelector(".vod-resume-text").textContent=`Continue ${item.name||"video"} from ${formatTime(data.position)}?`;
+    el.classList.add("show");
+  }
+  function restoreResume(){
+    if(resumeRestored || !isVOD())return;
+    const data=readResume();
+    if(!data)return;
+    const position=Math.min(data.position, Math.max(0, video.duration-5));
+    try{
+      video.currentTime=position;
+      resumeRestored=true;
+      showResumeNotice({...data,position});
+    }catch(e){}
   }
   function setPlayingUi(){
     const playing=!video.paused && !video.ended;
@@ -503,8 +585,22 @@ function player(){
   function fail(msg){
     setStatus("Stream unavailable");
     setError(msg);
-    // Do not automatically rewrite a working URL. The user can fix the stream
-    // directly in app.js/admin and retry without breaking the rest of the site.
+    // A visible retry control is useful on Smart TVs and devices where streams
+    // can take longer to initialize. It retries the same configured URL.
+    if(errorBox){
+      let retry=errorBox.querySelector("[data-player-retry]");
+      if(!retry){
+        retry=document.createElement("button");
+        retry.type="button";
+        retry.dataset.playerRetry="1";
+        retry.className="primary-btn player-retry-btn";
+        retry.textContent="Retry stream";
+        retry.addEventListener("click",()=>{setError("");loadStream(stream);});
+        errorBox.appendChild(document.createElement("br"));
+        errorBox.appendChild(retry);
+      }
+    }
+    console.warn("SavageTech stream failure:", msg, {url:stream, kind:extOf(stream)});
   }
 
   async function loadStream(rawUrl){
@@ -690,6 +786,49 @@ function player(){
     }catch(e){}
   }
 
+  function pipSupported(){
+    return !!(document.pictureInPictureEnabled && typeof video.requestPictureInPicture === "function") || typeof video.webkitSetPresentationMode === "function";
+  }
+  async function enterPiP(){
+    try{
+      if(typeof video.webkitSetPresentationMode === "function" && video.webkitPresentationMode !== "picture-in-picture"){
+        video.webkitSetPresentationMode("picture-in-picture");
+        return true;
+      }
+      if(document.pictureInPictureElement===video){
+        await document.exitPictureInPicture?.();
+        return true;
+      }
+      if(typeof video.requestPictureInPicture === "function") {
+        await video.requestPictureInPicture();
+        return true;
+      }
+    }catch(e){
+      console.warn("Picture-in-Picture was not permitted",e);
+    }
+    showPiPNotice();
+    return false;
+  }
+  function showPiPNotice(){
+    let el=document.getElementById("pipNotice");
+    if(!el){
+      el=document.createElement("div");
+      el.id="pipNotice";
+      el.className="pip-notice";
+      el.textContent="Mini player is not available in this browser. Try Chrome/Edge/Safari Picture-in-Picture.";
+      document.body.appendChild(el);
+    }
+    el.classList.add("show");
+    clearTimeout(window.__pipNoticeTimer);
+    window.__pipNoticeTimer=setTimeout(()=>el.classList.remove("show"),5000);
+  }
+  if(pipBtn){
+    pipBtn.hidden=!pipSupported();
+    pipBtn.addEventListener("click",async()=>{await enterPiP();revealControls();});
+  }
+  document.addEventListener("enterpictureinpicture",()=>{if(pipBtn)pipBtn.textContent="▣";});
+  document.addEventListener("leavepictureinpicture",()=>{if(pipBtn)pipBtn.textContent="▣";});
+
   fullscreenBtn?.addEventListener("click",async()=>{
     try{
       if(document.fullscreenElement){
@@ -737,8 +876,14 @@ function player(){
   video.addEventListener("timeupdate",()=>{
     if(progressFill && Number.isFinite(video.duration) && video.duration>0)
       progressFill.style.width=(video.currentTime/video.duration*100)+"%";
+    saveResume(false);
   });
-  video.addEventListener("loadedmetadata",showTracks);
+  video.addEventListener("loadedmetadata",()=>{showTracks();restoreResume();});
+  video.addEventListener("durationchange",restoreResume);
+  video.addEventListener("pause",()=>saveResume(true));
+  video.addEventListener("ended",()=>{try{localStorage.removeItem(resumeKey)}catch(e){}});
+  window.addEventListener("pagehide",()=>saveResume(true));
+  document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")saveResume(true)});
   video.addEventListener("canplay",()=>{setStatus("");setPlayingUi()});
   video.addEventListener("waiting",()=>setStatus("Buffering…"));
   video.addEventListener("playing",()=>{setStatus("");setError("");setPlayingUi()});

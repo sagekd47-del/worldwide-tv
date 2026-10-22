@@ -603,3 +603,18 @@ body.light footer{background:#fff}.light .account-status{background:#f3f6fa;colo
 @media(max-width:560px){
   .orientation-notice{bottom:78px;}
 }
+
+
+/* VOD resume + browser Picture-in-Picture / mini-player */
+.vod-resume-notice{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);opacity:0;visibility:hidden;z-index:2147483646;display:flex;align-items:center;gap:10px;max-width:min(92vw,620px);padding:11px 13px;background:rgba(8,15,26,.96);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px #0009;color:#eaf2fb;font-size:13px;transition:.2s ease}.vod-resume-notice.show{opacity:1;visibility:visible;transform:translate(-50%,0)}.vod-resume-notice button{border:0;border-radius:8px;padding:8px 10px;cursor:pointer;font-weight:700}.vod-resume-notice .resume-btn{background:#168cff;color:#fff}.vod-resume-notice .restart-btn{background:#ffffff12;color:#dbe6f4}.vod-resume-text{flex:1}.pip-notice{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;visibility:hidden;z-index:2147483647;max-width:90vw;padding:10px 14px;border-radius:10px;background:#101927;color:#eaf2fb;border:1px solid var(--line);box-shadow:0 12px 30px #0009;font-size:12px;text-align:center;transition:.2s ease}.pip-notice.show{opacity:1;visibility:visible;transform:translate(-50%,0)}#pipBtn[hidden]{display:none!important}@media(max-width:560px){.vod-resume-notice{left:8px;right:8px;bottom:76px;transform:translateY(20px);max-width:none;flex-wrap:wrap}.vod-resume-notice.show{transform:translateY(0)}.vod-resume-text{width:100%;flex-basis:100%}}
+
+/* SavageTech TV player: consistent 16:9 frame on phones, laptops and TVs */
+.watch-page .video-screen{aspect-ratio:16/9;width:100%;height:auto;min-height:0;background:#000;overflow:hidden}
+.watch-page .video-screen video,.watch-page .video-screen iframe,.watch-page .video-player{width:100%;height:100%;min-height:0;object-fit:contain;background:#000}
+.watch-page .video-screen.landscape-mode{aspect-ratio:16/9;width:100%;height:100%;min-height:0}
+.live-pill{display:none!important}
+@media(max-width:560px){.watch-page .video-screen{min-height:0;height:auto;aspect-ratio:16/9}.watch-page .video-screen video{min-height:0}}
+
+
+/* Hide the browser cursor during active playback after 3 seconds of inactivity. */
+body.st-cursor-hidden, body.st-cursor-hidden * { cursor: none !important; }

@@ -28,7 +28,6 @@
         <div class="play-orb" id="bigPlayOrb">▶</div>
         <div class="player-status" id="playerStatus">Loading stream…</div>
       </div>
-      <span class="live-pill">● LIVE</span>
       <div class="video-title" id="playerTitle">SavageTech TV — Channel 1</div>
       <div class="player-error" id="playerError" hidden></div>
     </div>
@@ -38,6 +37,7 @@
       <button class="control-btn" id="muteBtn" type="button" aria-label="Mute or unmute">🔊</button>
       <div class="settings-wrap"><button class="control-btn" id="subtitleBtn" type="button" aria-label="Subtitles">CC</button><div class="settings-menu subtitle-menu" id="subtitleMenu"><div class="settings-label">Subtitles</div><button type="button" data-subtitle="off">Off</button><div id="subtitleOptions" class="subtitle-options"></div></div></div>
       <div class="settings-wrap"><button class="control-btn" id="settingsBtn" type="button" aria-label="Player settings">⚙</button><div class="settings-menu" id="settingsMenu"><div class="settings-label">Playback speed</div><button type="button" data-speed="0.5">0.5×</button><button type="button" data-speed="1">1× Normal</button><button type="button" data-speed="1.5">1.5×</button><button type="button" data-speed="2">2×</button><div class="settings-label">Video quality</div><div id="qualityOptions" class="quality-options"><button type="button" data-quality="auto">Auto</button></div><div class="settings-label">Screen mode</div><button type="button" data-orientation="landscape">▭ Landscape</button><button type="button" data-orientation="portrait">▯ Portrait</button></div></div>
+      <button class="control-btn" id="pipBtn" type="button" aria-label="Picture in Picture" title="Mini player / Picture in Picture">▣</button>
       <button class="control-btn" id="fullscreenBtn" type="button" aria-label="Fullscreen">⛶</button>
     </div>
   </div>
@@ -59,9 +59,40 @@
     <div class="channel-grid" id="moreGrid"></div>
   </section>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/dashjs@5.0.3/dist/modern/umd/dash.all.min.js" onerror="this.onerror=null;this.src="https://cdn.dashjs.org/latest/dash.all.min.js""></script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.6.15/dist/hls.min.js" onerror="this.onerror=null;this.src="https://unpkg.com/hls.js@1.6.15/dist/hls.min.js""></script>
+<script src="https://cdn.jsdelivr.net/npm/dashjs@5.0.3/dist/modern/umd/dash.all.min.js" onerror="this.onerror=null;this.src='https://cdn.dashjs.org/latest/dash.all.min.js'"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.6.15/dist/hls.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/hls.js@1.6.15/dist/hls.min.js'"></script>
 <script src="js/app.js"></script>
 <script src="js/analytics.js"></script>
+
+<script>
+(function(){
+  const screen = document.getElementById('videoScreen');
+  const video = document.getElementById('videoPlayer');
+  if (!screen || !video) return;
+  let hideTimer = null;
+  function showPointer(){
+    document.body.classList.remove('st-cursor-hidden');
+    if (hideTimer) clearTimeout(hideTimer);
+    if (!video.paused && !video.ended) {
+      hideTimer = setTimeout(function(){
+        if (!video.paused && !video.ended) document.body.classList.add('st-cursor-hidden');
+      }, 3000);
+    }
+  }
+  function keepVisible(){
+    document.body.classList.remove('st-cursor-hidden');
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+  }
+  ['mousemove','pointermove','pointerdown','mousedown','touchstart','click','keydown','keyup','wheel'].forEach(function(evt){
+    document.addEventListener(evt, showPointer, {passive:true});
+  });
+  video.addEventListener('play', showPointer);
+  video.addEventListener('playing', showPointer);
+  ['pause','ended','waiting','error'].forEach(function(evt){ video.addEventListener(evt, keepVisible); });
+  document.addEventListener('visibilitychange', function(){ if (document.hidden) keepVisible(); });
+  // Start hidden only after playback has actually begun; remote/keyboard input restores it.
+})();
+</script>
+
 </body>
 </html>

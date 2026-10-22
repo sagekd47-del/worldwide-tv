@@ -53,7 +53,8 @@ app.use((req,res,next)=>{
   next();
 });
 app.use(express.json({ limit: '1mb' }));
-app.use(express.static(__dirname, { extensions: ['html'] }));
+// Serve the full SavageTech TV project from its parent folder while keeping API routes on this server.
+app.use(express.static(path.resolve(__dirname, '..'), { extensions: ['html'] }));
 
 const CHANNEL_KNOWLEDGE = (() => { try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'ai-knowledge.json'), 'utf8')); } catch(e) { return {channels:[],categories:['Sports','Entertainment','Documentary','Religious','Kids','Movies','News','Music']}; } })();
 
@@ -226,7 +227,12 @@ async function fetchRemote(req,res,target){
   if(!/^https?:$/.test(u.protocol)) return res.status(400).send('Only HTTP/HTTPS stream URLs are supported');
   const headers={};
   if(req.headers.range) headers.Range=req.headers.range;
-  if(req.headers['user-agent']) headers['User-Agent']=req.headers['user-agent'];
+  // Provider-specific headers are configurable in Render environment variables.
+  // Use only values authorized by the stream provider; this is not DRM/auth bypass.
+  headers['User-Agent']=String(process.env.STREAM_USER_AGENT || req.headers['user-agent'] || 'SavageTechTV/1.0');
+  if(process.env.STREAM_REFERER) headers.Referer=process.env.STREAM_REFERER;
+  if(process.env.STREAM_ORIGIN) headers.Origin=process.env.STREAM_ORIGIN;
+  if(process.env.STREAM_ACCEPT) headers.Accept=process.env.STREAM_ACCEPT;
   try{
     const r=await fetch(u,{headers,redirect:'follow'});
     if(!r.ok && r.status!==206) return res.status(r.status).send(`Upstream stream returned HTTP ${r.status}`);
@@ -237,7 +243,7 @@ async function fetchRemote(req,res,target){
     res.setHeader('Cache-Control','no-store');
     const ct=(r.headers.get('content-type')||'').toLowerCase();
     const pathname=u.pathname.toLowerCase();
-    const isM3U8=ct.includes('mpegurl')||ct.includes('vnd.apple.mpegurl')||pathname.endsWith('.m3u8');
+    const isM3U8=ct.includes('mpegurl')||ct.includes('vnd.apple.mpegurl')||pathname.endsWith('.m3u8')||pathname.endsWith('.hls');
     const isMPD=ct.includes('dash+xml')||pathname.endsWith('.mpd');
     if(isM3U8||isMPD){
       const body=await r.text();

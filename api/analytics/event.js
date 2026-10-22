@@ -1,4 +1,4 @@
-import { memory, json, getClientId, visitorDay } from '../_lib.js';
+import { memory, json, getClientId, visitorDay } from '../../lib/vercel.js';
 export async function POST(request) {
   let body={}; try { body=await request.json(); } catch {}
   const visitorId=getClientId(body); const type=String(body?.type||'').slice(0,40);

@@ -1,4 +1,4 @@
-import { memory, json } from '../_lib.js';
+import { memory, json } from '../../lib/vercel.js';
 export async function POST(request){
   let body={}; try{body=await request.json()}catch{}
   const username=String(body?.username||'').trim().slice(0,50);const message=String(body?.message||'').trim().slice(0,1000);const stars=Number(body?.stars||0);

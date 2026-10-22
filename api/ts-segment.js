@@ -1,4 +1,4 @@
-import { getMediaBackend, json } from './_lib.js';
+import { getMediaBackend, json } from '../lib/vercel.js';
 export async function GET(request){
   const u=new URL(request.url); const session=String(u.searchParams.get('session')||''); const file=String(u.searchParams.get('file')||'');
   if(!/^[a-f0-9]{8,64}$/i.test(session) || !/^[^/\\.][^/\\]*\.(ts|m3u8)$/i.test(file)) return json({ok:false,error:'Invalid TS segment request'},400);

@@ -1,4 +1,4 @@
-import { memory, json } from '../_lib.js';
+import { memory, json } from '../../lib/vercel.js';
 function stats(days){
   const cutoff=Date.now()-(days-1)*86400000; const visitors=new Set(); let chats=0,downloads=0;
   for(const [day,d] of memory.analytics.daily){ if(Date.parse(day+'T00:00:00Z')>=cutoff){for(const x of d.visitors)visitors.add(x);chats+=d.chats;downloads+=d.downloads;} }

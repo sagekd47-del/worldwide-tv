@@ -74,3 +74,12 @@ npm start
 ```
 
 Then keep Live Server open if you prefer; the AI page automatically sends localhost Live Server requests to `http://localhost:3000/api/chat`. Set `OPENAI_API_KEY` in your environment before starting the server.
+
+
+## VOD resume and mini-player
+- Finite-duration VOD playback positions are stored in browser localStorage for 30 minutes and restored after refresh.
+- Live streams are not treated as VOD resume sessions.
+- The player includes a Picture-in-Picture button when the browser supports it. PiP can keep the video visible over other apps; the browser/OS controls the actual floating window.
+
+## Windows local streaming test (including .hls)
+Use the included `LOCAL_TEST_WINDOWS.md`. For real stream testing, run the Node media backend (not VS Code Live Server): open a terminal in the project root, run `cd media-backend`, `npm install`, then `npm start`, and open `http://localhost:3000/index.html`. The backend serves the project root and supports the stream proxy/transcoding APIs. `.hls` and `.m3u8` are both detected as HLS playlists.

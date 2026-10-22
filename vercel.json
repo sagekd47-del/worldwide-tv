@@ -6,11 +6,5 @@
     { "source": "/home", "destination": "/home.html" },
     { "source": "/player", "destination": "/player.html" },
     { "source": "/ai", "destination": "/savagetech-ai.html" }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs24.x",
-      "maxDuration": 60
-    }
-  }
+  ]
 }

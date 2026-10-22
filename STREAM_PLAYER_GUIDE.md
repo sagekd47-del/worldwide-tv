@@ -46,3 +46,15 @@ Do not open `player.html` directly with `file://` if you want `.ts` conversion o
 
 ### MKV support
 Remote `.mkv` URLs are detected automatically. When the site is running through the included Node/FFmpeg server, the server converts MKV to HLS for browser playback. The original `.mkv` URL can remain in `app.js`.
+
+## SASU-style playback features in SavageTech TV
+The built-in web player remains independent of SASU Player and includes HLS.js playback, automatic/available quality selection, subtitle-track selection when provided by the stream, playback controls, fullscreen, Picture-in-Picture where supported, and a retry control when playback fails. It also supports MPEG-DASH via dash.js. A browser cannot play every provider stream: some sources require provider-specific authorization, DRM, expiring tokens, or headers that the provider explicitly allows.
+
+### Optional upstream request headers (Node media backend)
+On Render, you may set these environment variables only when the stream provider documents/requires them:
+- `STREAM_USER_AGENT` — optional User-Agent value
+- `STREAM_REFERER` — optional Referer URL
+- `STREAM_ORIGIN` — optional Origin value
+- `STREAM_ACCEPT` — optional Accept value
+
+Do not put credentials or short-lived signed tokens into public frontend code. These settings do not bypass DRM, authentication, expired tokens, geo-restrictions, or provider access controls. After changing Render environment variables, redeploy/restart the media backend.
