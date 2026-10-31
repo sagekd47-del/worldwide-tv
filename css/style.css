@@ -12,3 +12,16 @@
 @media(max-width:850px){.hero{gap:5px}.device-strip{grid-template-columns:repeat(3,1fr);margin-bottom:75px}.device-strip div:nth-child(3){border-right:0}.device-strip div:nth-child(-n+3){border-bottom:1px solid var(--line)}}
 @media(max-width:650px){.site-header{height:70px;padding:0 5%}.brand-name{font-size:16px}.brand-symbol{width:39px;height:39px}.header-actions{gap:8px}.language-control{padding:8px}.language-control select{max-width:90px;font-size:11px}.header-link{font-size:11px}.hero{display:block;padding-top:57px;padding-bottom:35px;min-height:auto}.hero h1{font-size:clamp(38px,10vw,52px);letter-spacing:-2px}.hero-visual{height:250px;margin-top:20px}.glow-core{width:125px;height:125px}.core-mark{font-size:43px}.orbit-one{width:250px;height:170px}.orbit-two{width:300px;height:210px}.phone{left:13%;top:25px}.laptop{right:10%;top:45px}.tv{left:13%;bottom:45px}.wifi{right:12%;bottom:30px}.device-strip div{font-size:10px;padding:14px 3px;gap:6px}.device-strip span{font-size:16px}.diagnosis-card{padding:17px 13px}.mode-switch{gap:3px}.mode-button{padding:9px 7px;font-size:10px}.form-grid{grid-template-columns:1fr;gap:13px}.form-bottom{align-items:stretch;flex-direction:column}.submit-button{justify-content:space-between}.features{grid-template-columns:1fr;padding-bottom:55px}footer{flex-direction:column;text-align:center}.splash-logo-crop{width:66vw;height:66vw}.brand-art{width:93vw}.brand-tagline{font-size:8px;letter-spacing:2px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* DigiDoctor thinking and feedback */
+.typing-indicator{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:48px;color:#a9d9e8;font-size:12px}
+.typing-indicator span{width:7px;height:7px;border-radius:50%;background:#55d9ef;animation:ddPulse 1s infinite ease-in-out}
+.typing-indicator span:nth-child(2){animation-delay:.15s}.typing-indicator span:nth-child(3){animation-delay:.3s}
+.typing-indicator p{flex-basis:100%;margin:4px 0 0;color:#a9c4d2;font-size:12px}
+@keyframes ddPulse{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-5px)}}
+.submit-button:disabled{opacity:.65;cursor:wait}.submit-button.is-thinking b{animation:ddSpin 1s linear infinite}
+@keyframes ddSpin{to{transform:rotate(360deg)}}
+.feedback-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:20px;padding-top:14px;border-top:1px solid var(--line);color:#a8c2d0;font-size:12px}
+.feedback-button{border:1px solid #31566a;background:#102a3a;color:#cceaf4;border-radius:9px;padding:8px 12px;cursor:pointer;font-size:12px}
+.feedback-button:hover,.feedback-button.selected{border-color:#51d5e9;background:#16475b}
+.feedback-button:disabled{opacity:.7;cursor:default}.feedback-thanks{flex-basis:100%;color:#70e0b9;font-size:12px}

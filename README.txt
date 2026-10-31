@@ -30,3 +30,14 @@ LOADING PAGE INTERNET REQUIREMENT
 - If the internet check or payload download fails, it stays on the loading page and offers Retry.
 - The 3 MiB payload is assets/loading-payload.bin. Keep it in place when deploying the site.
 - The site must be served through a web server (for example VS Code Live Server); opening index.html directly as file:// can block fetch requests.
+
+LOCAL AI BACKEND (NEW)
+- server/server.js: local Node.js backend; it calls Ollama on this same machine and retrieves relevant documents from knowledge/ before generating an answer.
+- knowledge/: starter troubleshooting notes. Add authorized manuals and verified notes here.
+- LOCAL_AI_SETUP_SW.md: Windows setup instructions in Kiswahili.
+- package.json: Node dependency and start script.
+- Run `npm install`, then `npm start`, then open http://localhost:3000.
+- Install Ollama and pull a local model first (example: `ollama pull qwen2.5:7b`).
+- No online AI API is used. The model download and any source research require internet once; after model and knowledge are local, inference and retrieval can run offline.
+- The existing frontend keeps its 5-second typing indicator and feedback buttons. It now has a matching /api/diagnose backend.
+- This is a foundation with a starter knowledge library, not a complete database of every model and fault. Read LOCAL_AI_SETUP_SW.md for limitations and safe expansion.

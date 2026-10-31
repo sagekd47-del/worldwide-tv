@@ -75,21 +75,53 @@ const guides=[
  {keys:["slow","freez","hang","lag","polepole"],title:"Slow or unresponsive device",causes:"Too many running apps, low storage, background updates, limited memory, overheating, or unwanted software.",steps:["Restart the device.","Close unused apps and browser tabs.","Check available storage and remove only files you have backed up.","Install system and app updates from official settings.","If the slowdown began after installing an app, review or uninstall that app."],warning:"Avoid unofficial cleaner apps and do not delete system files to free space."},
  {keys:["battery","charging","charge","does not turn on","won't turn on","haichaji"],title:"Power or charging issue",causes:"Cable/adapter fault, damaged port, depleted battery, power outlet issue, or internal hardware fault.",steps:["Try a known-good compatible cable and approved adapter.","Check the wall outlet using another safe device.","Inspect the charging port visually; do not insert metal objects.","Leave the device to charge for a short period while monitoring it.","If it remains unresponsive, seek a qualified technician."],warning:"Stop charging immediately if the battery is swollen, the device smokes, sparks, or becomes dangerously hot."}
 ];
-$("diagnosisForm").addEventListener("submit",e=>{
+const responseWords = {
+ en:{thinking:"DigiDoctor is reading your question and checking troubleshooting knowledge…",causes:"Possible causes",checks:"Recommended safe checks",safety:"Safety reminder",like:"Helpful",dislike:"Not helpful",thanks:"Thank you! Your feedback helps improve DigiDoctor.",need:"Please describe the issue in a little more detail.",unknown:"I couldn't identify the exact fault yet. I will not guess: share the full error message and what happened just before the issue began.",fallback:"The built-in offline guide is being used. Connect a multilingual AI model and a verified device knowledge base for broader answers."},
+ sw:{thinking:"DigiDoctor inasoma swali lako na kutafuta mwongozo wa utatuzi…",causes:"Sababu zinazowezekana",checks:"Hatua salama za kufanya",safety:"Tahadhari ya usalama",like:"Imesaidia",dislike:"Haijasaidia",thanks:"Asante! Maoni yako yatasaidia kuboresha DigiDoctor.",need:"Tafadhali eleza tatizo kwa maelezo zaidi.",unknown:"Bado sijatambua hitilafu husika. Sitakisia: tuma ujumbe kamili wa hitilafu na eleza kilichotokea kabla tatizo kuanza.",fallback:"Kwa sasa nimetumia mwongozo uliojengewa ndani unaofanya kazi bila intaneti. Ili kujibu maswali mapana, unahitaji kuunganisha AI ya lugha nyingi pamoja na hifadhidata iliyothibitishwa ya vifaa."},
+ fr:{thinking:"DigiDoctor analyse votre question et consulte les guides…",causes:"Causes possibles",checks:"Vérifications recommandées",safety:"Consigne de sécurité",like:"Utile",dislike:"Inutile",thanks:"Merci ! Votre avis aide à améliorer DigiDoctor.",need:"Veuillez décrire le problème plus en détail.",unknown:"Je n’ai pas encore identifié la panne. Envoyez le message d’erreur complet et expliquez ce qui s’est passé avant.",fallback:"Guide hors ligne utilisé. Une IA multilingue et une base de connaissances vérifiée sont nécessaires pour des réponses plus larges."},
+ es:{thinking:"DigiDoctor está leyendo tu pregunta y consultando guías…",causes:"Causas posibles",checks:"Comprobaciones seguras",safety:"Aviso de seguridad",like:"Útil",dislike:"No útil",thanks:"¡Gracias! Tus comentarios ayudan a mejorar DigiDoctor.",need:"Describe el problema con más detalle.",unknown:"Aún no puedo identificar el fallo exacto. Comparte el mensaje de error completo y qué ocurrió antes.",fallback:"Se utiliza la guía sin conexión. Para respuestas más amplias se necesita una IA multilingüe y una base de conocimientos verificada."},
+ de:{thinking:"DigiDoctor liest Ihre Frage und prüft Fehlerbehebungswissen…",causes:"Mögliche Ursachen",checks:"Empfohlene sichere Prüfungen",safety:"Sicherheitshinweis",like:"Hilfreich",dislike:"Nicht hilfreich",thanks:"Danke! Ihr Feedback hilft DigiDoctor zu verbessern.",need:"Bitte beschreiben Sie das Problem genauer.",unknown:"Der genaue Fehler ist noch unklar. Senden Sie die vollständige Fehlermeldung und beschreiben Sie, was zuvor geschah.",fallback:"Der Offline-Leitfaden wird verwendet. Für umfassendere Antworten sind ein mehrsprachiges KI-Modell und eine geprüfte Wissensdatenbank nötig."},
+ pt:{thinking:"DigiDoctor está lendo sua pergunta e consultando guias…",causes:"Possíveis causas",checks:"Verificações seguras recomendadas",safety:"Aviso de segurança",like:"Útil",dislike:"Não útil",thanks:"Obrigado! Seu feedback ajuda a melhorar o DigiDoctor.",need:"Descreva o problema com mais detalhes.",unknown:"Ainda não identifiquei a falha exata. Envie a mensagem de erro completa e explique o que aconteceu antes.",fallback:"Guia offline utilizado. Para respostas mais amplas, é necessário conectar uma IA multilíngue e uma base de conhecimento verificada."},
+ ar:{thinking:"يفحص DigiDoctor سؤالك ويبحث في أدلة استكشاف الأخطاء…",causes:"الأسباب المحتملة",checks:"الفحوصات الآمنة المقترحة",safety:"تنبيه السلامة",like:"مفيد",dislike:"غير مفيد",thanks:"شكراً! تساعد ملاحظاتك في تحسين DigiDoctor.",need:"يرجى وصف المشكلة بمزيد من التفاصيل.",unknown:"لم أحدد العطل بدقة بعد. أرسل رسالة الخطأ كاملة وما حدث قبل بدء المشكلة.",fallback:"يُستخدم الدليل غير المتصل. تتطلب الإجابات الأوسع نموذج ذكاء اصطناعي متعدد اللغات وقاعدة معرفة موثوقة."},
+ zh:{thinking:"DigiDoctor 正在阅读问题并检索故障排除知识…",causes:"可能原因",checks:"建议的安全检查",safety:"安全提醒",like:"有帮助",dislike:"没有帮助",thanks:"谢谢！您的反馈有助于改进 DigiDoctor。",need:"请更详细地描述问题。",unknown:"尚无法确定具体故障。请提供完整错误信息以及故障发生前的操作。",fallback:"当前使用离线指南。更广泛的回答需要多语言 AI 模型和经过验证的设备知识库。"},
+ ja:{thinking:"DigiDoctor が質問を読み、トラブルシューティング情報を確認しています…",causes:"考えられる原因",checks:"推奨される安全な確認",safety:"安全上の注意",like:"役に立った",dislike:"役に立たなかった",thanks:"ありがとうございます。ご意見は改善に役立ちます。",need:"問題をもう少し詳しく説明してください。",unknown:"正確な故障を特定できません。完全なエラーメッセージと発生直前の操作を教えてください。",fallback:"オフラインガイドを使用しています。幅広い回答には多言語 AI と検証済み知識ベースが必要です。"},
+ ko:{thinking:"DigiDoctor가 질문을 읽고 문제 해결 정보를 확인하고 있습니다…",causes:"가능한 원인",checks:"권장되는 안전 점검",safety:"안전 안내",like:"도움이 됨",dislike:"도움이 되지 않음",thanks:"감사합니다. 의견은 DigiDoctor 개선에 도움이 됩니다.",need:"문제를 조금 더 자세히 설명해 주세요.",unknown:"정확한 문제를 아직 확인하지 못했습니다. 전체 오류 메시지와 문제가 발생하기 직전의 상황을 알려주세요.",fallback:"오프라인 안내를 사용했습니다. 더 폭넓은 답변에는 다국어 AI와 검증된 지식 기반이 필요합니다."},
+ hi:{thinking:"DigiDoctor आपका प्रश्न पढ़कर समस्या-समाधान जानकारी खोज रहा है…",causes:"संभावित कारण",checks:"सुझाई गई सुरक्षित जाँच",safety:"सुरक्षा सूचना",like:"उपयोगी",dislike:"उपयोगी नहीं",thanks:"धन्यवाद! आपकी प्रतिक्रिया DigiDoctor को बेहतर बनाती है।",need:"कृपया समस्या का थोड़ा और विवरण दें।",unknown:"मैं अभी सटीक खराबी नहीं पहचान पाया। पूरा त्रुटि संदेश और उससे पहले हुई घटना बताएँ।",fallback:"ऑफ़लाइन गाइड का उपयोग किया गया। व्यापक उत्तरों के लिए बहुभाषी AI और सत्यापित डिवाइस ज्ञान-आधार चाहिए।"},
+ ru:{thinking:"DigiDoctor читает вопрос и ищет рекомендации по устранению неполадок…",causes:"Возможные причины",checks:"Рекомендуемые безопасные проверки",safety:"Предупреждение о безопасности",like:"Полезно",dislike:"Не полезно",thanks:"Спасибо! Ваш отзыв помогает улучшать DigiDoctor.",need:"Опишите проблему подробнее.",unknown:"Пока не удалось определить точную неисправность. Пришлите полный текст ошибки и опишите, что произошло перед ней.",fallback:"Используется автономное руководство. Для более широких ответов нужны многоязычная ИИ-модель и проверенная база знаний."}
+};
+function safeText(tag, text){const el=document.createElement(tag);el.textContent=text;return el;}
+$("diagnosisForm").addEventListener("submit", async e=>{
  e.preventDefault();
  const problem=$("problem").value.trim();if(problem.length<5){$("problem").focus();return;}
+ const lang=currentLanguage, w=responseWords[lang]||responseWords.en;
  const device=$("deviceType").value, brand=$("brand").value.trim(), model=$("model").value.trim();
- const text=(problem+" "+device+" "+brand+" "+model).toLowerCase();
- const match=guides.find(g=>g.keys.some(k=>text.includes(k)));
- const title=match?match.title:"More details are needed";
- const causes=match?match.causes:"The description does not yet match a specific verified starter guide. The issue could be related to settings, software, power, connectivity, or hardware.";
- const steps=match?match.steps:["Tell us the exact device brand and model.","Copy the full error message, if one appears.","Describe what you were doing immediately before the issue started.","Tell us what you have already tried and what changed.","Check the manufacturer's official support page for model-specific instructions."];
- const result=$("resultContent");result.innerHTML="";
- const heading=document.createElement("h4");heading.textContent=title;result.appendChild(heading);
- const cause=document.createElement("p");cause.textContent="Possible causes: "+causes;result.appendChild(cause);
- const sh=document.createElement("h4");sh.textContent="Suggested safe checks";result.appendChild(sh);
- const ul=document.createElement("ul");steps.forEach(s=>{const li=document.createElement("li");li.textContent=s;ul.appendChild(li)});result.appendChild(ul);
- const wh=document.createElement("h4");wh.textContent="Safety reminder";result.appendChild(wh);
- const warning=document.createElement("p");warning.textContent=match?match.warning:"If you notice smoke, sparks, liquid damage, extreme heat, a swollen battery, or a burning smell, stop using the device and seek qualified help.";result.appendChild(warning);
- $("resultPanel").classList.remove("is-hidden");$("resultPanel").scrollIntoView({behavior:"smooth",block:"nearest"});
+ const panel=$("resultPanel"), result=$("resultContent"), button=$("submitDiagnosis");
+ panel.classList.remove("is-hidden");result.innerHTML="";
+ const thinking=document.createElement("div");thinking.className="typing-indicator";thinking.innerHTML='<span></span><span></span><span></span><p></p>';thinking.querySelector("p").textContent=w.thinking;result.appendChild(thinking);
+ button.disabled=true;button.classList.add("is-thinking");
+ // Deliberate 5-second thinking indicator; replace with a real model response when an API is connected.
+ await new Promise(resolve=>setTimeout(resolve,5000));
+ result.innerHTML="";
+ const payload={deviceType:device,brand,model,problem,language:lang,mode};
+ let answer=null;
+ // Optional backend contract: POST /api/diagnose and return {title,causes,steps:[...],warning}.
+ try{const r=await fetch("/api/diagnose",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(r.ok){const data=await r.json();if(data&&data.steps)answer=data;}}catch(_){}
+ const all=(problem+" "+device+" "+brand+" "+model).toLowerCase();
+ const match=guides.find(g=>g.keys.some(k=>all.includes(k)));
+ const title=answer?.title||(match?match.title:(lang==="sw"?"Maelezo zaidi yanahitajika":"More details are needed"));
+ const causes=answer?.causes||(match?match.causes:w.unknown);
+ const steps=answer?.steps||(match?match.steps:[w.need,"Share the exact brand and model, full error message, and what you have already tried."]);
+ const warning=answer?.warning||(match?match.warning:"If you notice smoke, sparks, liquid damage, extreme heat, a swollen battery, or a burning smell, stop using the device and seek qualified help.");
+ result.appendChild(safeText("h4",title));
+ result.appendChild(safeText("p",w.causes+": "+causes));
+ result.appendChild(safeText("h4",w.checks));
+ const ul=document.createElement("ul");steps.forEach(s=>ul.appendChild(safeText("li",s)));result.appendChild(ul);
+ result.appendChild(safeText("h4",w.safety));result.appendChild(safeText("p",warning));
+ if(!answer)result.appendChild(safeText("p",w.fallback));
+ const feedback=document.createElement("div");feedback.className="feedback-row";
+ feedback.appendChild(safeText("span",lang==="sw"?"Je, jibu hili limekusaidia?":lang==="fr"?"Cette réponse vous a-t-elle aidé ?":lang==="es"?"¿Te ayudó esta respuesta?":"Was this answer helpful?"));
+ ["like","dislike"].forEach(type=>{const b=document.createElement("button");b.type="button";b.className="feedback-button";b.innerHTML=type==="like"?"👍 ":"👎 ";b.appendChild(document.createTextNode(w[type]));b.addEventListener("click",()=>{feedback.querySelectorAll("button").forEach(x=>x.disabled=true);b.classList.add("selected");const msg=safeText("small",w.thanks);msg.className="feedback-thanks";feedback.appendChild(msg);try{const logs=JSON.parse(localStorage.getItem("digidoctor-feedback")||"[]");logs.push({rating:type,language:lang,device,problem,at:new Date().toISOString()});localStorage.setItem("digidoctor-feedback",JSON.stringify(logs.slice(-100)));}catch(_){}});feedback.appendChild(b);});
+ result.appendChild(feedback);
+ $("resultPanel").scrollIntoView({behavior:"smooth",block:"nearest"});
+ button.disabled=false;button.classList.remove("is-thinking");
 });
