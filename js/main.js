@@ -15,22 +15,43 @@ const translations = {
  ru:{getHelp:"Получить помощь",eyebrow:"ВАША ЛИЧНАЯ ТЕХПОДДЕРЖКА",heroText:"Проблема с устройством? Давайте найдём причину и возможное решение.",startNow:"Начать диагностику",trust:"Понятные советы · Безопасность прежде всего · Поддержка устройств",phones:"Телефоны и планшеты",computers:"Компьютеры",tvs:"Смарт-телевизоры",network:"Сети",printers:"Принтеры",gaming:"Игровые устройства",diagnosisTitle:"Давайте разберёмся с проблемой.",diagnosisSub:"Расскажите об устройстве и о том, что происходит.",automatic:"Автоматически",guided:"Пошаговая диагностика",imageMode:"Проверка изображения",deviceType:"Тип устройства",brand:"Бренд",model:"Модель (необязательно)",problem:"Опишите проблему",uploadImage:"Прикрепите снимок экрана или фото устройства",imageNote:"Выбранное изображение можно просмотреть. Анализ изображений ИИ пока не подключён.",privacy:"В этой версии описание остаётся в браузере.",diagnose:"Диагностировать устройство",resultTitle:"Рекомендации DigiDoctor",disclaimer:"Это предварительные рекомендации, а не подтверждённый диагноз.",engineNote:"Веб-версия содержит небольшую офлайн-библиотеку. Полноценный локальный ИИ и анализ изображений ещё не интегрированы.",feature1Title:"Умная диагностика",feature1Text:"Начните с проверок для вашего устройства и симптомов.",feature2Title:"Для пользователей по всему миру",feature2Text:"Выберите удобный язык интерфейса.",feature3Title:"Безопасность прежде всего",feature3Text:"Мы предупреждаем об опасности и не выполняем команды на устройстве.",footerLine:"Помогаем устройствам работать лучше."}
 };
 let mode = "automatic";
-function applyLanguage(lang){const d=translations[lang]||translations.en;document.documentElement.lang=lang;document.querySelectorAll("[data-t]").forEach(el=>{const k=el.dataset.t;if(d[k])el.textContent=d[k];});
+let currentLanguage = "en";
+const greetingTranslations = {
+ en:{hello:"Hello there 👋",morning:"Good Morning 🌞",afternoon:"Good Afternoon ☀️",evening:"Good Evening 🌇",night:"Good Night 🌙"},
+ sw:{hello:"Habari yako 👋",morning:"Habari za asubuhi 🌞",afternoon:"Habari za mchana ☀️",evening:"Habari za jioni 🌇",night:"Usiku mwema 🌙"},
+ fr:{hello:"Bonjour 👋",morning:"Bonjour 🌞",afternoon:"Bon après-midi ☀️",evening:"Bonsoir 🌇",night:"Bonne nuit 🌙"},
+ es:{hello:"¡Hola! 👋",morning:"¡Buenos días! 🌞",afternoon:"¡Buenas tardes! ☀️",evening:"¡Buenas tardes! 🌇",night:"¡Buenas noches! 🌙"},
+ de:{hello:"Hallo! 👋",morning:"Guten Morgen 🌞",afternoon:"Guten Tag ☀️",evening:"Guten Abend 🌇",night:"Gute Nacht 🌙"},
+ pt:{hello:"Olá! 👋",morning:"Bom dia 🌞",afternoon:"Boa tarde ☀️",evening:"Boa noite 🌇",night:"Boa noite 🌙"},
+ ar:{hello:"مرحباً بك 👋",morning:"صباح الخير 🌞",afternoon:"طاب نهارك ☀️",evening:"مساء الخير 🌇",night:"تصبح على خير 🌙"},
+ zh:{hello:"你好！👋",morning:"早上好 🌞",afternoon:"下午好 ☀️",evening:"晚上好 🌇",night:"晚安 🌙"},
+ ja:{hello:"こんにちは！👋",morning:"おはようございます 🌞",afternoon:"こんにちは ☀️",evening:"こんばんは 🌇",night:"おやすみなさい 🌙"},
+ ko:{hello:"안녕하세요! 👋",morning:"좋은 아침이에요 🌞",afternoon:"좋은 오후예요 ☀️",evening:"좋은 저녁이에요 🌇",night:"안녕히 주무세요 🌙"},
+ hi:{hello:"नमस्ते! 👋",morning:"सुप्रभात 🌞",afternoon:"नमस्कार ☀️",evening:"शुभ संध्या 🌇",night:"शुभ रात्रि 🌙"},
+ ru:{hello:"Здравствуйте! 👋",morning:"Доброе утро 🌞",afternoon:"Добрый день ☀️",evening:"Добрый вечер 🌇",night:"Спокойной ночи 🌙"}
+};
+function applyLanguage(lang){const d=translations[lang]||translations.en;currentLanguage=translations[lang]?lang:"en";document.documentElement.lang=currentLanguage;document.querySelectorAll("[data-t]").forEach(el=>{const k=el.dataset.t;if(d[k])el.textContent=d[k];});updateGreeting();
  const placeholders={brand:{en:"e.g. Samsung, HP, Hisense",sw:"mf. Samsung, HP, Hisense",fr:"ex. Samsung, HP, Hisense",es:"p. ej. Samsung, HP, Hisense"},model:{en:"Enter model if known",sw:"Weka modeli kama unaijua",fr:"Saisissez le modèle si connu",es:"Escribe el modelo si lo conoces"},problem:{en:"What happened? When did it start? Any error message?",sw:"Nini kimetokea? Kilianza lini? Kuna ujumbe wa hitilafu?",fr:"Que s’est-il passé ? Depuis quand ? Un message d’erreur ?",es:"¿Qué ocurrió? ¿Cuándo empezó? ¿Hay algún mensaje de error?"}};
  if(placeholders.brand[lang])$("brand").placeholder=placeholders.brand[lang];
  if(placeholders.model[lang])$("model").placeholder=placeholders.model[lang];
  if(placeholders.problem[lang])$("problem").placeholder=placeholders.problem[lang];
 }
 $("languageSelect").addEventListener("change",e=>{localStorage.setItem("digidoctor-language",e.target.value);applyLanguage(e.target.value);});
-const savedLanguage=localStorage.getItem("digidoctor-language");if(savedLanguage&&$("languageSelect").querySelector(`option[value="${savedLanguage}"]`)){$("languageSelect").value=savedLanguage;applyLanguage(savedLanguage);}
+const savedLanguage=localStorage.getItem("digidoctor-language");if(savedLanguage&&$("languageSelect").querySelector(`option[value="${savedLanguage}"]`)){$("languageSelect").value=savedLanguage;applyLanguage(savedLanguage);}else{applyLanguage("en");}
 
 function updateGreeting(){
- const h=new Date().getHours(); let greeting;
- if(h>=5&&h<12) greeting="Good Morning 🌞";
- else if(h>=12&&h<17) greeting="Good Afternoon ☀️";
- else if(h>=17&&h<20) greeting="Good Evening 🌇";
- else greeting="Good Night 🌙";
- $("timeLine").textContent=greeting;
+ const h=new Date().getHours();
+ const words=greetingTranslations[currentLanguage]||greetingTranslations.en;
+ let key;
+ if(h>=5&&h<12) key="morning";
+ else if(h>=12&&h<17) key="afternoon";
+ else if(h>=17&&h<20) key="evening";
+ else key="night";
+ const hello=$("helloLine"), time=$("timeLine");
+ if(hello) hello.textContent=words.hello;
+ if(time) time.textContent=words[key];
+ if(currentLanguage==="ar") { if(hello) hello.dir="rtl"; if(time) time.dir="rtl"; }
+ else { if(hello) hello.dir="auto"; if(time) time.dir="auto"; }
 }
 updateGreeting();setInterval(updateGreeting,60000);$("year").textContent=new Date().getFullYear();
 

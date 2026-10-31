@@ -26,6 +26,18 @@
  const loader=document.querySelector('.load-wrap');
  const targetBytes=3*1024*1024;
  let running=false;
+ let messageTimer=null;
+ const loadingMessages=[
+  'Getting things ready…','Preparing your DigiDoctor experience…','Warming up the digital health tools…',
+  'Connecting the dots…','Making sure everything is in place…','Setting up your workspace…',
+  'Checking the connection…','Getting your experience ready…','Preparing helpful solutions…',
+  'Almost there — putting the pieces together…','Making a few final checks…','Your DigiDoctor journey is getting ready…'
+ ];
+ function startMessageRotation(){
+  stopMessageRotation();let i=0;status.textContent=loadingMessages[0];
+  messageTimer=setInterval(()=>{i=(i+1)%loadingMessages.length;status.textContent=loadingMessages[i];},1800);
+ }
+ function stopMessageRotation(){if(messageTimer){clearInterval(messageTimer);messageTimer=null;}}
  function showMessage(message,buttonText='Retry'){
    status.textContent=message;
    let retry=$('retry-load');
@@ -59,24 +71,24 @@
      received+=value.byteLength;
      const pct=Math.min(99,Math.floor(received/targetBytes*100));
      fill.style.width=pct+'%';percent.textContent=pct+'%';
-     status.textContent='Downloading '+(received/1048576).toFixed(2)+' / 3.00 MB…';
+     // Keep the interface friendly: show rotating preparation messages, never raw download size.
    }
    if(received<targetBytes) throw new Error('short');
  }
  async function start(){
-   if(running)return;running=true;hideRetry();fill.style.width='0%';percent.textContent='0%';status.textContent='Checking active internet connection…';
+   if(running)return;running=true;hideRetry();stopMessageRotation();fill.style.width='0%';percent.textContent='0%';status.textContent='Checking your connection…';startMessageRotation();
    try{
      await checkInternet();
      if(!navigator.onLine)throw new Error('offline');
      await downloadThreeMB();
-     fill.style.width='100%';percent.textContent='100%';status.textContent='Ready';
+     stopMessageRotation();fill.style.width='100%';percent.textContent='100%';status.textContent='Everything is ready!';
      setTimeout(()=>location.replace('home.html'),250);
    }catch(e){
-     fill.style.width='0%';percent.textContent='0%';
+     stopMessageRotation();fill.style.width='0%';percent.textContent='0%';
      if(e.message==='server') showMessage('Open this website through a web server (Live Server or hosting), not as a local file.');
      else if(e.message==='payload') showMessage('The 3 MB loading file could not be downloaded. Upload assets/loading-payload.bin to your hosting, then retry.');
      else showMessage('Could not verify an active internet connection. Check Wi-Fi/mobile data, then tap Retry.');
-   }finally{running=false;}
+   }finally{stopMessageRotation();running=false;}
  }
  window.addEventListener('offline',()=>{if(!running){fill.style.width='0%';percent.textContent='0%';showMessage('Internet disconnected. Connect to Wi-Fi or mobile data, then tap Retry.');}});
  window.addEventListener('online',()=>{if(!running)start();});
