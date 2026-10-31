@@ -1,36 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07111f">
-  <title>Loading — SavageTech TV</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06111b"><meta name="description" content="DigiDoctor — Digital Health Solutions">
+  <title>DigiDoctor — Loading</title><link rel="stylesheet" href="css/style.css">
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#06111b;color:#e8f7ff;font-family:Arial,sans-serif;min-height:100vh}
+    .loader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;background:radial-gradient(ellipse at center,#173c51 0%,#091724 58%,#06111b 100%)}
+    .logo{width:min(72vw,350px);max-height:42vh;object-fit:contain;filter:drop-shadow(0 15px 38px #0008)}
+    .title{font-size:clamp(24px,5vw,38px);font-weight:800;letter-spacing:1px;margin:18px 0 6px}.sub{color:#9abac9;font-size:13px;margin:0 0 28px}
+    .load-wrap{width:min(390px,84vw)}.load-copy{display:flex;justify-content:space-between;font-size:12px;color:#d9edf5;margin-bottom:10px}.load-copy strong{color:#65e3f5}
+    .track{height:6px;border-radius:20px;background:#ffffff2b;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#168dd9,#50e3ed);box-shadow:0 0 15px #50dfff;transition:width .15s linear}
+    .foot{color:#6e91a4;font-size:10px;letter-spacing:1px;margin-top:13px}
+  </style>
 </head>
-<body>
-  <div class="splash-screen" id="splashScreen">
-    <div class="splash-inner">
-      <img class="splash-logo" src="assets/logo.png" alt="SavageTech TV">
-      <div class="loading-track"><div class="loading-bar" id="loadingBar"></div></div>
-      <div class="loading-copy"><span>Preparing your experience</span><span id="loadingPercent">1%</span></div>
-    </div>
-  </div>
-  <script>
-    (function(){
-      const bar=document.getElementById('loadingBar');
-      const pct=document.getElementById('loadingPercent');
-      const duration=7000;
-      const start=performance.now();
-      function tick(now){
-        const progress=Math.min(100, Math.max(1, Math.floor(((now-start)/duration)*100)+1));
-        bar.style.width=progress+'%';
-        pct.textContent=progress+'%';
-        if(progress<100){ requestAnimationFrame(tick); }
-        else { setTimeout(()=>location.replace('home.html'), 120); }
-      }
-      requestAnimationFrame(tick);
-    })();
-  </script>
-<script src="js/analytics.js"></script>
-</body>
-</html>
+<body><main class="loader" aria-label="DigiDoctor loading screen">
+  <img class="logo" src="assets/digidoctor-brand.jpg" alt="DigiDoctor Digital Health Solutions">
+  <div class="title">DigiDoctor</div><p class="sub">Every Device Has a Solution.</p>
+  <div class="load-wrap"><div class="load-copy"><span id="status">Preparing your experience…</span><strong id="percent">0%</strong></div><div class="track"><div class="bar" id="bar"></div></div><div class="foot">DIGITAL HEALTH SOLUTIONS</div></div>
+</main>
+<script>
+(()=>{
+ const $=id=>document.getElementById(id);
+ const fill=$('bar'),percent=$('percent'),status=$('status');
+ const loader=document.querySelector('.load-wrap');
+ const targetBytes=3*1024*1024;
+ let running=false;
+ function showMessage(message,buttonText='Retry'){
+   status.textContent=message;
+   let retry=$('retry-load');
+   if(!retry){retry=document.createElement('button');retry.id='retry-load';retry.type='button';retry.style.cssText='margin-top:18px;padding:10px 18px;border:0;border-radius:22px;background:#50e3ed;color:#06111b;font-weight:700;cursor:pointer';loader.appendChild(retry);}
+   retry.textContent=buttonText;retry.hidden=false;retry.onclick=()=>{if(running)return;start();};
+ }
+ function hideRetry(){const b=$('retry-load');if(b)b.hidden=true;}
+ async function checkInternet(){
+   if(location.protocol==='file:') throw new Error('server');
+   if(!navigator.onLine) throw new Error('offline');
+   const endpoints=[
+     'https://www.gstatic.com/generate_204?check='+Date.now(),
+     'https://connectivitycheck.gstatic.com/generate_204?check='+Date.now()
+   ];
+   let lastError;
+   for(const url of endpoints){
+     const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),7000);
+     try { await fetch(url,{mode:'no-cors',cache:'no-store',signal:controller.signal}); return; }
+     catch(e){lastError=e;}
+     finally { clearTimeout(timer); }
+   }
+   throw lastError||new Error('offline');
+ }
+ async function downloadThreeMB(){
+   const response=await fetch(new URL('assets/loading-payload.bin?nocache='+Date.now(),location.href),{cache:'no-store'});
+   if(!response.ok || !response.body) throw new Error('payload');
+   const reader=response.body.getReader();let received=0;
+   while(true){
+     if(!navigator.onLine) throw new Error('offline');
+     const {done,value}=await reader.read();if(done)break;
+     received+=value.byteLength;
+     const pct=Math.min(99,Math.floor(received/targetBytes*100));
+     fill.style.width=pct+'%';percent.textContent=pct+'%';
+     status.textContent='Downloading '+(received/1048576).toFixed(2)+' / 3.00 MB…';
+   }
+   if(received<targetBytes) throw new Error('short');
+ }
+ async function start(){
+   if(running)return;running=true;hideRetry();fill.style.width='0%';percent.textContent='0%';status.textContent='Checking active internet connection…';
+   try{
+     await checkInternet();
+     if(!navigator.onLine)throw new Error('offline');
+     await downloadThreeMB();
+     fill.style.width='100%';percent.textContent='100%';status.textContent='Ready';
+     setTimeout(()=>location.replace('home.html'),250);
+   }catch(e){
+     fill.style.width='0%';percent.textContent='0%';
+     if(e.message==='server') showMessage('Open this website through a web server (Live Server or hosting), not as a local file.');
+     else if(e.message==='payload') showMessage('The 3 MB loading file could not be downloaded. Upload assets/loading-payload.bin to your hosting, then retry.');
+     else showMessage('Could not verify an active internet connection. Check Wi-Fi/mobile data, then tap Retry.');
+   }finally{running=false;}
+ }
+ window.addEventListener('offline',()=>{if(!running){fill.style.width='0%';percent.textContent='0%';showMessage('Internet disconnected. Connect to Wi-Fi or mobile data, then tap Retry.');}});
+ window.addEventListener('online',()=>{if(!running)start();});
+ start();
+})();
+</script></body></html>

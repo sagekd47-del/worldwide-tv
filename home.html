@@ -1,276 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07111f">
-  <title>SavageTech TV — Live Entertainment</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07121d">
+  <meta name="description" content="DigiDoctor — digital device troubleshooting and repair guidance.">
+  <title>DigiDoctor — Digital Health Solutions</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="home.html" aria-label="SavageTech TV"><img class="brand-logo" src="assets/logo.png" alt="SavageTech TV"></a>
-  <nav class="desktop-nav">
-    <a class="active" href="#home">Home</a><a href="#live">All Channels</a><a href="support.html">Support</a><a href="#category-Movies">Movies</a><a href="#category-Entertainment">Entertainment</a><a href="#category-News">News</a><a href="#category-Music">Music</a>
-  </nav>
-  <div class="top-actions">
-    <button class="icon-btn" id="themeBtn" title="Theme">☼</button>
-    <a class="icon-btn" id="downloadTopBtn" href="download.html" title="Download SavageTech TV">⇩</a>
-    <a class="icon-btn" id="settingsTopBtn" href="settings.html" title="Settings">⚙</a>
-    <a class="login-btn" id="loginBtn" href="login.html">Sign in</a>
-  </div>
-</header>
-
-<main id="home">
-  <section class="hero featured-hero" id="featuredHero">
-    <div class="featured-slides" id="featuredSlides"></div>
-    <div class="hero-overlay"></div>
-    <div class="featured-content" id="featuredContent"></div>
-    <div class="hero-dots" id="heroDots"></div>
-  </section>
-
-  <section class="content-wrap">
-    <div class="search-row">
-      <label class="search"><span>⌕</span><input id="searchInput" placeholder="Search channels, sports, movies..."><kbd>⌘ K</kbd></label>
-      <button class="filter-btn" id="filterBtn" type="button" aria-expanded="false">☷ Filters</button>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="DigiDoctor home">
+      <span class="brand-symbol">DD</span>
+      <span class="brand-name">DigiDoctor<small>DIGITAL HEALTH SOLUTIONS</small></span>
+    </a>
+    <div class="header-actions">
+      <label class="language-control" aria-label="Select language">🌐
+        <select id="languageSelect">
+          <option value="en">English</option><option value="sw">Kiswahili</option>
+          <option value="fr">Français</option><option value="es">Español</option>
+          <option value="de">Deutsch</option><option value="pt">Português</option>
+          <option value="ar">العربية</option><option value="zh">中文</option>
+          <option value="ja">日本語</option><option value="ko">한국어</option>
+          <option value="hi">हिन्दी</option><option value="ru">Русский</option>
+        </select>
+      </label>
+      <a class="header-link" href="#diagnosis" data-t="getHelp">Get help</a>
     </div>
+  </header>
 
-    <section id="live" class="section category-browser">
-      <div class="section-head"><div><span class="section-kicker">CHANNEL DIRECTORY</span><h2>Browse Channels</h2></div></div>
-      <div class="category-tabs" id="categoryTabs"></div>
-      <div class="channel-grid" id="channelGrid"></div>
+  <main id="home">
+    <section class="hero page-width">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span><span data-t="eyebrow">YOUR PERSONAL TECH SUPPORT</span></div>
+        <h1><span id="helloLine">Hello there 👋</span><br><span class="greeting-gradient" id="timeLine">Good Evening 🌇</span></h1>
+        <p class="hero-description" data-t="heroText">Something wrong with your device? Let's find the cause and work toward a solution.</p>
+        <a class="hero-button" href="#diagnosis"><span data-t="startNow">Start troubleshooting</span><b>↗</b></a>
+        <div class="trust-line"><span>✓</span><span data-t="trust">Clear guidance · Safety-first steps · Device-focused support</span></div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="glow-core"><div class="core-mark">DD</div><span class="core-ring"></span></div>
+        <span class="float-icon phone">▯</span><span class="float-icon laptop">▱</span>
+        <span class="float-icon tv">▣</span><span class="float-icon wifi">⌁</span>
+        <div class="visual-caption"><span class="live-dot"></span> DEVICE CARE SYSTEM</div>
+      </div>
     </section>
-    <div id="categorySections"></div>
-  </section>
-</main>
 
-<!-- SAVAGETECH TV DOWNLOAD CENTER -->
-<section class="content-wrap">
-  <section class="download-center compact-download" id="download">
-    <div class="download-head"><div><span class="section-kicker">GET THE APP</span><h2>Download SavageTech TV</h2><p>Choose Android, iPhone, Tablet, TV or Laptop from the dedicated download center.</p></div>
-    <a class="primary-btn" href="download.html">⇩ Download Center</a></div>
-  </section>
-</section>
+    <section class="device-strip page-width" aria-label="Supported device categories">
+      <div><span>📱</span><b data-t="phones">Phones & Tablets</b></div>
+      <div><span>💻</span><b data-t="computers">Computers</b></div>
+      <div><span>📺</span><b data-t="tvs">Smart TVs</b></div>
+      <div><span>🌐</span><b data-t="network">Networking</b></div>
+      <div><span>🖨️</span><b data-t="printers">Printers</b></div>
+      <div><span>🎮</span><b data-t="gaming">Gaming</b></div>
+    </section>
 
-<!-- FIRST-LAUNCH SAVAGETECH TV GUIDE -->
-<div class="guide-modal" id="guideModal" aria-hidden="true">
-  <div class="guide-card">
-    <div class="guide-top"><span id="guideStep">1 / 6</span><button type="button" class="modal-close" id="guideSkip" aria-label="Close">×</button></div>
-    <div class="guide-icon" id="guideIcon">📺</div>
-    <h2 id="guideTitle">Welcome to SavageTech TV</h2>
-    <p id="guideText">This quick guide shows how to use the main features of SavageTech TV.</p>
-    <div class="guide-progress" id="guideProgress"></div>
-    <div class="guide-actions">
-      <button class="ghost-btn" type="button" id="guideBack">Back</button>
-      <button class="primary-btn" type="button" id="guideNext">Next</button>
-    </div>
-    <label class="guide-check"><input type="checkbox" id="guideDontShow"> Don't show this again</label>
-    <button class="primary-btn guide-ok" type="button" id="guideOk" hidden>OK</button>
-  </div>
-</div>
-
-<div class="filter-panel" id="filterPanel" hidden>
-  <div class="filter-panel-header"><strong>Filter Channels</strong><button type="button" id="filterClose" aria-label="Close filters">×</button></div>
-  <div class="filter-options" id="filterOptions"></div>
-  <button type="button" class="filter-clear" id="filterClear">Show All</button>
-</div>
-
-<div class="floating-contact-stack" aria-label="SavageTech shortcuts">
-  <a class="savage-ai-shortcut" href="savagetech-ai.html" aria-label="Open SavageTech AI" title="SavageTech AI">
-    <img src="assets/savagetec-ai-icon.png" alt="SavageTech AI">
-  </a>
-
-  <a class="whatsapp whatsapp-trigger" href="https://wa.me/255614051456?text=Hello%20SavageTech%20Tv%20Creator" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-    <img class="whatsapp-icon" src="assets/whatsapp.png" data-whatsapp="assets/whatsapp.png" alt="Tap to show shortcuts" width="60" height="60">
-  </a>
-</div>
-
-
-
-<nav class="mobile-nav">
-  <a class="active" href="home.html">🏠<small>Home</small></a>
-  <a href="#live">⏺️<small>Live</small></a>
-  <a href="support.html">✉️<small>Support</small></a>
-  <a href="settings.html">⚙️<small>Settings</small></a>
-</nav>
-
-<footer>
-    <div class="brand">
-        <img class="brand-logo" src="assets/logo.png" alt="SavageTech TV">
-    </div>
-
-    <p>© 2026 SavageTech TV. Built for a better viewing experience.</p>
-
-    <div class="footer-links">
-        <button onclick="openModal('termsModal')" class="footer-link">
-            Terms
-        </button>
-
-        <span>|</span>
-
-        <button onclick="openModal('privacyModal')" class="footer-link">
-            Privacy
-        </button>
-    </div>
-</footer>
-
-
-<!-- TERMS POPUP -->
-<div id="termsModal" class="policy-modal">
-
-    <div class="policy-modal-content">
-
-        <button class="modal-close"
-            onclick="closeModal('termsModal')">
-            ×
-        </button>
-
-        <h2>Terms of Service</h2>
-
-        <div class="policy-content">
-
-            <h3>1. Acceptance of Terms</h3>
-
-            <p>
-                By using SavageTech TV, you agree to these Terms of Service.
-                If you do not agree with these terms, please stop using the service.
-            </p>
-
-
-            <h3>2. Use of the Service</h3>
-
-            <p>
-                SavageTech TV provides access to television and entertainment
-                content. Users must use the platform responsibly and legally.
-            </p>
-
-
-            <h3>3. Streaming Content</h3>
-
-            <p>
-                Channel availability and streaming quality may change depending
-                on internet connection, stream providers, maintenance, or
-                technical issues.
-            </p>
-
-
-            <h3>4. Changes to the Service</h3>
-
-            <p>
-                SavageTech TV may update, modify, or remove features and
-                channels when necessary.
-            </p>
-
-
-            <h3>5. Changes to Terms</h3>
-
-            <p>
-                These Terms may be updated from time to time. Continued use of
-                SavageTech TV means that you accept the updated Terms.
-            </p>
-
+    <section class="diagnosis-section page-width" id="diagnosis">
+      <div class="section-intro">
+        <div class="eyebrow">DIGIDOCTOR INTELLIGENCE</div>
+        <h2 data-t="diagnosisTitle">Let's diagnose the problem.</h2>
+        <p data-t="diagnosisSub">Tell us a little about your device and what is happening.</p>
+      </div>
+      <div class="diagnosis-card">
+        <div class="mode-switch" role="tablist">
+          <button class="mode-button active" data-mode="automatic" type="button">⚡ <span data-t="automatic">Automatic</span></button>
+          <button class="mode-button" data-mode="guided" type="button">🧭 <span data-t="guided">Guided diagnosis</span></button>
+          <button class="mode-button" data-mode="image" type="button">▧ <span data-t="imageMode">Image check</span></button>
         </div>
+        <form id="diagnosisForm">
+          <div class="form-grid">
+            <label><span data-t="deviceType">Device type</span>
+              <select id="deviceType"><option value="smartphone">Smartphone</option><option value="tablet">Tablet</option><option value="laptop">Laptop</option><option value="desktop">Desktop computer</option><option value="smart tv">Smart TV</option><option value="router">Router / Networking device</option><option value="printer">Printer</option><option value="gaming console">Gaming console</option><option value="other">Other electronic device</option></select>
+            </label>
+            <label><span data-t="brand">Brand</span><input id="brand" placeholder="e.g. Samsung, HP, Hisense"></label>
+            <label><span data-t="model">Model (optional)</span><input id="model" placeholder="Enter model if known"></label>
+          </div>
+          <label class="problem-field"><span data-t="problem">Describe what is wrong</span><textarea id="problem" rows="4" placeholder="What happened? When did it start? Any error message?" required></textarea></label>
+          <div class="image-upload" id="imageUpload">
+            <label><span data-t="uploadImage">Attach a screenshot or device photo</span><input type="file" id="imageFile" accept="image/*" capture="environment"></label>
+            <div id="imagePreview" class="image-preview"></div>
+            <small data-t="imageNote">Image attachment preview is available in this web starter. AI image interpretation will be connected in a later integration phase.</small>
+          </div>
+          <div class="form-bottom">
+            <p class="privacy-note">🔒 <span data-t="privacy">Your description stays in this browser in this starter version.</span></p>
+            <button class="submit-button" id="submitDiagnosis" type="submit"><span data-t="diagnose">Diagnose my device</span><b>→</b></button>
+          </div>
+        </form>
+        <section class="result-panel is-hidden" id="resultPanel" aria-live="polite">
+          <div class="result-title"><span>🩺 <b data-t="resultTitle">DigiDoctor guidance</b></span><button id="clearResult" type="button" aria-label="Close result">×</button></div>
+          <div id="resultContent" class="result-content"></div>
+          <div class="result-disclaimer" data-t="disclaimer">This is preliminary troubleshooting guidance, not a confirmed repair diagnosis.</div>
+        </section>
+      </div>
+      <p class="engine-note"><span class="note-icon">ⓘ</span><span data-t="engineNote">Web starter: includes a small offline troubleshooting library. Full Local AI (Ollama), verified knowledge expansion and image understanding are separate integration milestones.</span></p>
+    </section>
 
-    </div>
-
-</div>
-
-<!-- PRIVACY POPUP -->
-<div id="privacyModal" class="policy-modal">
-
-    <div class="policy-modal-content">
-
-        <button class="modal-close"
-            onclick="closeModal('privacyModal')">
-            ×
-        </button>
-
-        <h2>Privacy Policy</h2>
-
-        <div class="policy-content">
-
-            <h3>1. Information We Collect</h3>
-
-            <p>
-                SavageTech TV may store basic preferences required for the
-                platform to function properly.
-            </p>
-
-
-            <h3>2. Local Storage</h3>
-
-            <p>
-                The website may use browser local storage to remember your
-                preferences, theme settings, and channel configuration.
-            </p>
-
-
-            <h3>3. Third-Party Streams</h3>
-
-            <p>
-                Some channels may use third-party streaming providers.
-                SavageTech TV is not responsible for the privacy practices
-                or availability of external streaming services.
-            </p>
-
-
-            <h3>4. Data Protection</h3>
-
-            <p>
-                We aim to protect user information and do not intentionally
-                sell personal information to third parties.
-            </p>
-
-
-            <h3>5. Updates</h3>
-
-            <p>
-                This Privacy Policy may be updated when necessary.
-                Continued use of the service indicates acceptance of changes.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<script>
-(function(){
-  const modal=document.getElementById('guideModal');
-  if(!modal || localStorage.getItem('st_onboarding_done')==='true') return;
-  const steps=[
-    ['📺','Browse channels','Use “All Channels” or the category tabs to find Live TV, Sports, Movies, News, Music and Entertainment. Tap any channel card to open the player.'],
-    ['▶️','Start a stream','Inside the player, tap ▶ to start or pause. Use 🔊 for sound, CC for available subtitles, ⚙ for speed/quality, and ⛶ for fullscreen.'],
-    ['🔎','Search & filter','Use the search box to quickly find a channel. The Filters button lets you narrow the channel directory.'],
-    ['⚙️','Settings & Profile','Open a channel and choose Add to Favorites. Open Settings to manage your profile, preferences, AI history and account.'],
-    ['🤖','SavageTech AI & WhatsApp','Tap the animated arrow at the bottom-right to reveal the SavageTech AI and WhatsApp shortcuts. SavageTech AI answers SavageTech TV questions only.'],
-    ['🛡️','Ready to watch','If your connection becomes unstable, the player will show a network notice and retry. Terms and Privacy are available at the bottom of the page.']
-  ];
-  let i=0;
-  const step=document.getElementById('guideStep'),icon=document.getElementById('guideIcon'),title=document.getElementById('guideTitle'),
-        text=document.getElementById('guideText'),next=document.getElementById('guideNext'),back=document.getElementById('guideBack'),
-        check=document.getElementById('guideDontShow'),ok=document.getElementById('guideOk'),progress=document.getElementById('guideProgress');
-  function paint(){
-    const x=steps[i]; step.textContent=(i+1)+' / '+steps.length; icon.textContent=x[0]; title.textContent=x[1]; text.textContent=x[2];
-    back.style.visibility=i===0?'hidden':'visible'; next.hidden=i===steps.length-1; ok.hidden=i!==steps.length-1;
-    progress.innerHTML=steps.map((_,n)=>'<i class="'+(n===i?'active':'')+'"></i>').join('');
-  }
-  function close(){
-    if(check.checked) localStorage.setItem('st_onboarding_done','true');
-    modal.style.display='none'; modal.setAttribute('aria-hidden','true'); document.body.classList.remove('guide-open');
-  }
-  next.addEventListener('click',()=>{if(i<steps.length-1){i++;paint();}});
-  back.addEventListener('click',()=>{if(i>0){i--;paint();}});
-  ok.addEventListener('click',close);
-  document.getElementById('guideSkip').addEventListener('click',close);
-  modal.addEventListener('click',e=>{if(e.target===modal)close()});
-  modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); document.body.classList.add('guide-open'); paint();
-})();
-</script>
-
-<script src="js/app.js"></script>
-<script src="js/analytics.js"></script>
+    <section class="features page-width">
+      <article><div class="feature-icon">🧠</div><h3 data-t="feature1Title">Smarter troubleshooting</h3><p data-t="feature1Text">Start with useful checks based on your device category and symptoms.</p></article>
+      <article><div class="feature-icon">🌍</div><h3 data-t="feature2Title">A global experience</h3><p data-t="feature2Text">Choose your preferred interface language and get a welcoming experience.</p></article>
+      <article><div class="feature-icon">🛡️</div><h3 data-t="feature3Title">Safety comes first</h3><p data-t="feature3Text">We highlight warning signs and never run commands on your device.</p></article>
+    </section>
+  </main>
+  <footer class="page-width"><a class="footer-brand" href="#home">DigiDoctor</a><span>© <span id="year"></span> DigiDoctor · Digital Health Solutions</span><span data-t="footerLine">Built to help devices live better.</span></footer>
+  <script src="js/main.js"></script>
 </body>
 </html>
