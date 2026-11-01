@@ -21,77 +21,24 @@
 </main>
 <script>
 (()=>{
- const $=id=>document.getElementById(id);
- const fill=$('bar'),percent=$('percent'),status=$('status');
- const loader=document.querySelector('.load-wrap');
- const targetBytes=3*1024*1024;
- let running=false;
- let messageTimer=null;
- const loadingMessages=[
-  'Getting things ready…','Preparing your DigiDoctor experience…','Warming up the digital health tools…',
-  'Connecting the dots…','Making sure everything is in place…','Setting up your workspace…',
-  'Checking the connection…','Getting your experience ready…','Preparing helpful solutions…',
-  'Almost there — putting the pieces together…','Making a few final checks…','Your DigiDoctor journey is getting ready…'
- ];
- function startMessageRotation(){
-  stopMessageRotation();let i=0;status.textContent=loadingMessages[0];
-  messageTimer=setInterval(()=>{i=(i+1)%loadingMessages.length;status.textContent=loadingMessages[i];},1800);
- }
- function stopMessageRotation(){if(messageTimer){clearInterval(messageTimer);messageTimer=null;}}
- function showMessage(message,buttonText='Retry'){
-   status.textContent=message;
-   let retry=$('retry-load');
-   if(!retry){retry=document.createElement('button');retry.id='retry-load';retry.type='button';retry.style.cssText='margin-top:18px;padding:10px 18px;border:0;border-radius:22px;background:#50e3ed;color:#06111b;font-weight:700;cursor:pointer';loader.appendChild(retry);}
-   retry.textContent=buttonText;retry.hidden=false;retry.onclick=()=>{if(running)return;start();};
- }
- function hideRetry(){const b=$('retry-load');if(b)b.hidden=true;}
- async function checkInternet(){
-   if(location.protocol==='file:') throw new Error('server');
-   if(!navigator.onLine) throw new Error('offline');
-   const endpoints=[
-     'https://www.gstatic.com/generate_204?check='+Date.now(),
-     'https://connectivitycheck.gstatic.com/generate_204?check='+Date.now()
-   ];
-   let lastError;
-   for(const url of endpoints){
-     const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),7000);
-     try { await fetch(url,{mode:'no-cors',cache:'no-store',signal:controller.signal}); return; }
-     catch(e){lastError=e;}
-     finally { clearTimeout(timer); }
-   }
-   throw lastError||new Error('offline');
- }
- async function downloadThreeMB(){
-   const response=await fetch(new URL('assets/loading-payload.bin?nocache='+Date.now(),location.href),{cache:'no-store'});
-   if(!response.ok || !response.body) throw new Error('payload');
-   const reader=response.body.getReader();let received=0;
-   while(true){
-     if(!navigator.onLine) throw new Error('offline');
-     const {done,value}=await reader.read();if(done)break;
-     received+=value.byteLength;
-     const pct=Math.min(99,Math.floor(received/targetBytes*100));
-     fill.style.width=pct+'%';percent.textContent=pct+'%';
-     // Keep the interface friendly: show rotating preparation messages, never raw download size.
-   }
-   if(received<targetBytes) throw new Error('short');
- }
- async function start(){
-   if(running)return;running=true;hideRetry();stopMessageRotation();fill.style.width='0%';percent.textContent='0%';status.textContent='Checking your connection…';startMessageRotation();
+ const $=id=>document.getElementById(id), fill=$('bar'), pct=$('percent'), status=$('status');
+ const loader=document.querySelector('.load-wrap'); let running=false;
+ function showRetry(message){status.textContent=message;let b=$('retry-load');if(!b){b=document.createElement('button');b.id='retry-load';b.type='button';b.style.cssText='margin-top:18px;padding:10px 18px;border:0;border-radius:22px;background:#50e3ed;color:#06111b;font-weight:700;cursor:pointer';loader.appendChild(b);}b.textContent='Retry';b.hidden=false;b.onclick=start;}
+ async function start(){if(running)return;running=true;const b=$('retry-load');if(b)b.hidden=true;fill.style.width='0%';pct.textContent='0%';
+   const messages=['Starting local diagnostic service…','Checking the local AI engine…','Loading device knowledge…','Preparing multilingual troubleshooting…'];let i=0;status.textContent=messages[0];const timer=setInterval(()=>{i=(i+1)%messages.length;status.textContent=messages[i];},1800);
    try{
-     await checkInternet();
-     if(!navigator.onLine)throw new Error('offline');
-     await downloadThreeMB();
-     stopMessageRotation();fill.style.width='100%';percent.textContent='100%';status.textContent='Everything is ready!';
-     setTimeout(()=>location.replace('home.html'),250);
-   }catch(e){
-     stopMessageRotation();fill.style.width='0%';percent.textContent='0%';
-     if(e.message==='server') showMessage('Open this website through a web server (Live Server or hosting), not as a local file.');
-     else if(e.message==='payload') showMessage('The 3 MB loading file could not be downloaded. Upload assets/loading-payload.bin to your hosting, then retry.');
-     else showMessage('Could not verify an active internet connection. Check Wi-Fi/mobile data, then tap Retry.');
-   }finally{stopMessageRotation();running=false;}
+     // Local-first: no internet check or remote download is required once Ollama and its model are installed.
+     const began=Date.now();let ready=false, last=null;
+     while(Date.now()-began<300000){
+       try{const r=await fetch('/api/health',{cache:'no-store',signal:AbortSignal.timeout(6000)});last=await r.json();if(r.ok&&last.ok&&last.modelInstalled){ready=true;break;}if(r.ok&&last.ok&&!last.modelInstalled){throw new Error('The configured Ollama model is not installed. Run the model pull command in the setup guide.');}}
+       catch(e){if(e.message&&e.message.includes('model is not installed'))throw e;}
+       const progress=Math.min(92,Math.floor((Date.now()-began)/300000*92));fill.style.width=progress+'%';pct.textContent=progress+'%';await new Promise(r=>setTimeout(r,2500));
+     }
+     if(!ready)throw new Error('DigiDoctor Local AI is not ready. Start Node.js and Ollama, then retry.');
+     fill.style.width='100%';pct.textContent='100%';status.textContent='Local AI is ready — opening DigiDoctor…';clearInterval(timer);setTimeout(()=>location.replace('home.html'),350);
+   }catch(e){clearInterval(timer);fill.style.width='0%';pct.textContent='0%';showRetry(e.message||'Could not start DigiDoctor Local AI.');}
+   finally{clearInterval(timer);running=false;}
  }
- window.addEventListener('offline',()=>{if(!running){fill.style.width='0%';percent.textContent='0%';showMessage('Internet disconnected. Connect to Wi-Fi or mobile data, then tap Retry.');}});
- window.addEventListener('online',()=>{if(!running)start();});
  start();
 })();
 </script></body></html>

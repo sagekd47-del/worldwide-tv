@@ -1,43 +1,36 @@
-DIGIDOCTOR — UPDATED WEB PROJECT
-================================
+DIGIDOCTOR LOCAL AI — VERSION 3
+==============================
 
-PROJECT STRUCTURE
-- index.html: dedicated loading page with progress bar; redirects to home.html within 7 seconds.
-- home.html: main DigiDoctor website and diagnosis interface.
-- css/style.css: responsive styles.
-- js/main.js: language selector, image preview, and troubleshooting logic.
-- assets/: brand artwork.
+IMPORTANT: This is a LOCAL AI application, not a static website demo.
+Do not open index.html directly and do not use VS Code Live Server by itself.
+Run the Node.js backend; it serves the pages and calls Ollama on this computer.
 
-HOW TO RUN
-1. Extract the ZIP.
-2. Open the DigiDoctor_Web folder in VS Code.
-3. Run index.html using VS Code Live Server (recommended), or open it in a browser.
+RUN ON WINDOWS
+1. Install Node.js 18+.
+2. Install Ollama for Windows.
+3. In PowerShell run: ollama pull qwen3:4b
+4. Extract the ZIP and open the DigiDoctor_Web folder in VS Code.
+5. Open Terminal in that folder and run: npm install
+6. Run: npm start
+7. Open: http://localhost:3000
+8. Check: http://localhost:3000/api/health
+   The response should show ok:true and modelInstalled:true.
 
-CHANGES IN THIS VERSION
-- Loading screen is now the only page named index.html and moves to home.html within a maximum of about 7 seconds.
-- The main website is in its own home.html file and uses separate CSS and JavaScript files.
-- Language options include English, Kiswahili, French, Spanish, German, Portuguese, Arabic, Chinese, Japanese, Korean, Hindi and Russian. Interface labels are translated for those languages; some device-specific diagnosis guidance is still authored in English.
-- Image upload is visible without needing to click the Image Check tab. It supports selecting a device photo or screenshot and previewing it before submitting.
+WHAT CHANGED IN V3
+- Fixed the main reason for repeated generic answers: the frontend previously swallowed backend connection errors and silently displayed the same generic fallback. It now shows a clear Local AI connection/model error instead of pretending that answer came from AI.
+- The loading page now waits for the local Node + Ollama service and configured model to be ready. It no longer requires a 3 MB download or a stable internet connection at runtime.
+- Diagnosis keeps the typing indicator for at least 5 seconds, then waits for local AI readiness and the model response (up to 10 minutes for slow CPU inference).
+- The local model may use its general technical knowledge for safe general troubleshooting even when a knowledge document does not match. It must not invent exact model-specific codes, menu paths, firmware or part numbers.
+- Improved retrieval ranking, Swahili/English symptom synonyms, error/model identifier matching and up to 8 local reference documents per question.
+- Expanded curated local knowledge from 8 to 13 documents: safety, Windows, Wi-Fi, printers, Android, iPhone/iPad, Smart TVs, laptops, storage, phones, gaming and more.
+- Results show follow-up questions, confidence and the local knowledge filenames used.
+- Like/Dislike feedback continues to be saved locally in the browser.
 
-IMPORTANT LIMITATIONS
-- This is a frontend-only starter. Uploaded images are previewed in the browser; they are not uploaded to a server, saved to an account, or interpreted by AI.
-- Diagnosis uses a small local rule-based troubleshooting library. It is not a confirmed repair diagnosis and does not run commands on your device.
-- Use Live Server for best results.
+OFFLINE BEHAVIOUR
+Once Node.js, Ollama, the model and knowledge files are installed locally, the AI diagnosis works without internet. Internet is only needed to download/install the model, install Node packages, or manually obtain/update reference documents. A local model does not become more accurate merely by waiting for the user's internet connection.
 
-LOADING PAGE INTERNET REQUIREMENT
-- index.html first checks for an active internet connection.
-- The loading bar tracks download progress for a 3 MiB payload (3,145,728 bytes), then opens home.html at 100%.
-- If the internet check or payload download fails, it stays on the loading page and offers Retry.
-- The 3 MiB payload is assets/loading-payload.bin. Keep it in place when deploying the site.
-- The site must be served through a web server (for example VS Code Live Server); opening index.html directly as file:// can block fetch requests.
+IMPORTANT DEPLOYMENT LIMITATION
+If you upload only the frontend to Render, it cannot use Ollama installed on your personal laptop. The Node backend and Ollama must run on the same machine/server, or you must configure a secure private connection to the machine hosting Ollama. Do not expose Ollama's port publicly without authentication and network protections.
 
-LOCAL AI BACKEND (NEW)
-- server/server.js: local Node.js backend; it calls Ollama on this same machine and retrieves relevant documents from knowledge/ before generating an answer.
-- knowledge/: starter troubleshooting notes. Add authorized manuals and verified notes here.
-- LOCAL_AI_SETUP_SW.md: Windows setup instructions in Kiswahili.
-- package.json: Node dependency and start script.
-- Run `npm install`, then `npm start`, then open http://localhost:3000.
-- Install Ollama and pull a local model first (example: `ollama pull qwen2.5:7b`).
-- No online AI API is used. The model download and any source research require internet once; after model and knowledge are local, inference and retrieval can run offline.
-- The existing frontend keeps its 5-second typing indicator and feedback buttons. It now has a matching /api/diagnose backend.
-- This is a foundation with a starter knowledge library, not a complete database of every model and fault. Read LOCAL_AI_SETUP_SW.md for limitations and safe expansion.
+KNOWLEDGE BASE LIMITATION
+The included 13 documents are a curated starter pack, not a complete repair encyclopedia. There is no single complete database of every device and fault. Add legally reusable manufacturer manuals, official troubleshooting pages and verified service notes to the knowledge/ folder. Include exact model/version, symptom, diagnostic tests, confirmed fix, source URL, and date checked. Do not copy copyrighted manuals wholesale without permission.

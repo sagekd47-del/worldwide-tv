@@ -25,3 +25,7 @@
 .feedback-button{border:1px solid #31566a;background:#102a3a;color:#cceaf4;border-radius:9px;padding:8px 12px;cursor:pointer;font-size:12px}
 .feedback-button:hover,.feedback-button.selected{border-color:#51d5e9;background:#16475b}
 .feedback-button:disabled{opacity:.7;cursor:default}.feedback-thanks{flex-basis:100%;color:#70e0b9;font-size:12px}
+
+/* Live word-by-word AI response cursor */
+.result-content .is-typing::after{content:"▋";display:inline-block;margin-left:3px;color:#81dceb;animation:ddTypingBlink .8s steps(2,start) infinite}
+@keyframes ddTypingBlink{to{visibility:hidden}}

@@ -90,38 +90,79 @@ const responseWords = {
  ru:{thinking:"DigiDoctor читает вопрос и ищет рекомендации по устранению неполадок…",causes:"Возможные причины",checks:"Рекомендуемые безопасные проверки",safety:"Предупреждение о безопасности",like:"Полезно",dislike:"Не полезно",thanks:"Спасибо! Ваш отзыв помогает улучшать DigiDoctor.",need:"Опишите проблему подробнее.",unknown:"Пока не удалось определить точную неисправность. Пришлите полный текст ошибки и опишите, что произошло перед ней.",fallback:"Используется автономное руководство. Для более широких ответов нужны многоязычная ИИ-модель и проверенная база знаний."}
 };
 function safeText(tag, text){const el=document.createElement(tag);el.textContent=text;return el;}
+// Reveal the Local AI response like live typing: one word at a time.
+async function typeInto(el, value, speed=42){
+ const text=String(value??"");
+ el.classList.add("is-typing");
+ const parts=text.match(/\S+\s*/g)||[];
+ for(const part of parts){
+   el.appendChild(document.createTextNode(part));
+   const panel=document.getElementById("resultPanel");
+   if(panel) panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+   await new Promise(resolve=>setTimeout(resolve,Math.min(speed+part.length*1.5,95)));
+ }
+ el.classList.remove("is-typing");
+}
 $("diagnosisForm").addEventListener("submit", async e=>{
  e.preventDefault();
- const problem=$("problem").value.trim();if(problem.length<5){$("problem").focus();return;}
+ const problem=$("problem").value.trim(); if(problem.length<5){$("problem").focus();return;}
  const lang=currentLanguage, w=responseWords[lang]||responseWords.en;
  const device=$("deviceType").value, brand=$("brand").value.trim(), model=$("model").value.trim();
  const panel=$("resultPanel"), result=$("resultContent"), button=$("submitDiagnosis");
- panel.classList.remove("is-hidden");result.innerHTML="";
- const thinking=document.createElement("div");thinking.className="typing-indicator";thinking.innerHTML='<span></span><span></span><span></span><p></p>';thinking.querySelector("p").textContent=w.thinking;result.appendChild(thinking);
- button.disabled=true;button.classList.add("is-thinking");
- // Deliberate 5-second thinking indicator; replace with a real model response when an API is connected.
- await new Promise(resolve=>setTimeout(resolve,5000));
- result.innerHTML="";
+ panel.classList.remove("is-hidden"); result.innerHTML="";
+ const thinking=document.createElement("div"); thinking.className="typing-indicator";
+ thinking.innerHTML='<span></span><span></span><span></span><p></p>';
+ const status=thinking.querySelector("p"); status.textContent=w.thinking; result.appendChild(thinking);
+ button.disabled=true; button.classList.add("is-thinking");
+ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
  const payload={deviceType:device,brand,model,problem,language:lang,mode};
- let answer=null;
- // Optional backend contract: POST /api/diagnose and return {title,causes,steps:[...],warning}.
- try{const r=await fetch("/api/diagnose",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(r.ok){const data=await r.json();if(data&&data.steps)answer=data;}}catch(_){}
- const all=(problem+" "+device+" "+brand+" "+model).toLowerCase();
- const match=guides.find(g=>g.keys.some(k=>all.includes(k)));
- const title=answer?.title||(match?match.title:(lang==="sw"?"Maelezo zaidi yanahitajika":"More details are needed"));
- const causes=answer?.causes||(match?match.causes:w.unknown);
- const steps=answer?.steps||(match?match.steps:[w.need,"Share the exact brand and model, full error message, and what you have already tried."]);
- const warning=answer?.warning||(match?match.warning:"If you notice smoke, sparks, liquid damage, extreme heat, a swollen battery, or a burning smell, stop using the device and seek qualified help.");
+ let answer=null, failure="";
+ try{
+   // Keep the indicator visible for at least five seconds, then wait for the local model.
+   const minDelay=wait(5000);
+   let ready=false, lastHealth=null, started=Date.now();
+   while(Date.now()-started<300000){
+     try{
+       const h=await fetch("/api/health",{cache:"no-store",signal:AbortSignal.timeout(8000)});
+       lastHealth=await h.json();
+       if(h.ok && lastHealth.ok && lastHealth.modelInstalled){ready=true;break;}
+       if(h.ok && lastHealth.ok && !lastHealth.modelInstalled){failure=(lang==="sw"?`Model ${lastHealth.model} haijapakuliwa kwenye Ollama.`:`The local model ${lastHealth.model} is not installed in Ollama.`);break;}
+     }catch(err){ lastHealth=null; }
+     status.textContent=(lang==="sw"?"Inasubiri DigiDoctor Local AI iwashe na kuwa tayari…":"Waiting for DigiDoctor Local AI to become ready…");
+     await wait(2500);
+   }
+   await minDelay;
+   if(!ready && !failure) throw new Error(lang==="sw"?"Local AI haikupatikana baada ya kusubiri dakika 5. Hakikisha Node.js server na Ollama vinaendelea kufanya kazi.":"Local AI did not become ready after 5 minutes. Check that the Node.js server and Ollama are running.");
+   if(failure) throw new Error(failure);
+   status.textContent=(lang==="sw"?"AI inachambua tatizo na kutafuta maarifa yanayohusiana…":"AI is analysing the issue and retrieving relevant knowledge…");
+   const r=await fetch("/api/diagnose",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),signal:AbortSignal.timeout(620000)});
+   const data=await r.json();
+   if(!r.ok) throw new Error(data.detail||data.error||"Local AI request failed.");
+   if(!data || !Array.isArray(data.steps)) throw new Error("Local AI returned an incomplete response.");
+   answer=data;
+ }catch(err){failure=err.message||"Unable to connect to local AI.";}
+ result.innerHTML="";
+ const title=answer?.title||(lang==="sw"?"DigiDoctor Local AI haipatikani":"DigiDoctor Local AI unavailable");
  result.appendChild(safeText("h4",title));
- result.appendChild(safeText("p",w.causes+": "+causes));
- result.appendChild(safeText("h4",w.checks));
- const ul=document.createElement("ul");steps.forEach(s=>ul.appendChild(safeText("li",s)));result.appendChild(ul);
- result.appendChild(safeText("h4",w.safety));result.appendChild(safeText("p",warning));
- if(!answer)result.appendChild(safeText("p",w.fallback));
- const feedback=document.createElement("div");feedback.className="feedback-row";
- feedback.appendChild(safeText("span",lang==="sw"?"Je, jibu hili limekusaidia?":lang==="fr"?"Cette réponse vous a-t-elle aidé ?":lang==="es"?"¿Te ayudó esta respuesta?":"Was this answer helpful?"));
- ["like","dislike"].forEach(type=>{const b=document.createElement("button");b.type="button";b.className="feedback-button";b.innerHTML=type==="like"?"👍 ":"👎 ";b.appendChild(document.createTextNode(w[type]));b.addEventListener("click",()=>{feedback.querySelectorAll("button").forEach(x=>x.disabled=true);b.classList.add("selected");const msg=safeText("small",w.thanks);msg.className="feedback-thanks";feedback.appendChild(msg);try{const logs=JSON.parse(localStorage.getItem("digidoctor-feedback")||"[]");logs.push({rating:type,language:lang,device,problem,at:new Date().toISOString()});localStorage.setItem("digidoctor-feedback",JSON.stringify(logs.slice(-100)));}catch(_){}});feedback.appendChild(b);});
- result.appendChild(feedback);
- $("resultPanel").scrollIntoView({behavior:"smooth",block:"nearest"});
- button.disabled=false;button.classList.remove("is-thinking");
+ if(!answer){
+   const errLine=safeText("p",""); result.appendChild(errLine); await typeInto(errLine,failure);
+   const helpLine=safeText("p",""); result.appendChild(helpLine);
+   await typeInto(helpLine,lang==="sw"?"Hakikisha umeendesha `npm start`, Ollama inafanya kazi, na model imepakuliwa. Fungua /api/health kuthibitisha hali. Ukifungua ukurasa kwa Live Server pekee, backend haitaitwa kwenye port sahihi.":"Make sure `npm start` is running, Ollama is running, and the model is downloaded. Open /api/health to check status. Opening the page with Live Server alone will not start the local AI backend.");
+ }else{
+   const causeHeading=safeText("h4",""); result.appendChild(causeHeading); await typeInto(causeHeading,w.causes,30);
+   const causeText=safeText("p",""); result.appendChild(causeText); await typeInto(causeText,answer.causes||"");
+   const checksHeading=safeText("h4",""); result.appendChild(checksHeading); await typeInto(checksHeading,w.checks,30);
+   const ul=document.createElement("ol"); result.appendChild(ul);
+   for(const step of answer.steps){const li=safeText("li","");ul.appendChild(li);await typeInto(li,step);}
+   if(Array.isArray(answer.followUp)&&answer.followUp.length){const followHeading=safeText("h4","");result.appendChild(followHeading);await typeInto(followHeading,lang==="sw"?"Maswali ya kufuatilia":"Follow-up questions",30);const ql=document.createElement("ul");result.appendChild(ql);for(const q of answer.followUp){const li=safeText("li","");ql.appendChild(li);await typeInto(li,q);}}
+   const safetyHeading=safeText("h4",""); result.appendChild(safetyHeading); await typeInto(safetyHeading,w.safety,30);
+   const warning=safeText("p","");result.appendChild(warning);await typeInto(warning,answer.warning||"");
+   if(answer.confidence){const confidence=safeText("p","");result.appendChild(confidence);await typeInto(confidence,(lang==="sw"?"Kiwango cha uhakika: ":"Confidence: ")+answer.confidence);}
+   if(Array.isArray(answer.sources)&&answer.sources.length){const sources=safeText("small","");result.appendChild(sources);await typeInto(sources,(lang==="sw"?"Vyanzo vya ndani: ":"Local knowledge sources: ")+answer.sources.join(", "),25);}
+ }
+ const feedback=document.createElement("div"); feedback.className="feedback-row";
+ feedback.appendChild(safeText("span",lang==="sw"?"Je, jibu hili limekusaidia?":"Was this answer helpful?"));
+ ["like","dislike"].forEach(type=>{const b=document.createElement("button");b.type="button";b.className="feedback-button";b.textContent=(type==="like"?"👍 ":"👎 ")+w[type];b.addEventListener("click",()=>{feedback.querySelectorAll("button").forEach(x=>x.disabled=true);b.classList.add("selected");const msg=safeText("small",w.thanks);msg.className="feedback-thanks";feedback.appendChild(msg);try{const logs=JSON.parse(localStorage.getItem("digidoctor-feedback")||"[]");logs.push({rating:type,language:lang,device,brand,model,problem,answerTitle:title,at:new Date().toISOString()});localStorage.setItem("digidoctor-feedback",JSON.stringify(logs.slice(-200)));}catch(_){}});feedback.appendChild(b);});
+ result.appendChild(feedback); panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+ button.disabled=false; button.classList.remove("is-thinking");
 });
