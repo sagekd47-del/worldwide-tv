@@ -21,24 +21,9 @@
 </main>
 <script>
 (()=>{
- const $=id=>document.getElementById(id), fill=$('bar'), pct=$('percent'), status=$('status');
- const loader=document.querySelector('.load-wrap'); let running=false;
- function showRetry(message){status.textContent=message;let b=$('retry-load');if(!b){b=document.createElement('button');b.id='retry-load';b.type='button';b.style.cssText='margin-top:18px;padding:10px 18px;border:0;border-radius:22px;background:#50e3ed;color:#06111b;font-weight:700;cursor:pointer';loader.appendChild(b);}b.textContent='Retry';b.hidden=false;b.onclick=start;}
- async function start(){if(running)return;running=true;const b=$('retry-load');if(b)b.hidden=true;fill.style.width='0%';pct.textContent='0%';
-   const messages=['Starting local diagnostic service…','Checking the local AI engine…','Loading device knowledge…','Preparing multilingual troubleshooting…'];let i=0;status.textContent=messages[0];const timer=setInterval(()=>{i=(i+1)%messages.length;status.textContent=messages[i];},1800);
-   try{
-     // Local-first: no internet check or remote download is required once Ollama and its model are installed.
-     const began=Date.now();let ready=false, last=null;
-     while(Date.now()-began<300000){
-       try{const r=await fetch('/api/health',{cache:'no-store',signal:AbortSignal.timeout(6000)});last=await r.json();if(r.ok&&last.ok&&last.modelInstalled){ready=true;break;}if(r.ok&&last.ok&&!last.modelInstalled){throw new Error('The configured Ollama model is not installed. Run the model pull command in the setup guide.');}}
-       catch(e){if(e.message&&e.message.includes('model is not installed'))throw e;}
-       const progress=Math.min(92,Math.floor((Date.now()-began)/300000*92));fill.style.width=progress+'%';pct.textContent=progress+'%';await new Promise(r=>setTimeout(r,2500));
-     }
-     if(!ready)throw new Error('DigiDoctor Local AI is not ready. Start Node.js and Ollama, then retry.');
-     fill.style.width='100%';pct.textContent='100%';status.textContent='Local AI is ready — opening DigiDoctor…';clearInterval(timer);setTimeout(()=>location.replace('home.html'),350);
-   }catch(e){clearInterval(timer);fill.style.width='0%';pct.textContent='0%';showRetry(e.message||'Could not start DigiDoctor Local AI.');}
-   finally{clearInterval(timer);running=false;}
- }
- start();
+ const $=id=>document.getElementById(id),fill=$('bar'),pct=$('percent'),status=$('status');
+ const messages=['Starting DigiDoctor…','Loading device knowledge…','Preparing diagnostic rules…','Preparing multilingual support…'];
+ let n=0;const timer=setInterval(()=>{n=(n+1)%messages.length;status.textContent=messages[n];},1400);
+ let progress=0;const tick=setInterval(()=>{progress=Math.min(100,progress+8+Math.random()*9);fill.style.width=progress+'%';pct.textContent=Math.floor(progress)+'%';if(progress>=100){clearInterval(tick);clearInterval(timer);status.textContent='DigiDoctor is ready — opening…';setTimeout(()=>location.replace('home.html'),350);}},180);
 })();
 </script></body></html>

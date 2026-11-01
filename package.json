@@ -1,8 +1,8 @@
 {
-  "name": "digidoctor-local-ai",
+  "name": "digidoctor-offline-diagnostics",
   "version": "1.0.0",
   "private": true,
-  "description": "DigiDoctor local-first troubleshooting AI powered by Ollama and a local knowledge base",
+  "description": "DigiDoctor offline rule-based diagnostics and searchable local device knowledge base",
   "main": "server/server.js",
   "scripts": {"start": "node server/server.js", "check": "node --check server/server.js"},
   "engines": {"node": ">=18"},
