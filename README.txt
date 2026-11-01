@@ -38,3 +38,23 @@ The knowledge folder contains the offline troubleshooting documents. Add new .md
 
 IMPORTANT
 Do not upload sensitive credentials, passwords, one-time codes, or personal account information. For smoke, sparks, burning smell, swollen battery, liquid ingress, or dangerous electrical faults, stop using the device and seek qualified service.
+
+HOW ANSWERS ARE BUILT (NO AI MODEL / NO OLLAMA / NO AI API)
+1. The user submits a question with device type, brand, model and symptoms.
+2. The server searches the files inside the knowledge/ folder.
+3. It ranks the closest documents using keyword and synonym matching.
+4. It extracts the matching file's Symptoms, Safe checks / Steps, and Cautions sections.
+5. The website presents that extracted information as the answer.
+6. The existing front-end types the answer one word at a time, after keeping the thinking indicator visible for at least five seconds.
+
+To add knowledge, create a .md or .txt file in the knowledge/ folder. Use headings such as:
+# Device / problem title
+## Symptoms
+Describe the documented symptoms.
+## Safe checks
+- First safe check.
+- Second safe check.
+## Cautions
+- Safety warning.
+
+Important: this is a local knowledge retrieval and response-assembly system, not a generative AI. It can only answer from information that exists in its knowledge files. If no close match is found, it asks for more details rather than inventing a repair.
