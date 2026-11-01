@@ -59,7 +59,7 @@ function retrieve(query){
   return {...d,title,score};
  }).filter(d=>d.score>=1.5).sort((a,b)=>b.score-a.score).slice(0,3);
 }
-app.get('/api/health',(_req,res)=>res.json({ok:true,engine:'offline-rule-based-knowledge-search',inferenceEngine:false,knowledgeFiles:loadKnowledge().length,diagnosticRules:groups.length}));
+app.get('/api/health',(_req,res)=>res.json({ok:true,engine:'offline-rule-based-knowledge-search',inferenceEngine:false,knowledgeFiles:loadKnowledge().length,diagnosticRules:'document-based retrieval',status:'ready'}));
 app.post('/api/diagnose',(req,res)=>{
  const {deviceType='unknown',brand='',model='',problem='',language='en'}=req.body||{};
  if(typeof problem!=='string'||problem.trim().length<5) return res.status(400).json({error:'Please describe the issue in more detail.'});
@@ -99,5 +99,12 @@ app.post('/api/diagnose',(req,res)=>{
   sources:docs.map(d=>d.file),knowledgeMatched:docs.map(d=>({file:d.file,score:Number(d.score.toFixed(2))})),
   retrievedDocuments:docs.map(d=>({title:d.title,file:d.file,excerpt:d.text.slice(0,1800)})),
   engine:'Local knowledge-file retrieval and evidence-based response assembly'});
+});
+// API routes always return JSON, including unknown routes and server errors.
+app.use('/api', (req,res) => res.status(404).json({error:`API endpoint not found: ${req.method} ${req.originalUrl}`}));
+app.use((err,_req,res,_next) => {
+ console.error('DigiDoctor server error:', err);
+ if(res.headersSent) return;
+ res.status(500).json({error:'The diagnostic server encountered an internal error. Check the terminal for details.'});
 });
 app.listen(PORT,'0.0.0.0',()=>console.log(`DigiDoctor offline diagnostic system running at http://localhost:${PORT}`));

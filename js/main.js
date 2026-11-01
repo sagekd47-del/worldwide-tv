@@ -123,7 +123,16 @@ $("diagnosisForm").addEventListener("submit", async e=>{
    status.textContent=(lang==="sw"?"Inatafuta kwenye maktaba ya maarifa na kulinganisha dalili…":"Searching the knowledge library and matching symptoms…");
    const request=fetch("/api/diagnose",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),signal:AbortSignal.timeout(30000)});
    const [r]=await Promise.all([request,minDelay]);
-   const data=await r.json();
+   const raw=await r.text();
+   let data;
+   try { data=JSON.parse(raw); }
+   catch (_) {
+     const preview=raw.replace(/\s+/g," ").slice(0,180);
+     if(r.status===404 || /not found|page could not|cannot post/i.test(preview)) {
+       throw new Error("The DigiDoctor API route was not found. The website is likely running as a static site instead of the Node.js service. Start it with `npm start` or deploy it as a Node Web Service.");
+     }
+     throw new Error("The server returned a webpage instead of JSON. Check that the Node.js DigiDoctor server is running. Response: "+preview);
+   }
    if(!r.ok) throw new Error(data.error||"The diagnostic request could not be completed.");
    if(!data || !Array.isArray(data.steps)) throw new Error("The diagnostic system returned an incomplete response.");
    answer=data;

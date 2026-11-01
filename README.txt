@@ -58,3 +58,16 @@ Describe the documented symptoms.
 - Safety warning.
 
 Important: this is a local knowledge retrieval and response-assembly system, not a generative AI. It can only answer from information that exists in its knowledge files. If no close match is found, it asks for more details rather than inventing a repair.
+
+FIX IN v7
+- Fixed /api/health referencing an undefined variable that caused a server error.
+- Unknown /api routes and server errors now return JSON rather than an HTML error page.
+- The browser now checks the response before parsing JSON and displays a clear message if the site is deployed as static hosting without the Node API.
+- Added render.yaml for deployment as a Node Web Service. Do not deploy this project as a Static Site: the /api/diagnose endpoint needs the Node server.
+
+RENDER DEPLOYMENT
+- Set the Render service type to Web Service (Node), not Static Site.
+- Set the service Root Directory to DigiDoctor_Web if the repository contains the parent folder.
+- Build command: npm install
+- Start command: npm start
+- Health check path: /api/health
