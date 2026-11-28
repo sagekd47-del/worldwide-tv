@@ -1,522 +1,373 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07111f">
-  <meta name="description" content="SavageTech TV is getting ready for a BIG UPDATE this Saturday, November 28, 2026. More features, more channels, and an upgraded streaming experience are coming.">
-  <title>SavageTech TV — Big Update Coming</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SavageTech TV | Launching Tonight</title>
 
-  <style>
-    :root {
-      --bg: #050b14;
-      --bg2: #091525;
-      --card: rgba(10, 24, 42, 0.82);
-      --text: #f5f9ff;
-      --muted: #9eb0c7;
-      --blue: #22a7ff;
-      --cyan: #27e1ff;
-      --gold: #ffc857;
-      --border: rgba(255,255,255,.10);
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+body {
+  min-height: 100vh;
+  background: #03040a;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-    html, body {
-      width: 100%;
-      min-height: 100%;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 20% 15%, rgba(39,225,255,.13), transparent 28%),
-        radial-gradient(circle at 80% 75%, rgba(34,167,255,.12), transparent 30%),
-        linear-gradient(135deg, var(--bg), var(--bg2));
-      overflow-x: hidden;
-    }
+/* Animated background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  background:
+    radial-gradient(circle at 30% 40%,
+      rgba(0, 180, 255, .20), transparent 35%),
+    radial-gradient(circle at 70% 60%,
+      rgba(130, 0, 255, .22), transparent 35%);
+  animation: atmosphere 10s ease-in-out infinite alternate;
+  z-index: -2;
+}
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+@keyframes atmosphere {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1.2) rotate(8deg); }
+}
 
-    /* Animated construction grid */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .20;
-      background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 45px 45px;
-      mask-image: linear-gradient(to bottom, black, transparent);
-    }
+/* Floating particles */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(#ffffff55 1px, transparent 1px);
+  background-size: 65px 65px;
+  animation: stars 25s linear infinite;
+  opacity: .35;
+}
 
-    /* Floating particles */
-    .particles {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
 
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 14px var(--cyan);
-      animation: float 8s infinite ease-in-out;
-      opacity: .45;
-    }
+.container {
+  width: min(92%, 650px);
+  text-align: center;
+  padding: 40px 25px;
+  border: 1px solid #ffffff18;
+  border-radius: 28px;
+  background: rgba(10, 13, 25, .72);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 80px #0066ff15;
+  animation: appear 1.2s ease;
+}
 
-    .p1 { left: 8%; top: 20%; animation-delay: 0s; }
-    .p2 { left: 17%; top: 75%; animation-delay: 2s; }
-    .p3 { left: 31%; top: 10%; animation-delay: 4s; }
-    .p4 { left: 69%; top: 18%; animation-delay: 1s; }
-    .p5 { left: 83%; top: 68%; animation-delay: 3s; }
-    .p6 { left: 91%; top: 32%; animation-delay: 5s; }
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    @keyframes float {
-      0%,100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-30px) scale(1.7); }
-    }
+.logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 25px #00aaff88);
+  animation: glow 3s infinite alternate;
+}
 
-    .wrapper {
-      width: min(1100px, 92%);
-      padding: 35px 0;
-      position: relative;
-      z-index: 2;
-    }
+@keyframes glow {
+  from { filter: drop-shadow(0 0 10px #0077ff55); }
+  to { filter: drop-shadow(0 0 30px #00ccff); }
+}
 
-    .card {
-      position: relative;
-      overflow: hidden;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 55px 45px;
-      text-align: center;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow:
-        0 30px 80px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.06);
-    }
+.status {
+  display: inline-block;
+  padding: 9px 18px;
+  border: 1px solid #00d9ff55;
+  border-radius: 50px;
+  color: #00d9ff;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
 
-    .card::after {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      right: -220px;
-      top: -220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(39,225,255,.16), transparent 68%);
-      pointer-events: none;
-    }
+.status span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #00ff9d;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 12px #00ff9d;
+}
 
-    /* Logo / building icon */
-    .logo {
-      width: 94px;
-      height: 94px;
-      margin: 0 auto 24px;
-      border-radius: 26px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      background: linear-gradient(145deg, #0c2742, #071321);
-      border: 1px solid rgba(39,225,255,.30);
-      box-shadow:
-        0 0 35px rgba(39,225,255,.16),
-        inset 0 0 25px rgba(39,225,255,.07);
-    }
+h1 {
+  font-size: clamp(30px, 7vw, 54px);
+  line-height: 1.15;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
 
-    .building {
-      width: 43px;
-      height: 51px;
-      border: 3px solid var(--cyan);
-      border-radius: 5px 5px 2px 2px;
-      position: relative;
-      box-shadow: 0 0 20px rgba(39,225,255,.25);
-    }
+h1 strong {
+  background: linear-gradient(90deg, #00d9ff, #7b61ff, #00d9ff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient 4s linear infinite;
+}
 
-    .building::before,
-    .building::after {
-      content: "";
-      position: absolute;
-      width: 7px;
-      height: 7px;
-      background: var(--gold);
-      border-radius: 1px;
-      box-shadow:
-        14px 0 var(--gold),
-        0 14px var(--gold),
-        14px 14px var(--gold),
-        0 28px var(--gold),
-        14px 28px var(--gold);
-      left: 8px;
-      top: 8px;
-    }
+@keyframes gradient {
+  to { background-position: 200%; }
+}
 
-    .building::after {
-      width: 5px;
-      height: 16px;
-      left: 17px;
-      top: 32px;
-      background: var(--cyan);
-      box-shadow: none;
-    }
+.description {
+  color: #a8b0c5;
+  line-height: 1.7;
+  font-size: 15px;
+  max-width: 450px;
+  margin: 0 auto 30px;
+}
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 9px 15px;
-      border-radius: 999px;
-      color: #d9f7ff;
-      background: rgba(39,225,255,.08);
-      border: 1px solid rgba(39,225,255,.20);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 22px;
-    }
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px 0;
+}
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 12px var(--gold);
-      animation: blink 1.5s infinite;
-    }
+.time-box {
+  width: 85px;
+  padding: 17px 5px;
+  border: 1px solid #ffffff16;
+  background: #ffffff07;
+  border-radius: 15px;
+}
 
-    @keyframes blink {
-      0%,100% { opacity: 1; }
-      50% { opacity: .35; }
-    }
+.time-box b {
+  display: block;
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
 
-    h1 {
-      font-size: clamp(38px, 7vw, 76px);
-      line-height: .98;
-      letter-spacing: -3px;
-      margin-bottom: 20px;
-      background: linear-gradient(90deg, #fff, #9feaff 50%, #fff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 10px 45px rgba(39,225,255,.10);
-    }
+.time-box small {
+  color: #79849c;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
 
-    .highlight {
-      color: var(--cyan);
-      -webkit-text-fill-color: var(--cyan);
-    }
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  color: #8792aa;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
 
-    .message {
-      max-width: 680px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: clamp(16px, 2vw, 19px);
-      line-height: 1.75;
-    }
+.progress {
+  height: 5px;
+  background: #ffffff12;
+  border-radius: 20px;
+  overflow: hidden;
+}
 
-    .message strong {
-      color: #fff;
-    }
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #0077ff, #00eaff);
+  box-shadow: 0 0 15px #00aaff;
+  transition: width 1s linear;
+}
 
-    /* Construction section */
-    .construction {
-      max-width: 720px;
-      margin: 42px auto 0;
-      padding: 25px;
-      border-radius: 22px;
-      background: rgba(0,0,0,.16);
-      border: 1px solid rgba(255,255,255,.07);
-      text-align: left;
-    }
+.button {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 30px;
+  border: 0;
+  border-radius: 50px;
+  background: linear-gradient(100deg, #006aff, #00c8ff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 30px #0077ff35;
+  transition: .3s;
+}
 
-    .construction-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 18px;
-      font-weight: 800;
-    }
+.button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 35px #00aaff88;
+}
 
-    .construction-title span:last-child {
-      color: var(--cyan);
-      font-size: 13px;
-    }
+footer {
+  margin-top: 30px;
+  color: #586278;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
 
-    .progress {
-      height: 10px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-    }
-
-    .progress-bar {
-      width: 42%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
-      box-shadow: 0 0 20px rgba(39,225,255,.35);
-      animation: progressMove 2.4s infinite ease-in-out;
-    }
-
-    @keyframes progressMove {
-      0% { transform: translateX(-35%); opacity: .65; }
-      50% { transform: translateX(95%); opacity: 1; }
-      100% { transform: translateX(210%); opacity: .65; }
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .step {
-      padding: 16px;
-      border-radius: 15px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid rgba(255,255,255,.06);
-    }
-
-    .step-icon {
-      font-size: 23px;
-      margin-bottom: 9px;
-    }
-
-    .step strong {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-
-    .step small {
-      color: #8296ae;
-      line-height: 1.5;
-    }
-
-    .try-again {
-      margin-top: 32px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-width: 190px;
-      padding: 14px 22px;
-      border: 0;
-      border-radius: 14px;
-      cursor: pointer;
-      color: #03101b;
-      font-weight: 900;
-      background: linear-gradient(135deg, #6beaff, #22a7ff);
-      box-shadow: 0 12px 30px rgba(34,167,255,.22);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .try-again:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 38px rgba(34,167,255,.32);
-    }
-
-    footer {
-      margin-top: 32px;
-      color: #71849a;
-      font-size: 12px;
-    }
-
-    footer strong {
-      color: #a9b9ca;
-    }
-
-    /* Crane/building decoration */
-    .blueprint {
-      position: absolute;
-      left: 30px;
-      bottom: 25px;
-      width: 120px;
-      height: 90px;
-      opacity: .10;
-      pointer-events: none;
-    }
-
-    .blueprint .tower {
-      position: absolute;
-      left: 25px;
-      bottom: 0;
-      width: 9px;
-      height: 75px;
-      border-left: 2px solid var(--cyan);
-      border-right: 2px solid var(--cyan);
-    }
-
-    .blueprint .arm {
-      position: absolute;
-      left: 29px;
-      top: 8px;
-      width: 82px;
-      border-top: 2px solid var(--cyan);
-    }
-
-    .blueprint .rope {
-      position: absolute;
-      left: 96px;
-      top: 9px;
-      height: 45px;
-      border-left: 2px dashed var(--cyan);
-    }
-
-    @media (max-width: 700px) {
-      .wrapper {
-        width: 94%;
-        padding: 18px 0 28px;
-      }
-
-      .card {
-        padding: 38px 20px 32px;
-        border-radius: 24px;
-      }
-
-      .logo {
-        width: 78px;
-        height: 78px;
-        border-radius: 21px;
-      }
-
-      h1 {
-        font-size: clamp(38px, 13vw, 58px);
-        letter-spacing: -2px;
-      }
-
-      .message {
-        font-size: 15px;
-        line-height: 1.65;
-      }
-
-      .construction {
-        margin-top: 30px;
-        padding: 18px;
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-      }
-
-      .blueprint {
-        display: none;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
+@media (max-width: 420px) {
+  .container { padding: 35px 15px; }
+  .time-box { width: 68px; }
+  .time-box b { font-size: 25px; }
+  .countdown { gap: 7px; }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="particles" aria-hidden="true">
-    <span class="particle p1"></span>
-    <span class="particle p2"></span>
-    <span class="particle p3"></span>
-    <span class="particle p4"></span>
-    <span class="particle p5"></span>
-    <span class="particle p6"></span>
+<div class="particles"></div>
+
+<main class="container">
+
+  <!-- Replace logo.png with your actual logo -->
+  <img src="logo.png" class="logo" alt="SavageTech TV Logo">
+
+  <div class="status" id="status">
+    <span></span> PREPARING FOR LAUNCH
   </div>
 
-  <main class="wrapper">
-    <section class="card">
+  <h1 id="heading">
+    The Wait Is<br>
+    <strong>Almost Over.</strong>
+  </h1>
 
-      <div class="blueprint" aria-hidden="true">
-        <div class="tower"></div>
-        <div class="arm"></div>
-        <div class="rope"></div>
-      </div>
+  <p class="description" id="message">
+    Something extraordinary is coming.
+    More channels, more entertainment,
+    and a completely new streaming experience.
+    Get ready to witness the next level.
+  </p>
 
-      <div class="logo" aria-hidden="true">
-        <div class="building"></div>
-      </div>
+  <div class="countdown" id="countdown">
 
-      <div class="badge">
-        <span class="status-dot"></span>
-        BIG UPDATE THIS SATURDAY
-      </div>
+    <div class="time-box">
+      <b id="hours">00</b>
+      <small>HOURS</small>
+    </div>
 
-      <h1>
-        SavageTech <span class="highlight">TV</span>
-      </h1>
+    <div class="time-box">
+      <b id="minutes">00</b>
+      <small>MINUTES</small>
+    </div>
 
-      <p class="message">
-        <strong>Something BIG is coming to SavageTech TV!</strong><br>
-        We are preparing a major update for <strong>Saturday, November 28, 2026</strong>.
-        Get ready for more channels, exciting new features, and an even better streaming experience.
-        Thanks for being part of SavageTech TV — stay tuned!
-      </p>
+    <div class="time-box">
+      <b id="seconds">00</b>
+      <small>SECONDS</small>
+    </div>
 
-      <p class="message" style="margin-top:22px;color:#d9f7ff;font-weight:800;">📅 Saturday, November 28, 2026</p>
+  </div>
 
-      <div class="construction">
-        <div class="construction-title">
-          <span>🚀 Preparing the Big Update</span>
-          <span>Coming Saturday</span>
-        </div>
+  <div class="progress-info">
+    <span>LAUNCH SEQUENCE</span>
+    <span id="percent">0%</span>
+  </div>
 
-        <div class="progress" aria-label="Maintenance progress">
-          <div class="progress-bar"></div>
-        </div>
+  <div class="progress">
+    <div class="progress-fill" id="progress"></div>
+  </div>
 
-        <div class="steps">
-          <div class="step">
-            <div class="step-icon">📺</div>
-            <strong>More Channels</strong>
-            <small>Get ready for an expanded channel lineup.</small>
-          </div>
+  <button class="button" id="readyBtn">
+    I'M READY 🚀
+  </button>
 
-          <div class="step">
-            <div class="step-icon">⚡</div>
-            <strong>New Features</strong>
-            <small>Fresh features are on the way to improve your experience.</small>
-          </div>
+  <footer>
+    SAVAGETECH TV © 2026 · THE FUTURE OF STREAMING
+  </footer>
 
-          <div class="step">
-            <div class="step-icon">🤖</div>
-            <strong>Better Streaming</strong>
-            <small>Updates designed to make watching smoother and more enjoyable.</small>
-          </div>
-        </div>
-      </div>
+</main>
 
-      <button class="try-again" onclick="location.reload()">
-        🔄 Check for Update
-      </button>
+<script>
+// Launch time: 28 November 2026, 10:00 PM Tanzania
+// Tanzania is UTC+3, so 22:00 EAT = 19:00 UTC.
 
-      <footer>
-        <strong>SavageTech TV</strong> · Created by Victor_the_IT · Tanzania
-      </footer>
+const launchTime = new Date("2026-11-28T19:00:00Z").getTime();
 
-    </section>
-  </main>
+// Countdown started at 6:00 PM EAT
+const startTime = new Date("2026-11-28T15:00:00Z").getTime();
+
+function updateCountdown() {
+  const now = Date.now();
+  const remaining = launchTime - now;
+
+  if (remaining <= 0) {
+    document.getElementById("status").innerHTML =
+      '<span></span> WE ARE LIVE';
+
+    document.getElementById("heading").innerHTML =
+      "SavageTech TV<br><strong>Is Now LIVE!</strong>";
+
+    document.getElementById("message").textContent =
+      "The wait is over. Welcome to a new streaming experience.";
+
+    document.getElementById("countdown").style.display = "none";
+    document.getElementById("progress").style.width = "100%";
+    document.getElementById("percent").textContent = "100%";
+
+    document.getElementById("readyBtn").textContent =
+      "ENTER SAVAGETECH TV";
+
+    document.getElementById("readyBtn").onclick = () => {
+      window.location.href = "home.html";
+    };
+
+    return;
+  }
+
+  const hours = Math.floor(remaining / 3600000);
+  const minutes = Math.floor((remaining % 3600000) / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
+
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
+
+  const progress = Math.max(0, Math.min(
+    100,
+    ((now - startTime) / (launchTime - startTime)) * 100
+  ));
+
+  document.getElementById("progress").style.width =
+    progress + "%";
+
+  document.getElementById("percent").textContent =
+    Math.floor(progress) + "%";
+}
+
+document.getElementById("readyBtn").onclick = () => {
+  document.getElementById("message").textContent =
+    "You're on the list! Stay tuned for the big launch tonight. 🚀";
+
+  document.getElementById("readyBtn").textContent =
+    "SEE YOU AT 10 PM ❤️";
+};
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
 
 </body>
 </html>
